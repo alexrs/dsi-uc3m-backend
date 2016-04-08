@@ -17,3 +17,12 @@ Execute `python run.py` et voilà from inside the `app/` folder.
 - Bugfix: git checkout -b bugfix/nameofthefix
 
 **If you push to master, I will find you and I will kill you**
+
+##Endpints
+
+- `/`: index
+- `/search?query={query}&category={category}`:
+	- `{query}`: text of the search
+	- `{category}`: category for searching
+	- Example: /search?query=Star&category=2
+	- TODO: Define IDs for the categories
