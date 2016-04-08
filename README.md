@@ -6,10 +6,6 @@ Run `pip install -r requirements.txt` to download the dependencies
 ##Running
 Execute `python run.py` et voilà from inside the `app/` folder.
 
-(if you have installed both python 2.7 and python 3, maybe you have to execute `python3 run.py`)
-
-**Tested with python 3**
-
 ## Libraries
 - [SQLAlchemy](http://flask-sqlalchemy.pocoo.org/2.1/quickstart/)
 - [Flask](http://flask.pocoo.org/)
