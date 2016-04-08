@@ -10,6 +10,7 @@ Execute `python run.py` et voilà from inside the `app/` folder.
 
 **Tested with python 3**
 
+## Libraries
 - [SQLAlchemy](http://flask-sqlalchemy.pocoo.org/2.1/quickstart/)
 - [Flask](http://flask.pocoo.org/)
 - [Blueprints](http://flask.pocoo.org/docs/0.10/blueprints/)
