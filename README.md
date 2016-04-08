@@ -10,10 +10,10 @@ Execute `python run.py` et voilà from inside the `app/` folder.
 
 **Tested with python 3**
 
-- (SQLAlchemy)[http://flask-sqlalchemy.pocoo.org/2.1/quickstart/]
-- (Flask)[http://flask.pocoo.org/]
-- (Blueprints)[http://flask.pocoo.org/docs/0.10/blueprints/]
-- (Flask-WTF)[https://flask-wtf.readthedocs.org/en/latest/]
+- [SQLAlchemy](http://flask-sqlalchemy.pocoo.org/2.1/quickstart/)
+- [Flask](http://flask.pocoo.org/)
+- [Blueprints](http://flask.pocoo.org/docs/0.10/blueprints/)
+- [Flask-WTF](https://flask-wtf.readthedocs.org/en/latest/)
 
 **The default branch is integration.**
 
