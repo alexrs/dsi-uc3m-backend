@@ -144,7 +144,16 @@ class ShowTime:
         self.eventId = theaterId
         self.time = time
         self.ticketUrl = ticketUrl
-        self.time 
+        self.time
+
+class Actor:
+    def __init__(self, firstName):
+        self.firstName = firstName
+
+class CrewMember:
+    def __init__(self, firstName, role):
+        self.firstName = firstName
+        self.role = role
 
 # <showTime date="20151112" theaterId="2" movieId="30171">
 # <times>
