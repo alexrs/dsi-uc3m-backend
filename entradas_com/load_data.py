@@ -86,7 +86,7 @@ class CrewMember(Base):
 class Event(Base):
     __tablename__ = 'event'
     movieId = db.Column(db.Integer)
-    title = db.Column(db.String(50))
+    title = db.Column(db.String(200))
     sinopsis = db.Column(db.Text)
     country = db.Column(db.String(20))
     # ratings is a list.
@@ -97,8 +97,6 @@ class Event(Base):
     #cast
     #crew
     trailer = db.Column(db.String(15))
-
-
 
     def __init__(self, movieId, title, sinopsis, country, ratings, runningTime, format, originalLanguage, genres, cast, crew, trailer):
         self.movieId = int(movieId)
@@ -161,6 +159,8 @@ for elem in root[1]:
     movieId = elem.get('movieId')
     title = elem.find('officialTitle').text
     sinopsis = elem.find('sinopsis')
+    if sinopsis is not None:
+        sinopsis = sinopsis.text
     country = elem.find('country').text
     ratings = elem.find('ratings').findall('rating')
     duration = elem.find('runningTime').text
@@ -172,11 +172,12 @@ for elem in root[1]:
     cast = elem.find('cast').findall('actor')
     crew = elem.find('crew').findall('member')
     trailer = elem.find('trailer')
+    if trailer is not None:
+        trailer = trailer.text
 
     event = Event(movieId, title, sinopsis, country, ratings, duration, format, originalLanguage, genres, cast, crew, trailer)
     db.session.add(event)
 db.session.commit()
-
  
 # <movie movieId="18507">
     # <officialTitle>&#211;pera La Flauta M&#225;gica</officialTitle>
