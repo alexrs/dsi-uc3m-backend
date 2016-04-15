@@ -18,10 +18,9 @@ class Base(db.Model):
 	date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
 class Theater(Base):
-
     __tablename__ = 'theater'
 
-    id = db.Column(db.Integer, primary_key=True)
+    theaterId = db.Column(db.Integer, unique=True)
     name  = db.Column(db.String(30), unique=False)
     telephone = db.Column(db.String(12), unique=False)
     longitude = db.Column(db.Float, unique=False)
@@ -32,8 +31,8 @@ class Theater(Base):
     postalCode = db.Column(db.Integer, unique=False)
     country = db.Column(db.String(12), unique=False)
 
-    def __init__(self, id, name, telephone, longitude, latitude, street, city, state, postalCode, country):
-        self.id = int(id)
+    def __init__(self, theaterId, name, telephone, longitude, latitude, street, city, state, postalCode, country):
+        self.theaterId = int(theaterId)
         self.name = name
         self.telephone = telephone
         self.longitude = float(longitude)
@@ -44,9 +43,81 @@ class Theater(Base):
         self.postalCode = int(postalCode)
         self.country = country
 
+class ShowTime(Base):
+    __tablename__ = 'showtime'
+
+    date = db.Column(db.String(40)) #TODO: PARSE THIS AS A DATE
+    theaterId = db.Column(db.Integer)
+    movieId = db.Column(db.Integer)
+
+    def __init__(self, date, theaterId, movieId):
+        self.date = date
+        self.theaterId = int(theaterId)
+        self.movieId = int(movieId)
+
+class Time(Base):
+    __tablename__ = "time"
+
+    ticketUrl = db.Column(db.String(100))
+    hour = db.Column(db.String(5)) #TODO: Parse
+    movieId = db.Column(db.Integer)
+
+    def __init__(self, ticketUrl, hour, movieId):
+        self.ticketUrl = ticketUrl
+        self.hour = hour
+        self.movieId = int(movieId)
+
+class Actor(Base):
+    __tablename__ = 'actor'
+    firstName = db.Column(db.String(100))
+
+    def __init__(self, firstName):
+        self.firstName = firstName
+
+class CrewMember(Base):
+    __tablename__ = 'crew_member'
+    firstName = db.Column(db.String(100))
+    role = db.Column(db.String(50))
+
+    def __init__(self, firstName, role):
+        self.firstName = firstName
+        self.role = role
+
+class Event(Base):
+    __tablename__ = 'event'
+    movieId = db.Column(db.Integer)
+    title = db.Column(db.String(50))
+    sinopsis = db.Column(db.Text)
+    country = db.Column(db.String(20))
+    # ratings is a list.
+    duration = db.Column(db.Integer)
+    format = db.Column(db.String(10))
+    originalLanguage = db.Column(db.String(30))
+    #genres
+    #cast
+    #crew
+    trailer = db.Column(db.String(15))
+
+
+
+    def __init__(self, movieId, title, sinopsis, country, ratings, runningTime, format, originalLanguage, genres, cast, crew, trailer):
+        self.movieId = int(movieId)
+        self.title = title
+        self.sinopsis = sinopsis
+        self.country = country
+        self.ratings = ratings # list
+        self.duration = int(runningTime)
+        self.format = format
+        self.originalLanguage = originalLanguage
+        self.genres = genres #list
+        self.cast = cast #List of Actor
+        self.crew = crew #List of CreeMember
+        self.trailer = trailer
+
 
 db.create_all()
 
+"""Theater"""
 for elem in root[0]:
 
     id = elem.get('theaterId')
@@ -64,136 +135,49 @@ for elem in root[0]:
     db.session.add(theater)
 
 db.session.commit()
-print(Theater.query.all())
-
-    #for elem in root[1]:
-    #     print(elem.get('movieId'))
-    #     print(elem.find('officialTitle').text)
-    #
-    #     sinopsis = elem.find('sinopsis')
-    #
-    #     if sinopsis is not None:
-    #         print(sinopsis.text)
-    #
-    #     print(elem.find('country').text)
-    #
-    #     ratings = elem.find('ratings').findall('rating')
-    #
-    #     for rating in ratings:
-    #         print(rating.text)
-    #
-    #     print(elem.find('runningTime').text)
-    #     print(elem.find('format').text)
-    #
-    #     print(elem.find('originalLanguage').text)
-    #     print(elem.find('formatCode').text)
-    #     print(elem.find('subtitles').text)
-    #     print(elem.find('version').text)
-    #
-    #     genres = elem.find('genres').findall('genre')
-    #
-    #     for genre in genres:
-    #         print(genre.text)
-    #
-    #     cast = elem.find('cast').findall('actor')
-    #
-    #     for actor in cast:
-    #         print(actor.find('firstName').text)
-    #
-    #     crew = elem.find('crew').findall('member')
-    #
-    #     for person in crew:
-    #         print(person.find('role').text)
-    #         if not person.find('firstName') is None:
-    #             print(person.find('firstName').text)
-    #
-    #     print(elem.find('cartel').text)
-    #
-    #     trailer = elem.find('trailer')
-    #
-    #     if trailer is not None:
-    #         print(trailer.text)
-    # #
-    #     print("\n")
-
-    # for elem in root[2]:
-    #     print(elem.get('date'))
-    #     print(elem.get('theaterId'))
-    #     print(elem.get('movieId'))
-    #
-    #     times = elem.find('times').findall('time')
-    #
-    #     for time in times:
-    #         print(time.get('ticketUrl'))
-    #         print(time.text)
-    #
-    #     print("\n")
 
 
-# for elem in root[0]:
-#     print(elem.get('theaterId'))
-#     print(root[0][0].find('name').text)
-#     print(root[0][0].find('telephone').text)
-#     print(root[0][0].find('longitude').text)
-#     print(root[0][0].find('latitude').text)
-#     print(root[0][0].find('address').find('streetAddress').find('street').text)
-#     print(root[0][0].find('address').find('city').text)
-#     print(root[0][0].find('address').find('state').text)
-#     print(root[0][0].find('address').find('postalCode').text)
-#     print(root[0][0].find('address').find('country').text)
-#
-#     print("\n")
+"""Showtime"""
+for elem in root[2]:
+    date = elem.get('date')
+    theaterId = elem.get('theaterId')
+    movieId = elem.get('movieId')
 
-#for elem in root[1]:
-#     print(elem.get('movieId'))
-#     print(elem.find('officialTitle').text)
-#
-#     sinopsis = elem.find('sinopsis')
-#
-#     if sinopsis is not None:
-#         print(sinopsis.text)
-#
-#     print(elem.find('country').text)
-#
-#     ratings = elem.find('ratings').findall('rating')
-#
-#     for rating in ratings:
-#         print(rating.text)
-#
-#     print(elem.find('runningTime').text)
-#     print(elem.find('format').text)
-#
-#     print(elem.find('originalLanguage').text)
-#     print(elem.find('formatCode').text)
-#     print(elem.find('subtitles').text)
-#     print(elem.find('version').text)
-#
-#     genres = elem.find('genres').findall('genre')
-#
-#     for genre in genres:
-#         print(genre.text)
-#
-#     cast = elem.find('cast').findall('actor')
-#
-#     for actor in cast:
-#         print(actor.find('firstName').text)
-#
-#     crew = elem.find('crew').findall('member')
-#
-#     for person in crew:
-#         print(person.find('role').text)
-#         if not person.find('firstName') is None:
-#             print(person.find('firstName').text)
-#
-#     print(elem.find('cartel').text)
-#
-#     trailer = elem.find('trailer')
-#
-#     if trailer is not None:
-#         print(trailer.text)
-# #
-#     print("\n")
+    showtime = ShowTime(date, theaterId, movieId)
+    db.session.add(showtime)
 
+    times = elem.find('times').findall('time')
+
+    for time in times:
+        ticketUrl = time.get('ticketUrl')
+        hour = time.text
+        mtime = Time(ticketUrl, hour, movieId)
+        db.session.add(mtime)
+
+db.session.commit()
+
+"""Event"""
+for elem in root[1]:
+    movieId = elem.get('movieId')
+    title = elem.find('officialTitle').text
+    sinopsis = elem.find('sinopsis')
+    country = elem.find('country').text
+    ratings = elem.find('ratings').findall('rating')
+    duration = elem.find('runningTime').text
+    if duration is None:
+        duration = 90
+    format = elem.find('format').text
+    originalLanguage = elem.find('originalLanguage').text
+    genres = elem.find('genres').findall('genre')
+    cast = elem.find('cast').findall('actor')
+    crew = elem.find('crew').findall('member')
+    trailer = elem.find('trailer')
+
+    event = Event(movieId, title, sinopsis, country, ratings, duration, format, originalLanguage, genres, cast, crew, trailer)
+    db.session.add(event)
+db.session.commit()
+
+ 
 # <movie movieId="18507">
     # <officialTitle>&#211;pera La Flauta M&#225;gica</officialTitle>
     # <sinopsis>Proyecci&#243;n de la &#243;pera -La flauta m&#225;gica- de Mozart.</sinopsis>
@@ -220,54 +204,6 @@ print(Theater.query.all())
     # <cartel>opera.gif</cartel>
 # </movie>
 
-# for elem in root[2]:
-#     print(elem.get('date'))
-#     print(elem.get('theaterId'))
-#     print(elem.get('movieId'))
-#
-#     times = elem.find('times').findall('time')
-#
-#     for time in times:
-#         print(time.get('ticketUrl'))
-#         print(time.text)
-#
-#     print("\n")
-
-class ShowTime(Base):
-    def __init__(self, date, theaterId, movieId, time, ticketUrl):
-        self.date = date
-        self.eventId = theaterId
-        self.time = time
-        self.ticketUrl = ticketUrl
-
-class Actor(Base):
-    def __init__(self, firstName):
-        self.firstName = firstName
-
-class CrewMember(Base):
-    def __init__(self, firstName, role):
-        self.firstName = firstName
-        self.role = role
-
-class Event(Base):
-
-    def __init__(self, id, title, sinopsis, country, ratings, runningTime, format, originalLanguage, formatCode, subtitles, version, genres, cast, crew, cartel, trailer):
-        self.id = id
-        self.title = title
-        self.sinopsis = sinopsis
-        self.country = country
-        self.ratings = ratings
-        self.duration = runningTime
-        self.format = format
-        self.originalLanguage = originalLanguage
-        self.formatCode = formatCode
-        self.subtitles = subtitles
-        self.version = version
-        self.genres = genres
-        self.cast = cast #List of Actor
-        self.crew = crew #List of CreeMember
-        self.cartel = cartel
-        self.trailer = trailer
 
 
 # <showTime date="20151112" theaterId="2" movieId="30171">
