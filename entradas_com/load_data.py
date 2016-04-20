@@ -17,8 +17,12 @@ class Base(db.Model):
 	date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
 	date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
+class Genre(db.Model):
+
+	name = db.Column(db.String(15), unique=True)
+	def __init__(name):
+		self.name = name
 class Theater(Base):
-    __tablename__ = 'theater'
 
     theaterId = db.Column(db.Integer, unique=True)
     name  = db.Column(db.String(30), unique=False)
@@ -44,7 +48,6 @@ class Theater(Base):
         self.country = country
 
 class ShowTime(Base):
-    __tablename__ = 'showtime'
 
     date = db.Column(db.String(40)) #TODO: PARSE THIS AS A DATE
     theaterId = db.Column(db.Integer)
@@ -56,29 +59,23 @@ class ShowTime(Base):
         self.movieId = int(movieId)
 
 class Time(Base):
-    __tablename__ = "time"
 
     ticketUrl = db.Column(db.String(100))
     hour = db.Column(db.String(5)) #TODO: Parse
     movieId = db.Column(db.Integer)
 
-    def __init__(self, ticketUrl, hour, movieId):
+    showtime_id = db.Column(db.Integer, db.ForeignKey('show_time.id'))
+
+    showtime = db.relationship('ShowTime', backref=db.backref('times', lazy='dynamic'))
+
+
+    def __init__(self, ticketUrl, hour, movieId, showtime):
         self.ticketUrl = ticketUrl
         self.hour = hour
         self.movieId = int(movieId)
-
-class Actor(Base):
-    __tablename__ = 'actor'
-    firstName = db.Column(db.String(100))
-
-	tags = db.relationship('Event', secondary=tags,
-        backref=db.backref('pages', lazy='dynamic'))
-
-    def __init__(self, firstName):
-        self.firstName = firstName
+        self.showtime = showtime
 
 class CrewMember(Base):
-    __tablename__ = 'crew_member'
     firstName = db.Column(db.String(100))
     role = db.Column(db.String(50))
 
@@ -86,8 +83,17 @@ class CrewMember(Base):
         self.firstName = firstName
         self.role = role
 
+movie_actor = db.Table('movie_actor', db.Column("event_id", db.Integer, db.ForeignKey('event.id')), db.Column("actor_id", db.Integer, db.ForeignKey('actor.id')))
+
+class Actor(Base):
+    firstName = db.Column(db.String(100))
+
+    movie_actor = db.relationship('Event', secondary=movie_actor, backref = db.backref('actors', lazy='dynamic'))
+
+    def __init__(self, firstName):
+        self.firstName = firstName
+
 class Event(Base):
-    __tablename__ = 'event'
     eventId = db.Column(db.Integer)
     title = db.Column(db.String(200))
     sinopsis = db.Column(db.Text)
@@ -101,7 +107,7 @@ class Event(Base):
     #crew
     trailer = db.Column(db.String(15))
 
-    def __init__(self, eventId, title, sinopsis, country, ratings, runningTime, format, originalLanguage, genres, cast, crew, trailer):
+    def __init__(self, eventId, title, sinopsis, country, ratings, runningTime, format, originalLanguage, genres, trailer):
         self.eventId = int(eventId)
         self.title = title
         self.sinopsis = sinopsis
@@ -111,8 +117,6 @@ class Event(Base):
         self.format = format
         self.originalLanguage = originalLanguage
         self.genres = genres #list
-        self.cast = cast #List of Actor
-        self.crew = crew #List of CrewMember
         self.trailer = trailer
 
 
@@ -152,7 +156,7 @@ for elem in root[2]:
     for time in times:
         ticketUrl = time.get('ticketUrl')
         hour = time.text
-        mtime = Time(ticketUrl, hour, eventId)
+        mtime = Time(ticketUrl, hour, eventId, showtime)
         db.session.add(mtime)
 
 db.session.commit()
@@ -173,22 +177,23 @@ for elem in root[1]:
     originalLanguage = elem.find('originalLanguage').text
     genres = elem.find('genres').findall('genre')
     cast = elem.find('cast').findall('actor')
-    crew = elem.find('crew').findall('member')
     trailer = elem.find('trailer')
     if trailer is not None:
         trailer = trailer.text
+	event = Event(eventId, title, sinopsis, country, ratings, duration, format, originalLanguage, genres, trailer)
+	db.session.add(event)
 
-    event = Event(eventId, title, sinopsis, country, ratings, duration, format, originalLanguage, genres, cast, crew, trailer)
-    db.session.add(event)
+    for actor in cast:
+		dicaprio = Actor(actor.find('firstName').text)
+		dicaprio.movie_actor.append(event)
+		db.session.add(dicaprio)
+
+    crew = elem.find('crew').findall('member')
+    for person in crew:
+		db.session.add(CrewMember(person.find('firstName').text if person.find('firstName') is not None else "NULL", person.find('role').text if person.find('role') is not None else "NULL"))
+
+
 db.session.commit()
-
-
-actors_movie = db.Table('actors_movie',
-    db.Column('actor_id', db.Integer, db.ForeignKey('actor.id')),
-    db.Column('event_id', db.Integer, db.ForeignKey('event.id'))
-)
-
-
 
 # <movie movieId="18507">
     # <officialTitle>&#211;pera La Flauta M&#225;gica</officialTitle>
