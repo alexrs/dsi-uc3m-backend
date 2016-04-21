@@ -5,7 +5,7 @@ import config
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-
+from datetime import datetime
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -44,14 +44,12 @@ class Theater(Base):
 
 class ShowTime(Base):
 
-    date = db.Column(db.String(40))
-    #date = db.Column(db.Date)
+    date = db.Column(db.Date)
     theaterId = db.Column(db.Integer)
     movieId = db.Column(db.Integer)
 
     def __init__(self, date, theaterId, movieId):
-        self.date = date
-        #self.date = datetime.datetime.strptime(date, '%Y%m%d')
+        self.date = datetime.strptime(date, '%Y%m%d')
         self.theaterId = int(theaterId)
         self.movieId = int(movieId)
 
@@ -97,15 +95,14 @@ class Actor(Base):
 class Genre(Base):
 
     name = db.Column(db.String(15), unique=True)
-    eventId = db.Column (db.Integer)
 
     event_id = db.Column(db.Integer, db.ForeignKey('event.id'))
 
     event_genre = db.relationship('Event', backref=db.backref('genres', lazy='dynamic'))
 
-    def __init__(self, name, eventID):
+    def __init__(self, name, event):
         self.name = name
-        self.event = eventID
+        self.event_genre = event
 
 
 #Propongo hacer una tabla evento-teatro, para tener la relacion n-m
@@ -194,15 +191,16 @@ for elem in root[1]:
     format = elem.find('format').text
     originalLanguage = elem.find('originalLanguage').text
     genres = elem.find('genres').findall('genre')
-
-    for genre in genres:
-        
     cast = elem.find('cast').findall('actor')
     trailer = elem.find('trailer')
     if trailer is not None:
         trailer = trailer.text
 	event = Event(eventId, title, sinopsis, country, ratings, duration, format, originalLanguage, genres, trailer)
-	db.session.add(event)
+    event1 = Event(eventId, title, sinopsis, country, ratings, duration, format, originalLanguage, genres, trailer)
+    db.session.add(event1)
+
+    for genre in genres:
+        db.session.add(Genre(genre, event1))
 
     for actor in cast:
 		dicaprio = Actor(actor.find('firstName').text)
