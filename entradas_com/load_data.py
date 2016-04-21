@@ -17,11 +17,6 @@ class Base(db.Model):
 	date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
 	date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
-class Genre(db.Model):
-
-	name = db.Column(db.String(15), unique=True)
-	def __init__(name):
-		self.name = name
 class Theater(Base):
 
     theaterId = db.Column(db.Integer, unique=True)
@@ -49,19 +44,22 @@ class Theater(Base):
 
 class ShowTime(Base):
 
-    date = db.Column(db.String(40)) #TODO: PARSE THIS AS A DATE
+    date = db.Column(db.String(40))
+    #date = db.Column(db.Date)
     theaterId = db.Column(db.Integer)
     movieId = db.Column(db.Integer)
 
     def __init__(self, date, theaterId, movieId):
         self.date = date
+        #self.date = datetime.datetime.strptime(date, '%Y%m%d')
         self.theaterId = int(theaterId)
         self.movieId = int(movieId)
 
 class Time(Base):
 
     ticketUrl = db.Column(db.String(100))
-    hour = db.Column(db.String(5)) #TODO: Parse
+    hour = db.Column(db.String(15)) #TODO: Parse (check?)
+    #hour = db.Column(db.Date)
     movieId = db.Column(db.Integer)
 
     showtime_id = db.Column(db.Integer, db.ForeignKey('show_time.id'))
@@ -72,8 +70,10 @@ class Time(Base):
     def __init__(self, ticketUrl, hour, movieId, showtime):
         self.ticketUrl = ticketUrl
         self.hour = hour
+        #self.hour =  datetime.datetime.strptime(hour, '%Y%m%d')
         self.movieId = int(movieId)
         self.showtime = showtime
+
 
 class CrewMember(Base):
     firstName = db.Column(db.String(100))
@@ -82,6 +82,7 @@ class CrewMember(Base):
     def __init__(self, firstName, role):
         self.firstName = firstName
         self.role = role
+
 
 movie_actor = db.Table('movie_actor', db.Column("event_id", db.Integer, db.ForeignKey('event.id')), db.Column("actor_id", db.Integer, db.ForeignKey('actor.id')))
 
@@ -93,18 +94,35 @@ class Actor(Base):
     def __init__(self, firstName):
         self.firstName = firstName
 
+class Genre(Base):
+
+    name = db.Column(db.String(15), unique=True)
+    eventId = db.Column (db.Integer)
+
+    event_id = db.Column(db.Integer, db.ForeignKey('event.id'))
+
+    event_genre = db.relationship('Event', backref=db.backref('genres', lazy='dynamic'))
+
+    def __init__(self, name, eventID):
+        self.name = name
+        self.event = eventID
+
+
+#Propongo hacer una tabla evento-teatro, para tener la relacion n-m
 class Event(Base):
     eventId = db.Column(db.Integer)
     title = db.Column(db.String(200))
     sinopsis = db.Column(db.Text)
     country = db.Column(db.String(20))
-    # ratings is a list.
+    #ratings
     duration = db.Column(db.Integer)
     format = db.Column(db.String(10))
     originalLanguage = db.Column(db.String(30))
     #genres
     #cast
     #crew
+
+
     trailer = db.Column(db.String(15))
 
     def __init__(self, eventId, title, sinopsis, country, ratings, runningTime, format, originalLanguage, genres, trailer):
@@ -116,7 +134,7 @@ class Event(Base):
         self.duration = int(runningTime)
         self.format = format
         self.originalLanguage = originalLanguage
-        self.genres = genres #list
+        #self.genres = genres #list --> en realidad no lo es
         self.trailer = trailer
 
 
@@ -176,6 +194,9 @@ for elem in root[1]:
     format = elem.find('format').text
     originalLanguage = elem.find('originalLanguage').text
     genres = elem.find('genres').findall('genre')
+
+    for genre in genres:
+        
     cast = elem.find('cast').findall('actor')
     trailer = elem.find('trailer')
     if trailer is not None:
