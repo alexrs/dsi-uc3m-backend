@@ -104,6 +104,17 @@ class Genre(Base):
 		self.name = name
 		self.event_id = int(event)
 
+class Rating(Base):
+    rating = db.Column(db.String(60))
+
+    event_id = db.Column(db.Integer, db.ForeignKey('event.id'))
+    event_rating = db.relationship('Event', backref=db.backref('Rating', lazy='dynamic'))
+
+    def __init__(self, rating, event):
+        self.rating = rating
+        self.event_id = int(event)
+
+
 
 #Propongo hacer una tabla evento-teatro, para tener la relacion n-m
 class Event(Base):
@@ -137,111 +148,76 @@ class Event(Base):
 
 db.create_all()
 
-if __name__ == "__main__":
-	#Theater
-	for elem in root[0]:
+#Theater
+for elem in root[0]:
 
-	    id = elem.get('theaterId')
-	    name = elem.find('name').text
-	    telephone = elem.find('telephone').text
-	    longitude = elem.find('longitude').text if elem.find('longitude').text is not None else 0.0
-	    latitude = elem.find('latitude').text if elem.find('latitude').text is not None else 0.0
-	    street = elem.find('address').find('streetAddress').find('street').text
-	    city = elem.find('address').find('city').text
-	    state = elem.find('address').find('state').text
-	    postalCode = elem.find('address').find('postalCode').text
-	    country = elem.find('address').find('country').text
+    id = elem.get('theaterId')
+    name = elem.find('name').text
+    telephone = elem.find('telephone').text
+    longitude = elem.find('longitude').text if elem.find('longitude').text is not None else 0.0
+    latitude = elem.find('latitude').text if elem.find('latitude').text is not None else 0.0
+    street = elem.find('address').find('streetAddress').find('street').text
+    city = elem.find('address').find('city').text
+    state = elem.find('address').find('state').text
+    postalCode = elem.find('address').find('postalCode').text
+    country = elem.find('address').find('country').text
 
-	    theater = Theater(id, name, telephone, longitude, latitude, street, city, state, postalCode, country)
-	    db.session.add(theater)
+    theater = Theater(id, name, telephone, longitude, latitude, street, city, state, postalCode, country)
+    db.session.add(theater)
 
-	#Showtime
-	for elem in root[2]:
-	    date = elem.get('date')
-	    theaterId = elem.get('theaterId')
-	    eventId = elem.get('movieId')
+#Showtime
+for elem in root[2]:
+    date = elem.get('date')
+    theaterId = elem.get('theaterId')
+    eventId = elem.get('movieId')
 
-	    showtime = ShowTime(date, theaterId, eventId)
-	    db.session.add(showtime)
+    showtime = ShowTime(date, theaterId, eventId)
+    db.session.add(showtime)
 
-	    times = elem.find('times').findall('time')
+    times = elem.find('times').findall('time')
 
-	    for time in times:
-	        ticketUrl = time.get('ticketUrl')
-	        hour = time.text
-	        mtime = Time(ticketUrl, hour, eventId, showtime)
-	        db.session.add(mtime)
+    for time in times:
+        ticketUrl = time.get('ticketUrl')
+        hour = time.text
+        mtime = Time(ticketUrl, hour, eventId, showtime)
+        db.session.add(mtime)
 
-	#Event
-	for elem in root[1]:
-	    eventId = elem.get('movieId')
-	    title = elem.find('officialTitle').text
-	    sinopsis = elem.find('sinopsis')
-	    if sinopsis is not None:
-	        sinopsis = sinopsis.text
-	    country = elem.find('country').text
-	    ratings = elem.find('ratings').findall('rating')
-	    duration = elem.find('runningTime').text
-	    if duration is None:
-	        duration = 90
-	    format = elem.find('format').text
-	    originalLanguage = elem.find('originalLanguage').text
-	    genres = elem.find('genres').findall('genre')
-	    cast = elem.find('cast').findall('actor')
-	    trailer = elem.find('trailer')
-	    if trailer is not None:
-	        trailer = trailer.text
-        event = Event(eventId, title, sinopsis, country, ratings, duration, format, originalLanguage, genres, trailer)
+#Event
+for elem in root[1]:
+    eventId = elem.get('movieId')
+    title = elem.find('officialTitle').text
+    sinopsis = elem.find('sinopsis')
+    if sinopsis is not None:
+        sinopsis = sinopsis.text
+    country = elem.find('country').text
+    ratings = elem.find('ratings').findall('rating')
+    duration = elem.find('runningTime').text
+    if duration is None:
+        duration = 90
+    format = elem.find('format').text
+    originalLanguage = elem.find('originalLanguage').text
+    genres = elem.find('genres').findall('genre')
+    cast = elem.find('cast').findall('actor')
+    trailer = elem.find('trailer')
+    if trailer is not None:
+        trailer = trailer.text
+    event = Event(eventId, title, sinopsis, country, ratings, duration, format, originalLanguage, genres, trailer)
 
-        for genre in genres:
-			db.session.add(Genre(genre.text, eventId))
+    for genre in genres:
+        db.session.add(Genre(genre.text, eventId))
+    for rat in ratings:
+        print rat.text
+        db.session.add(Rating(rat.text, eventId))
 
-        for actor in cast:
-			name = actor.find('firstName').text
-			print(name)
-			dicaprio = Actor(name)
-			dicaprio.movie_actor.append(event)
-			db.session.add(dicaprio)
-
-
-        crew = elem.find('crew').findall('member')
-        for person in crew:
-			db.session.add(CrewMember(person.find('firstName').text if person.find('firstName') is not None else "NULL", person.find('role').text if person.find('role') is not None else "NULL"))
-
-        db.session.add(event)
-
-        db.session.commit()
-
-	# <movie movieId="18507">
-	    # <officialTitle>&#211;pera La Flauta M&#225;gica</officialTitle>
-	    # <sinopsis>Proyecci&#243;n de la &#243;pera -La flauta m&#225;gica- de Mozart.</sinopsis>
-	    # <runningTime>90</runningTime>
-	    # <format>35 mm.</format>
-	    # <country>ESPA&#209;A</country>
-	    # <ratings>
-	        # <rating>PENDIENTE DE CALIFICACI&#211;N</rating>
-	    # </ratings>
-	    # <originalLanguage>Castellano</originalLanguage>
-	    # <formatCode>0</formatCode>
-	    # <subtitles>0</subtitles>
-	    # <version>S</version>
-	    # <genres>
-	        # <genre>Opera</genre>
-	    # </genres>
-	    # <cast></cast>
-	    # <crew>
-	        # <member>
-	            # <role>Director</role>
-	            # <firstName>Mozart</firstName>
-	        # </member>
-	    # </crew>
-	    # <cartel>opera.gif</cartel>
-	# </movie>
+    for actor in cast:
+        name = actor.find('firstName').text
+        dicaprio = Actor(name)
+        dicaprio.movie_actor.append(event)
+        db.session.add(dicaprio)
 
 
-
-	# <showTime date="20151112" theaterId="2" movieId="30171">
-	# <times>
-	#   <time ticketUrl="http://cine.entradas.com/entradas/a001009.do?identidad=710&amp;idcanal=2&amp;idcine=2&amp;idprov=28&amp;idpeli=30171&amp;idSesion=29518&amp;fecha=20151112&amp;idSala=1">2015</time>
-	# </times>
-	# </showTime>
+    crew = elem.find('crew').findall('member')
+    for person in crew:
+		db.session.add(CrewMember(person.find('firstName').text if person.find('firstName') is not None else "NULL", person.find('role').text if person.find('role') is not None else "NULL"))
+    db.session.add(event)
+db.session.commit()
