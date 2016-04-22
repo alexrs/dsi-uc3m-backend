@@ -62,7 +62,7 @@ class Time(Base):
 
     showtime_id = db.Column(db.Integer, db.ForeignKey('show_time.id'))
 
-    showtime = db.relationship('ShowTime', backref=db.backref('times', lazy='dynamic'))
+    showtime_time = db.relationship('ShowTime', backref=db.backref('times', lazy='dynamic'))
 
 
     def __init__(self, ticketUrl, hour, movieId, showtime):
@@ -94,15 +94,15 @@ class Actor(Base):
 
 class Genre(Base):
 
-    name = db.Column(db.String(15), unique=True)
+    name = db.Column(db.String(25))
 
     event_id = db.Column(db.Integer, db.ForeignKey('event.id'))
 
     event_genre = db.relationship('Event', backref=db.backref('genres', lazy='dynamic'))
 
     def __init__(self, name, event):
-        self.name = name
-        self.event_genre = event
+		self.name = name
+		self.event_id = int(event)
 
 
 #Propongo hacer una tabla evento-teatro, para tener la relacion n-m
@@ -137,113 +137,111 @@ class Event(Base):
 
 db.create_all()
 
-"""Theater"""
-for elem in root[0]:
+if __name__ == "__main__":
+	#Theater
+	for elem in root[0]:
 
-    id = elem.get('theaterId')
-    name = root[0][0].find('name').text
-    telephone = root[0][0].find('telephone').text
-    longitude = root[0][0].find('longitude').text
-    latitude = root[0][0].find('latitude').text
-    street = root[0][0].find('address').find('streetAddress').find('street').text
-    city = root[0][0].find('address').find('city').text
-    state = root[0][0].find('address').find('state').text
-    postalCode = root[0][0].find('address').find('postalCode').text
-    country = root[0][0].find('address').find('country').text
+	    id = elem.get('theaterId')
+	    name = elem.find('name').text
+	    telephone = elem.find('telephone').text
+	    longitude = elem.find('longitude').text if elem.find('longitude').text is not None else 0.0
+	    latitude = elem.find('latitude').text if elem.find('latitude').text is not None else 0.0
+	    street = elem.find('address').find('streetAddress').find('street').text
+	    city = elem.find('address').find('city').text
+	    state = elem.find('address').find('state').text
+	    postalCode = elem.find('address').find('postalCode').text
+	    country = elem.find('address').find('country').text
 
-    theater = Theater(id, name, telephone, longitude, latitude, street, city, state, postalCode, country)
-    db.session.add(theater)
+	    theater = Theater(id, name, telephone, longitude, latitude, street, city, state, postalCode, country)
+	    db.session.add(theater)
 
-db.session.commit()
+	#Showtime
+	for elem in root[2]:
+	    date = elem.get('date')
+	    theaterId = elem.get('theaterId')
+	    eventId = elem.get('movieId')
 
+	    showtime = ShowTime(date, theaterId, eventId)
+	    db.session.add(showtime)
 
-"""Showtime"""
-for elem in root[2]:
-    date = elem.get('date')
-    theaterId = elem.get('theaterId')
-    eventId = elem.get('movieId')
+	    times = elem.find('times').findall('time')
 
-    showtime = ShowTime(date, theaterId, eventId)
-    db.session.add(showtime)
+	    for time in times:
+	        ticketUrl = time.get('ticketUrl')
+	        hour = time.text
+	        mtime = Time(ticketUrl, hour, eventId, showtime)
+	        db.session.add(mtime)
 
-    times = elem.find('times').findall('time')
+	#Event
+	for elem in root[1]:
+	    eventId = elem.get('movieId')
+	    title = elem.find('officialTitle').text
+	    sinopsis = elem.find('sinopsis')
+	    if sinopsis is not None:
+	        sinopsis = sinopsis.text
+	    country = elem.find('country').text
+	    ratings = elem.find('ratings').findall('rating')
+	    duration = elem.find('runningTime').text
+	    if duration is None:
+	        duration = 90
+	    format = elem.find('format').text
+	    originalLanguage = elem.find('originalLanguage').text
+	    genres = elem.find('genres').findall('genre')
+	    cast = elem.find('cast').findall('actor')
+	    trailer = elem.find('trailer')
+	    if trailer is not None:
+	        trailer = trailer.text
+        event = Event(eventId, title, sinopsis, country, ratings, duration, format, originalLanguage, genres, trailer)
 
-    for time in times:
-        ticketUrl = time.get('ticketUrl')
-        hour = time.text
-        mtime = Time(ticketUrl, hour, eventId, showtime)
-        db.session.add(mtime)
+        for genre in genres:
+			db.session.add(Genre(genre.text, eventId))
 
-db.session.commit()
-
-"""Event"""
-for elem in root[1]:
-    eventId = elem.get('movieId')
-    title = elem.find('officialTitle').text
-    sinopsis = elem.find('sinopsis')
-    if sinopsis is not None:
-        sinopsis = sinopsis.text
-    country = elem.find('country').text
-    ratings = elem.find('ratings').findall('rating')
-    duration = elem.find('runningTime').text
-    if duration is None:
-        duration = 90
-    format = elem.find('format').text
-    originalLanguage = elem.find('originalLanguage').text
-    genres = elem.find('genres').findall('genre')
-    cast = elem.find('cast').findall('actor')
-    trailer = elem.find('trailer')
-    if trailer is not None:
-        trailer = trailer.text
-	event = Event(eventId, title, sinopsis, country, ratings, duration, format, originalLanguage, genres, trailer)
-    event1 = Event(eventId, title, sinopsis, country, ratings, duration, format, originalLanguage, genres, trailer)
-    db.session.add(event1)
-
-    for genre in genres:
-        db.session.add(Genre(genre, event1))
-
-    for actor in cast:
-		dicaprio = Actor(actor.find('firstName').text)
-		dicaprio.movie_actor.append(event)
-		db.session.add(dicaprio)
-
-    crew = elem.find('crew').findall('member')
-    for person in crew:
-		db.session.add(CrewMember(person.find('firstName').text if person.find('firstName') is not None else "NULL", person.find('role').text if person.find('role') is not None else "NULL"))
+        for actor in cast:
+			name = actor.find('firstName').text
+			print(name)
+			dicaprio = Actor(name)
+			dicaprio.movie_actor.append(event)
+			db.session.add(dicaprio)
 
 
-db.session.commit()
+        crew = elem.find('crew').findall('member')
+        for person in crew:
+			db.session.add(CrewMember(person.find('firstName').text if person.find('firstName') is not None else "NULL", person.find('role').text if person.find('role') is not None else "NULL"))
 
-# <movie movieId="18507">
-    # <officialTitle>&#211;pera La Flauta M&#225;gica</officialTitle>
-    # <sinopsis>Proyecci&#243;n de la &#243;pera -La flauta m&#225;gica- de Mozart.</sinopsis>
-    # <runningTime>90</runningTime>
-    # <format>35 mm.</format>
-    # <country>ESPA&#209;A</country>
-    # <ratings>
-        # <rating>PENDIENTE DE CALIFICACI&#211;N</rating>
-    # </ratings>
-    # <originalLanguage>Castellano</originalLanguage>
-    # <formatCode>0</formatCode>
-    # <subtitles>0</subtitles>
-    # <version>S</version>
-    # <genres>
-        # <genre>Opera</genre>
-    # </genres>
-    # <cast></cast>
-    # <crew>
-        # <member>
-            # <role>Director</role>
-            # <firstName>Mozart</firstName>
-        # </member>
-    # </crew>
-    # <cartel>opera.gif</cartel>
-# </movie>
+        db.session.add(event)
+
+        db.session.commit()
+
+	# <movie movieId="18507">
+	    # <officialTitle>&#211;pera La Flauta M&#225;gica</officialTitle>
+	    # <sinopsis>Proyecci&#243;n de la &#243;pera -La flauta m&#225;gica- de Mozart.</sinopsis>
+	    # <runningTime>90</runningTime>
+	    # <format>35 mm.</format>
+	    # <country>ESPA&#209;A</country>
+	    # <ratings>
+	        # <rating>PENDIENTE DE CALIFICACI&#211;N</rating>
+	    # </ratings>
+	    # <originalLanguage>Castellano</originalLanguage>
+	    # <formatCode>0</formatCode>
+	    # <subtitles>0</subtitles>
+	    # <version>S</version>
+	    # <genres>
+	        # <genre>Opera</genre>
+	    # </genres>
+	    # <cast></cast>
+	    # <crew>
+	        # <member>
+	            # <role>Director</role>
+	            # <firstName>Mozart</firstName>
+	        # </member>
+	    # </crew>
+	    # <cartel>opera.gif</cartel>
+	# </movie>
 
 
 
-# <showTime date="20151112" theaterId="2" movieId="30171">
-# <times>
-#   <time ticketUrl="http://cine.entradas.com/entradas/a001009.do?identidad=710&amp;idcanal=2&amp;idcine=2&amp;idprov=28&amp;idpeli=30171&amp;idSesion=29518&amp;fecha=20151112&amp;idSala=1">2015</time>
-# </times>
-# </showTime>
+	# <showTime date="20151112" theaterId="2" movieId="30171">
+	# <times>
+	#   <time ticketUrl="http://cine.entradas.com/entradas/a001009.do?identidad=710&amp;idcanal=2&amp;idcine=2&amp;idprov=28&amp;idpeli=30171&amp;idSesion=29518&amp;fecha=20151112&amp;idSala=1">2015</time>
+	# </times>
+	# </showTime>
