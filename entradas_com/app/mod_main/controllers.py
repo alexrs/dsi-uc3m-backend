@@ -1,5 +1,6 @@
 # Import flask dependencies
 from flask import Blueprint, render_template
+from app.models import *
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
 mod_main = Blueprint('index', __name__,)
@@ -8,3 +9,6 @@ mod_main = Blueprint('index', __name__,)
 @mod_main.route('/')
 def index():
     return render_template("main/index.html")
+
+
+def get_suggestions():
