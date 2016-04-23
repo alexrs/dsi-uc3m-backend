@@ -7,7 +7,7 @@ from wtforms import TextField, PasswordField # BooleanField
 # Import Form validators
 from wtforms.validators import Required, Email, EqualTo
 
-# Define the login form (WTForms)
+# Define the login form (WTForms)S
 
 class LoginForm(Form):
 	email = TextField('Email Address', [Email(), Required(message='Forgot your email address?')])

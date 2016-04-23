@@ -12,3 +12,5 @@ def index():
 
 
 def get_suggestions():
+	pass
+
