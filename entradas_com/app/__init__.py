@@ -1,6 +1,5 @@
 # Import flask and template operators
 from flask import Flask, render_template
-
 # Import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
 
