@@ -1,14 +1,20 @@
 # Import flask dependencies
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect
 from app.models import *
 
-# Define the blueprint: 'auth', set its url prefix: app.url/auth
-mod_main = Blueprint('index', __name__,)
+# Import module forms
+from app.mod_main.forms import SearchForm
+
+mod_main = Blueprint('main', __name__,)
 
 # Set the route and accepted methods
 @mod_main.route('/')
 def index():
-    return render_template("main/index.html")
+	form = SearchForm()
+	if form.validate_on_submit():
+		print str(form.search.data)
+		#return redirect('/search') #not sure
+	return render_template("main/index.html", form=form)
 
 
 def get_suggestions():

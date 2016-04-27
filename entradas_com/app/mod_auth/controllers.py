@@ -18,7 +18,7 @@ from app.mod_auth.models import User
 mod_auth = Blueprint('auth', __name__, url_prefix='/auth')
 
 # Set the route and accepted methods
-@mod_auth.route('/singin/', methods=['GET', 'POST'])
+@mod_auth.route('/signin/', methods=['GET', 'POST'])
 def signin():
 
     # If sign in form is submitted
@@ -35,4 +35,4 @@ def signin():
 
         flash('Wrong email or password', 'error-message')
 
-    return render_template("auth/singin.html", form=form)
+    return render_template("auth/signin.html", form=form)
