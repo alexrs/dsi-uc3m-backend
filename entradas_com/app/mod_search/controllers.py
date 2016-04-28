@@ -4,7 +4,7 @@ from app.models import *
 mod_search = Blueprint('search', __name__,)
 
 
-@mod_search.route('/search/', methods=['GET', 'POST'])
+@mod_search.route('/search/', methods=['POST'])
 def search():
 	print query_by_event_name(str(request.form['query']))
 	return str(request.form['query'])

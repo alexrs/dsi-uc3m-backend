@@ -7,6 +7,26 @@ class Base(db.Model):
 	date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
 	date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
+# Define a User model
+class User(Base):
+
+    # User Name
+    name = db.Column(db.String(128), nullable=False)
+
+    # Identification Data: email & password
+    email = db.Column(db.String(128), nullable=False, unique=True)
+    password = db.Column(db.String(192), nullable=False)
+
+# New instance instantiation procedure
+def __init__(self, username, email, password):
+    self.username = username
+    self.email = email
+    self.password = password
+
+def __repr__(self):
+    return '<User %r>' % (self.username)
+
+
 class Theater(Base):
     theaterId = db.Column(db.Integer, unique=True)
     name  = db.Column(db.String(30), unique=False)
