@@ -12,6 +12,6 @@ def search():
 	
 # http://flask-sqlalchemy.pocoo.org/2.1/queries/
 def query_by_event_name(look_for):
-	result = Event.query.filter(Event.title.like(look_for + "%")).all()
+	result = Event.query.filter(Event.title.like("%" + look_for + "%")).all()
 	#result = Event.query.order_by(Event.title).all()
 	return result
