@@ -31,6 +31,9 @@
 .sendsearchbtn{
     background-color: rgb(241,241,241);
     border: none;
+    border-radius: 0px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
     -webkit-transition: background-color 0.5s;
     transition: background-color 0.5s;
 }

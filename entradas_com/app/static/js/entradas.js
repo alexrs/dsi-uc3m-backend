@@ -41,8 +41,7 @@ $(document).ready(function(){
     selectControls();
 });
 
-// When resizing the window, check if the
-window.addEventListener('resize', function(){selectControls()}, true);
+
 
 // When clicking in the login pill in the login/signup modal
 $(".login-link").click(function( event ){
@@ -123,3 +122,6 @@ setInterval(function(){
         }
     }
 }, 2000);
+
+// When resizing the window, check if the
+window.addEventListener('resize', function(){selectControls()}, true);
