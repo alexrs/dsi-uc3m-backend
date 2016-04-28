@@ -41,7 +41,8 @@ $(document).ready(function(){
     selectControls();
 });
 
-
+// When resizing the window, check if the
+window.addEventListener('resize', function(){selectControls()}, true);
 
 // When clicking in the login pill in the login/signup modal
 $(".login-link").click(function( event ){
@@ -82,7 +83,7 @@ function dropdown(val){
     y[0].style.backgroundColor = 'rgb(241,241,241)';
     switch(val){
         case 1: y[0].innerHTML = '<i class="fa fa-ticket fa-lg fa-fw"></i> <span class="caret"></span>'; break;
-        case 2: y[0].innerHTML = '<img src="/static/img/theater.png" style="width:18px">  &nbsp;<span class="caret"></span>'; break;
+        case 2: y[0].innerHTML = '<img src="img/theater.png" style="width:18px">  &nbsp;<span class="caret"></span>'; break;
         case 3: y[0].innerHTML = '<i class="fa fa-music fa-lg fa-fw"></i> <span class="caret"></span>'; break;
         case 4: y[0].innerHTML = '<i class="fa fa-university fa-lg fa-fw"></i> <span class="caret"></span>'; break;
         case 5: y[0].innerHTML = '<i class="fa fa-futbol-o fa-lg fa-fw"></i> <span class="caret"></span>'; break;
@@ -122,6 +123,3 @@ setInterval(function(){
         }
     }
 }, 2000);
-
-// When resizing the window, check if the
-window.addEventListener('resize', function(){selectControls()}, true);
