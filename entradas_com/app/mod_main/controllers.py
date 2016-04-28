@@ -3,9 +3,6 @@ from flask import Blueprint, render_template, redirect
 from app.models import *
 from app import db
 
-# Import module forms
-from app.mod_main.forms import SearchForm
-
 mod_main = Blueprint('main', __name__,)
 
 # Set the route and accepted methods
