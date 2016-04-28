@@ -114,32 +114,31 @@
     </div>
 
     <!-- Search bar -->
-
-    <div id='search-container' class="container input-group">
-        <div class="input-group-btn">
-        <button id='dropbtn' type="button" class="btn btn-default dropdown-toggle searchbtn dropbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-question fa-lg fa-fw" aria-hidden="true"></i> <span class="caret"></span></button>
-            <ul class="dropdown-menu search-dropdown-menu">
-              <li><a href="#" onclick="dropdown(1);"><i class="fa fa-ticket fa-lg fa-fw"></i> Cine </a></li>
-              <li><a href="#" onclick="dropdown(2);"><img src="{{ url_for('static', filename='img/theater.png') }}" style="width:18px"> &nbsp; Teatro </a></li>
-              <li><a href="#" onclick="dropdown(3);"><i class="fa fa-music fa-lg fa-fw"></i> Conciertos </a></li>
-              <li><a href="#" onclick="dropdown(4);"><i class="fa fa-university fa-lg fa-fw"></i> Exposiciones/Museos </a></li>
-              <li><a href="#" onclick="dropdown(5);"><i class="fa fa-futbol-o fa-lg fa-fw"></i> Deportes </a></li>
-              <li><a href="#" onclick="dropdown(6);"><i class="fa fa-magic fa-lg fa-fw" aria-hidden="true"></i> Shows/Espectáculos </a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#" onclick="dropdown(0);"><i class="fa fa-globe fa-lg fa-fw"></i> Todas las categorías</a></li>
-        </div>
-        <form action="{{ url_for('search.search') }}" type="search" method="post" name="Search">
-        <input id="search-input-text" name="query" type="text" class="form-control searchbar searchbar-text" placeholder="Busca espectáculos aquí" aria-label="search-terms" onkeydown="setDefaultDrop()" method="post">
+    <form action="{{ url_for('search.search') }}" type="search" method="post" name="Search">
+        <div id='search-container' class="container input-group">
             <div class="input-group-btn">
-                <a href="search-results.html">
-                    <button id="searchnow" class="btn btn-default searchbtn sendsearchbtn" type="Submit">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </a>
+            <button id='dropbtn' type="button" class="btn btn-default dropdown-toggle searchbtn dropbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-question fa-lg fa-fw" aria-hidden="true"></i> <span class="caret"></span></button>
+                <ul class="dropdown-menu search-dropdown-menu">
+                  <li><a href="#" onclick="dropdown(1);"><i class="fa fa-ticket fa-lg fa-fw"></i> Cine </a></li>
+                  <li><a href="#" onclick="dropdown(2);"><img src="{{ url_for('static', filename='img/theater.png') }}" style="width:18px"> &nbsp; Teatro </a></li>
+                  <li><a href="#" onclick="dropdown(3);"><i class="fa fa-music fa-lg fa-fw"></i> Conciertos </a></li>
+                  <li><a href="#" onclick="dropdown(4);"><i class="fa fa-university fa-lg fa-fw"></i> Exposiciones/Museos </a></li>
+                  <li><a href="#" onclick="dropdown(5);"><i class="fa fa-futbol-o fa-lg fa-fw"></i> Deportes </a></li>
+                  <li><a href="#" onclick="dropdown(6);"><i class="fa fa-magic fa-lg fa-fw" aria-hidden="true"></i> Shows/Espectáculos </a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#" onclick="dropdown(0);"><i class="fa fa-globe fa-lg fa-fw"></i> Todas las categorías</a></li>
             </div>
-        </form>
-    </div>
+            <input id="search-input-text" name="query" type="text" class="form-control searchbar searchbar-text" placeholder="Busca espectáculos aquí" aria-label="search-terms" onkeydown="setDefaultDrop()" method="post">
+                <div class="input-group-btn">
+                    <a href="search-results.html">
+                        <button id="searchnow" class="btn btn-default searchbtn sendsearchbtn" type="Submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </a>
+                </div>
 
+        </div>
+    </form>
     <!-- Header Carousel -->
 
     <header id="myCarousel" class="carousel slide">
