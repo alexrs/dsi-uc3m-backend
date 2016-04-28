@@ -64,9 +64,8 @@
                         </li>
                     </ul>
 
-
                     <!-- When signing in -->
-                    <form action="{{ url_for('main.signin') }}" id="signup-form" class="signup-field" role="form" >
+                    <form action="{{ url_for('main.signup') }}" type="signup" id="signup-form" class="signup-field" role="form" method="post" name="Signup">
                         <div class="form-group">
                             <label for="email">Email:</label>
                             <input name="email "type="email" class="form-control" id="email">
@@ -86,13 +85,13 @@
                         <div class="checkbox">
                             <label><input type="checkbox">Recuérdame</label>
                         </div>
-                        <button type="submit" class="btn btn-success login signup-field" data-dismiss="modal">
+                        <button type="Submit" class="btn btn-success login signup-field" data-dismiss="modal">
                             <span class="glyphicon glyphicon-user"></span> Sign Up
                         </button>
                     </form>
 
                     <!-- When logging in -->
-                    <form action="{{ url_for('main.login') }}" id="login-form" class="login-field" role="form">
+                    <form action="{{ url_for('main.login') }}" type="login" id="login-form" class="login-field" role="form" method="post" name="Login">
                         <div class="form-group">
                             <label for="email">Usuario o email:</label>
                             <input name="email" type="email" class="form-control" id="email">
@@ -104,7 +103,7 @@
                         <div class="checkbox">
                             <label><input type="checkbox"> Recuérdame</label>
                         </div>
-                        <button type="submit" class="btn btn-success login login-field" data-dismiss="modal">
+                        <button type="Submit" class="btn btn-success login login-field" data-dismiss="modal">
                             <span class="glyphicon glyphicon-log-in"></span> Log in
                         </button>
                     </form>
