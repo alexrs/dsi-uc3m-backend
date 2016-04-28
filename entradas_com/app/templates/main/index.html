@@ -1,6 +1,286 @@
+{% extends "base.html" %}
+
 {% block content %}
-  	<form action="{{ url_for('search.search') }}" type="search" method="post" name="Search">
-            <input type="text" name="query" /><br />
-      	<p><input type="Submit"></p>
-  	</form>
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">
+                    <img class="brand-logo img-responsive" alt="Brand" src="{{ url_for('static', filename='img/entradascomlogo.png') }}">
+                </a>
+                <button type="button" class="navbar-toggle btn btn-yellow navbar-btn last-navbar-item login-option mobile" data-toggle="modal" data-target="#signup-modal">
+                    <span class="glyphicon glyphicon-user">
+                </button>
+                <button type="button" class="navbar-toggle btn btn-yellow navbar-btn last-navbar-item logged sign-out mobile">
+                    <span class="glyphicon glyphicon-off">
+                </button>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+
+                <!-- Sign up/in button -->
+
+                <li>
+                    <!-- Trigger the modal with a button -->
+                    <button type="button" class="btn btn-yellow navbar-btn last-navbar-item login-option desktop" data-toggle="modal" data-target="#signup-modal">
+                        <span class="glyphicon glyphicon-user"></span>Entrar
+                    </button>
+                </li>
+
+                <!-- Exit button -->
+
+                <li><p class="navbar-text navbar-right navbar-item logged desktop" style="color: white">¡Hola, <a href="#" class="navbar-link" style="color: white"> zdfsaff </a>!</p></li>
+                <li>
+                    <button type="button" class="btn btn-yellow navbar-btn last-navbar-item logged sign-out desktop">
+                        <span class="glyphicon glyphicon-off"></span>Salir
+                    </button>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+    <!-- Sign up modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="signup-dialog">
+        <div class="modal-dialog" role="document">
+
+        <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Sólo a un paso de las mejores condiciones</h4>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-pills">
+                        <!-- Sign up tab-->
+                        <li id="signup-tab" class="active">
+                            <a href="#" class="signup-link">Sign up</a>
+                        </li>
+                        <!-- Sign in tab -->
+                        <li id="login-tab">
+                            <a href="#" class="login-link">Log in</a>
+                        </li>
+                    </ul>
+
+
+                    <!-- When signing in -->
+                    <form action="{{ url_for('main.signin') }}" id="signup-form" class="signup-field" role="form" >
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input name="email "type="email" class="form-control" id="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Usuario:</label>
+                            <input name="username" type="text" class="form-control" id="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Contraseña:</label>
+                            <input name="password" type="password" class="form-control" id="pwd">
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd-confirm">Confirmar contraseña:</label>
+                            <input name="password" type="password" class="form-control" id="pwd-confirm">
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox">Recuérdame</label>
+                        </div>
+                    </form>
+
+                    <!-- When logging in -->
+                    <form action="{{ url_for('main.login') }}" id="login-form" class="login-field" role="form">
+                        <div class="form-group">
+                            <label for="email">Usuario o email:</label>
+                            <input name="email" type="email" class="form-control" id="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Password:</label>
+                            <input name="password" type="password" class="form-control" id="pwd">
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox"> Recuérdame</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success login signup-field" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-user"></span> Sign Up
+                    </button>
+                    <button type="submit" class="btn btn-success login login-field" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-log-in"></span> Log in
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search bar -->
+
+    <div id='search-container' class="container input-group">
+        <div class="input-group-btn">
+        <button id='dropbtn' type="button" class="btn btn-default dropdown-toggle searchbtn dropbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-question fa-lg fa-fw" aria-hidden="true"></i> <span class="caret"></span></button>
+            <ul class="dropdown-menu search-dropdown-menu">
+              <li><a href="#" onclick="dropdown(1);"><i class="fa fa-ticket fa-lg fa-fw"></i> Cine </a></li>
+              <li><a href="#" onclick="dropdown(2);"><img src="{{ url_for('static', filename='img/theater.png') }}" style="width:18px"> &nbsp; Teatro </a></li>
+              <li><a href="#" onclick="dropdown(3);"><i class="fa fa-music fa-lg fa-fw"></i> Conciertos </a></li>
+              <li><a href="#" onclick="dropdown(4);"><i class="fa fa-university fa-lg fa-fw"></i> Exposiciones/Museos </a></li>
+              <li><a href="#" onclick="dropdown(5);"><i class="fa fa-futbol-o fa-lg fa-fw"></i> Deportes </a></li>
+              <li><a href="#" onclick="dropdown(6);"><i class="fa fa-magic fa-lg fa-fw" aria-hidden="true"></i> Shows/Espectáculos </a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#" onclick="dropdown(0);"><i class="fa fa-globe fa-lg fa-fw"></i> Todas las categorías</a></li>
+        </div>
+        <form action="{{ url_for('search.search') }}" type="search" method="post" name="Search">
+        <input id="search-input-text" name="query" type="text" class="form-control searchbar searchbar-text" placeholder="Busca espectáculos aquí" aria-label="search-terms" onkeydown="setDefaultDrop()" method="post">
+            <div class="input-group-btn">
+                <a href="search-results.html">
+                    <button id="searchnow" class="btn btn-default searchbtn sendsearchbtn" type="Submit">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Header Carousel -->
+
+    <header id="myCarousel" class="carousel slide">
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <div class="fill" style="background-image:url('https://images.unsplash.com/photo-1459749411175-04bf5292ceea?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=698b0decc7115d06b16801d7b8291c63');"></div>
+            </div>
+            <div class="item">
+                <div class="fill" id ='violinFlip' style="background-image:url('http://cdn.paper4pc.com/images/entertainment-music-violin-musical-instrument-strings-wood-people-orchestra-wallpaper-1.jpg');"></div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://i.imgur.com/yny7x.jpg');"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Marketing Icons Section -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Recomendados para ti
+                </h1>
+            </div>
+
+             <div class="col-md-4" style="max-width:80%;margin-left:auto; margin-right:auto">
+                 <img class='img-responsive' src="{{ url_for('static', filename='img/bosnianr_rainbows.jpg') }}">
+                <div class="panel panel-default" style="border:none" >
+                    <div class="panel-body" style="background-color:rgb(241,241,241)">
+                        <h3 style="text-align:center;padding:0;margin:0">Bosnian Rainbows</h>
+                        <div style="margin-top:20px;vertical-align:middle">
+                            <div style="display:inline-block">
+                                <div style="background-color:rgb(221,221,221); width:70px; height:25px; font-size:16px; padding-top:3px">Mayo</div>
+                                <div style="background-color:white;width:70px; height:50px;">
+                                    <p style="font-size:16px;padding:0;margin:0">Viernes</p>
+                                    <h1 style="padding:0;margin:0; font-size:26px"> 26 </h1>
+                                </div>
+                            </div>
+                            <div style="display:inline-block; font-size:16px;">
+                            <ul class="list-unstyled" style="text-align:left">
+                                <li>
+                                  <i class="fa fa-money fa-fw"></i> Desde 23,20€</li>
+                                <li style="margin-top:10px"><i class="fa fa-music fa-fw"></i>  Indie/rock alternativo</li>
+                                <li style="margin-top:10px"><i class="fa fa-map-marker fa-fw"></i> Sala Caracol, Madrid</li>
+                            </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+
+        </div>
+        <!-- /.row -->
+
+        <a class="btn btn-lg btn-default btn-block push_button" href="#">¡Quiero más sugerencias!</a>
+
+        <!-- Portfolio Section -->
+        <div id='categories'>
+            <div class="col-lg-12">
+                <h2 class="page-header">Categorías</h2>
+            </div>
+            <div class="col-xs-6 col-sm-4">
+                <div class='categorias-img'>
+                    <a href="portfolio-item.html">
+                        <img id='sizesample' class="img-responsive img-portfolio img-hover" src="{{ url_for('static', filename='img/liveshow.jpg') }}" alt="conciertos">
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-4">
+                <div class='categorias-img'>
+                    <a href="portfolio-item.html" style="text-align:center; vertical-align:middle">
+                        <img class="img-responsive img-portfolio img-hover" src="{{ url_for('static', filename='img/opera.jpg') }}" alt="teatro">
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-4">
+                <div class='categorias-img'>
+                    <a href="portfolio-item.html">
+                        <img class="img-responsive img-portfolio img-hover" src="{{ url_for('static', filename='img/cinema.jpg') }}" alt="cine">
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-4">
+                <div class='categorias-img'>
+                    <a href="portfolio-item.html">
+                        <img class="img-responsive img-portfolio img-hover" src="{{ url_for('static', filename='img/expo.jpg') }}" alt="exposiciones/museos">
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-4">
+                <div class='categorias-img'>
+                    <a href="portfolio-item.html">
+                        <img class="img-responsive img-portfolio img-hover" src="{{ url_for('static', filename='img/soccer.jpg') }}" alt="deportes">
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-4">
+                <div class='categorias-img'>
+                    <a href="portfolio-item.html">
+                        <img class="img-responsive img-portfolio img-hover" src="{{ url_for('static', filename='img/openmic.jpg') }}" alt="shows/espectáculos">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="footer" style="margin-top:50px;">
+        <div class="row row-mod" align="center">
+          <div class="col-lg-4" style="margin-top:0px">
+            <a href="#"><img style="width:150px; padding-bottom:10px" src="{{ url_for('static', filename='img/entradascomlogo.png') }}"> </a>
+          </div>
+          <div class="col-lg-4" style="margin-top:10px; padding-bottom:10px">
+            <div style="display:inline-block; padding-left:10px; padding-right:10px; vertical-align:middle">
+              <a href="#" style="color:black"> <i class="fa fa-facebook-square fa-3x"></i></a>
+            </div>
+            <div style="display:inline-block; padding-left:10px; padding-right:10px; vertical-align:middle">
+                <a href="#" style="color:black"> <i class="fa fa-google-plus-square fa-3x"></i></a>
+            </div>
+            <div style="display:inline-block; padding-left:10px; padding-right:10px; vertical-align:middle">
+                <a href="#" style="color:black"> <i class="fa fa-twitter-square fa-3x"></i></a>
+            </div>
+          </div>
+            <ul class='col-lg-4' style="list-style-type:none;margin:0;padding:0;">
+                <li class="footitem"><a href="#" style="color:black"> Condiciones de uso</a></li>
+                <li class="footitem"><a href="#" style="color:black"> Política de privacidad</a></li>
+            </ul>
+            <p>Made with <i class="fa fa-heart" aria-hidden="true"></i> in Leganés</p>
+        </div>
+    </footer>
+
 {% endblock %}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<html>
+	<head>
+		<title>Entradas.com</title>
+
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <meta name="description" content="">
+	    <meta name="author" content="">
+
+	    <!-- Bootstrap Core CSS -->
+	    <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet">
+
+	    <!-- Custom CSS -->
+	    <link href="{{ url_for('static', filename='css/global.css') }}" rel="stylesheet">
+	    <link href="{{ url_for('static', filename='css/navbar.css') }}" rel="stylesheet">
+	    <link href="{{ url_for('static', filename='css/header-carousel.css') }}" rel="stylesheet">
+	    <link href="{{ url_for('static', filename='css/searchbar.css') }}" rel="stylesheet">
+	    <link href="{{ url_for('static', filename='css/footer.css') }}" rel="stylesheet">
+
+	    <!-- Custom Fonts -->
+	    <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}f" rel="stylesheet" type="text/css">
+
+	    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	    <!--[if lt IE 9]>
+	        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	    <![endif]-->
+
+	    <!-- jQuery -->
+	    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+
+	    <!-- Bootstrap Core JavaScript -->
+	    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+
+	    <!-- own JavaScript -->
+	    <script src="{{ url_for('static', filename='js/entradas.js') }}"></script>
+
+	</head>
+	<body>
+		{% block content %}{% endblock %}
+	</body>
+</html>

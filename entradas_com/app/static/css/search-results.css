@@ -1,0 +1,26 @@
+header.carousel {
+    height: 30%;
+}
+
+#search-container {
+    top: 15%;
+}
+
+@media(max-width:991px) {
+    header.carousel {
+        height: 20%;
+    }
+    #search-container{
+        width:690px;
+        top: 22%;
+    }
+}
+
+@media(max-width:767px) {
+    header.carousel {
+        height: 20%;
+    }
+    #search-container{
+        width: 90%;
+    }
+}
