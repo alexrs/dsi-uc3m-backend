@@ -12,43 +12,53 @@
 	    <meta name="author" content="">
 
 	    <!-- Bootstrap Core CSS -->
-	    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
 
-	    <!-- Custom CSS -->
-	    <link href="{{ url_for('static', filename='css/global.css') }}" rel="stylesheet">
-	    <link href="{{ url_for('static', filename='css/navbar.css') }}" rel="stylesheet">
-	    <link href="{{ url_for('static', filename='css/header-carousel.css') }}" rel="stylesheet">
-	    <link href="{{ url_for('static', filename='css/searchbar.css') }}" rel="stylesheet">
-	    <link href="{{ url_for('static', filename='css/footer.css') }}" rel="stylesheet">
 
-	    <!-- Custom Fonts -->
-	    <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+        <!-- uikit CSS -->
+        <link href="{{ url_for('static', filename='css/uk-flex.css') }}" rel="stylesheet">
+       
+        <!-- Custom Fonts -->
+        <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 
-	    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	    <!--[if lt IE 9]>
-	        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-	    <![endif]-->
+        <!-- Custom CSS -->
+            <link href="{{ url_for('static', filename='css/global.css') }}" rel="stylesheet">
+            <link href="{{ url_for('static', filename='css/navbar.css') }}" rel="stylesheet">
+            <link href="{{ url_for('static', filename='css/header-carousel.css') }}" rel="stylesheet">
+            <link href="{{ url_for('static', filename='css/searchbar.css') }}" rel="stylesheet">
+            <link href="{{ url_for('static', filename='css/footer.css') }}" rel="stylesheet">
 
-	    <!-- jQuery -->
-	    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+        
 
-	    <!-- Bootstrap Core JavaScript -->
-	    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
-	    <!-- own JavaScript -->
-	    <script src="{{ url_for('static', filename='js/entradas.js') }}"></script>
+            <!-- jQuery -->
+        <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        
+        <!-- UIkit -->
+        <script src="{{ url_for('static', filename='js/uikit.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/components/sticky.min.js') }}"></script>
+
+        <!-- own JavaScript -->
+        <script src="{{ url_for('static', filename='js/entradas.js') }}"></script>
 
 	</head>
 	<body>
 		{% block content %}
     <!-- Navigation -->
 
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-default navbar-static-top main-navbar">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="../">
                     <img class="brand-logo img-responsive" alt="Brand" src="{{ url_for('static', filename='img/entradascomlogo.png') }}">
                 </a>
                 <button type="button" class="navbar-toggle btn btn-yellow navbar-btn last-navbar-item login-option mobile" data-toggle="modal" data-target="#signup-modal">
@@ -71,7 +81,7 @@
 
                 <!-- Exit button -->
 
-                <li><p class="navbar-text navbar-right navbar-item logged desktop" style="color: white">¡Hola, <a href="#" class="navbar-link" style="color: white"> zdfsaff </a>!</p></li>
+                <li><p class="navbar-text navbar-right navbar-item logged desktop" style="color: white">¡Hola, <a href="#" class="navbar-link" style="color: white"> asdhfad </a>!</p></li>
                 <li>
                     <button type="button" class="btn btn-yellow navbar-btn last-navbar-item logged sign-out desktop">
                         <span class="glyphicon glyphicon-off"></span>Salir

@@ -15,42 +15,46 @@
         <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
 
 
-    <!-- uikit CSS -->
-    <link href="{{ url_for('static', filename='css/uk-flex.css') }}" rel="stylesheet">
+        <!-- uikit CSS -->
+        <link href="{{ url_for('static', filename='css/uk-flex.css') }}" rel="stylesheet">
+       
+        <!-- Custom Fonts -->
+        <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 
-<!-- Custom CSS -->
-        <link href="{{ url_for('static', filename='css/global.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='css/navbar.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='css/header-carousel.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='css/searchbar.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='css/footer.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/search-results.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/search-cards.css') }}" rel="stylesheet">
+        <!-- Custom CSS -->
+            <link href="{{ url_for('static', filename='css/global.css') }}" rel="stylesheet">
+            <link href="{{ url_for('static', filename='css/navbar.css') }}" rel="stylesheet">
+            <link href="{{ url_for('static', filename='css/header-carousel.css') }}" rel="stylesheet">
+            <link href="{{ url_for('static', filename='css/searchbar.css') }}" rel="stylesheet">
+            <link href="{{ url_for('static', filename='css/footer.css') }}" rel="stylesheet">
+            <link href="{{ url_for('static', filename='css/search-cards.css') }}" rel="stylesheet">
+            <link href="{{ url_for('static', filename='css/search-results.css') }}" rel="stylesheet">
 
-    <!-- Custom Fonts -->
-    <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
             <!-- jQuery -->
         <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
 
         <!-- Bootstrap Core JavaScript -->
         <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        
+        <!-- UIkit -->
+        <script src="{{ url_for('static', filename='js/uikit.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/components/sticky.min.js') }}"></script>
 
         <!-- own JavaScript -->
         <script src="{{ url_for('static', filename='js/entradas.js') }}"></script>
         <script src="{{ url_for('static', filename='js/search-results.js') }}"></script>
 
 
-        <!-- UIkit -->
-        <script src="{{ url_for('static', filename='js/uikit.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/components/sticky.min.js') }}"></script>
 
 </head>
 
@@ -62,7 +66,7 @@
     <nav class="navbar navbar-default navbar-static-top main-navbar">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="../">
                     <img class="brand-logo img-responsive" alt="Brand" src="{{ url_for('static', filename='img/entradascomlogo.png') }}">
                 </a>
                 <button type="button" class="navbar-toggle btn btn-yellow navbar-btn last-navbar-item login-option mobile" data-toggle="modal" data-target="#signup-modal">
@@ -237,7 +241,7 @@
 
 
     <!-- Cards -->
-
+    <div class="container">
     {% for event in events %}
 
 
@@ -264,10 +268,10 @@
     </div>
 
     {% endfor %}
-
+    </div>
     <!--Pagination-->
 
-        <nav style="text-align:center">
+        <nav style="text-align:center; display:block; margin-top:20px">
           <ul class="pagination pagination-lg">
             <li>
               <a href="#" aria-label="Previous">
@@ -287,10 +291,10 @@
           </ul>
         </nav>
     <!-- Footer -->
-    <footer class="footer" style="margin-top:50px;">
+    <footer class="footer" style="margin-top:30px">
         <div class="row row-mod" align="center">
           <div class="col-lg-4" style="margin-top:0px">
-            <a href="#"><img style="width:150px; padding-bottom:10px" src="img/entradascomlogo.png"> </a>
+            <a href="#"><img style="width:150px; padding-bottom:10px" src="{{ url_for('static', filename='img/entradascomlogo.png') }}"> </a>
           </div>
           <div class="col-lg-4" style="margin-top:10px; padding-bottom:10px">
             <div style="display:inline-block; padding-left:10px; padding-right:10px; vertical-align:middle">
