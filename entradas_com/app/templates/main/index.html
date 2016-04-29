@@ -58,8 +58,8 @@
 	</head>
 	<body>
 		{% block content %}
-    <!-- Navigation -->
 
+    <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top main-navbar">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -168,6 +168,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- Search bar -->
     <form action="{{ url_for('search.search') }}" type="search" method="post" name="Search">
@@ -331,7 +332,6 @@
             <p>Made with <i class="fa fa-heart" aria-hidden="true"></i> in Leganés</p>
         </div>
     </footer>
-
 {% endblock %}
 	</body>
 </html>

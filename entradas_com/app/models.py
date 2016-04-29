@@ -131,8 +131,9 @@ class Event(Base):
     originalLanguage = db.Column(db.String(30))
     trailer = db.Column(db.String(15))
     price = db.Column(db.Float)
+    imdb = db.Column(db.String(20))
 
-    def __init__(self, eventId, title, sinopsis, country, ratings, runningTime, format, originalLanguage, trailer, price):
+    def __init__(self, eventId, title, sinopsis, country, ratings, runningTime, format, originalLanguage, trailer, price, imdb):
         self.eventId = int(eventId)
         self.title = title
         self.sinopsis = sinopsis
@@ -143,3 +144,4 @@ class Event(Base):
         self.originalLanguage = originalLanguage
         self.trailer = trailer
         self.price = price
+        self.imdb = imdb

@@ -50,6 +50,11 @@ for elem in root[1]:
     country = elem.find('country').text
     ratings = elem.find('ratings').findall('rating')
     duration = elem.find('runningTime').text
+    imdb = elem.find('imdb')
+    if imdb is None:
+        imdb = "0"
+    else:
+        imdb = imdb.text
     if duration is None:
         duration = 90
     format = elem.find('format').text
@@ -59,7 +64,7 @@ for elem in root[1]:
     trailer = elem.find('trailer')
     if trailer is not None:
         trailer = trailer.text
-    event = Event(eventId, title, sinopsis, country, ratings, duration, format, originalLanguage, trailer, 7.80)
+    event = Event(eventId, title, sinopsis, country, ratings, duration, format, originalLanguage, trailer, 7.80, imdb)
 
     for genre in genres:
         db.session.add(Genre(genre.text, eventId))
