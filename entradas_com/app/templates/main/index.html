@@ -17,7 +17,10 @@
 
         <!-- uikit CSS -->
         <link href="{{ url_for('static', filename='css/uk-flex.css') }}" rel="stylesheet">
-       
+        <link href="{{ url_for('static', filename='css/uk-overlay.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/uk-position.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/uk-text.css') }}" rel="stylesheet">
+        
         <!-- Custom Fonts -->
         <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 
@@ -27,6 +30,8 @@
             <link href="{{ url_for('static', filename='css/header-carousel.css') }}" rel="stylesheet">
             <link href="{{ url_for('static', filename='css/searchbar.css') }}" rel="stylesheet">
             <link href="{{ url_for('static', filename='css/footer.css') }}" rel="stylesheet">
+            <link href="{{ url_for('static', filename='css/home-categories.css') }}" rel="stylesheet">
+
 
         
 
@@ -254,52 +259,48 @@
         <a class="btn btn-lg btn-default btn-block push_button" href="#">¡Quiero más sugerencias!</a>
 
         <!-- Portfolio Section -->
+        <!-- Portfolio Section -->
         <div id='categories'>
             <div class="col-lg-12">
                 <h2 class="page-header">Categorías</h2>
             </div>
-            <div class="col-xs-6 col-sm-4">
-                <div class='categorias-img'>
-                    <a href="portfolio-item.html">
-                        <img id='sizesample' class="img-responsive img-portfolio img-hover" src="{{ url_for('static', filename='img/liveshow.jpg') }}" alt="conciertos">
-                    </a>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4">
-                <div class='categorias-img'>
-                    <a href="portfolio-item.html" style="text-align:center; vertical-align:middle">
-                        <img class="img-responsive img-portfolio img-hover" src="{{ url_for('static', filename='img/opera.jpg') }}" alt="teatro">
-                    </a>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4">
-                <div class='categorias-img'>
-                    <a href="portfolio-item.html">
-                        <img class="img-responsive img-portfolio img-hover" src="{{ url_for('static', filename='img/cinema.jpg') }}" alt="cine">
-                    </a>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4">
-                <div class='categorias-img'>
-                    <a href="portfolio-item.html">
-                        <img class="img-responsive img-portfolio img-hover" src="{{ url_for('static', filename='img/expo.jpg') }}" alt="exposiciones/museos">
-                    </a>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4">
-                <div class='categorias-img'>
-                    <a href="portfolio-item.html">
-                        <img class="img-responsive img-portfolio img-hover" src="{{ url_for('static', filename='img/soccer.jpg') }}" alt="deportes">
-                    </a>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-4">
-                <div class='categorias-img'>
-                    <a href="portfolio-item.html">
-                        <img class="img-responsive img-portfolio img-hover" src="{{ url_for('static', filename='img/openmic.jpg') }}" alt="shows/espectáculos">
-                    </a>
-                </div>
-            </div>
+
+            <figure class="uk-overlay uk-overlay-hover col-xs-12 col-sm-4 categories">
+                <img class="uk-overlay-scale" src="{{ url_for('static', filename='img/openmic.jpg') }}" width="100%" height="" alt="conciertos">
+                <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background uk-flex uk-flex-center uk-flex-middle uk-text-center"><h2>Espectáculos</h2></div>
+                <a class="uk-position-cover" href=""></a>
+            </figure>
+
+            <figure class="uk-overlay uk-overlay-hover col-xs-12 col-sm-4 categories">
+                <img class="uk-overlay-scale" src="{{ url_for('static', filename='img/opera.jpg') }}" width="100%" height="" alt="conciertos">
+                <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background uk-flex uk-flex-center uk-flex-middle uk-text-center"><h2>Teatro</h2></div>
+                <a class="uk-position-cover" href=""></a>
+            </figure>
+
+            <figure class="uk-overlay uk-overlay-hover col-xs-12 col-sm-4 categories">
+                <img class="uk-overlay-scale" src="{{ url_for('static', filename='img/expo.jpg') }}" width="100%" height="" alt="conciertos">
+                <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background uk-flex uk-flex-center uk-flex-middle uk-text-center"><h2>Exposiciones</h2></div>
+                <a class="uk-position-cover" href=""></a>
+            </figure>
+
+            <figure class="uk-overlay uk-overlay-hover col-xs-12 col-sm-4 categories">
+                <img class="uk-overlay-scale" src="{{ url_for('static', filename='img/soccer.jpg') }}" width="100%" height="" alt="conciertos">
+                <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background uk-flex uk-flex-center uk-flex-middle uk-text-center"><h2>Deportes</h2></div>
+                <a class="uk-position-cover" href=""></a>
+            </figure>
+
+            <figure class="uk-overlay uk-overlay-hover col-xs-12 col-sm-4 categories">
+                <img class="uk-overlay-scale" src="{{ url_for('static', filename='img/liveshow.jpg') }}" width="100%" height="" alt="conciertos">
+                <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background uk-flex uk-flex-center uk-flex-middle uk-text-center"><h2>Conciertos</h2></div>
+                <a class="uk-position-cover" href=""></a>
+            </figure>
+
+            <figure class="uk-overlay uk-overlay-hover col-xs-12 col-sm-4 categories">
+                <img class="uk-overlay-scale" src="{{ url_for('static', filename='img/cinema.jpg') }}" width="100%" height="" alt="conciertos">
+                <div class="uk-overlay-panel uk-overlay-fade uk-overlay-background uk-flex uk-flex-center uk-flex-middle uk-text-center"><h2>Cine</h2></div>
+                <a class="uk-position-cover" href=""></a>
+            </figure>
+
         </div>
         <!-- /.row -->
 
