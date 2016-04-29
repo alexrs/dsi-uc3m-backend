@@ -125,19 +125,19 @@
                     <form action="{{ url_for('main.signup') }}" type="signup" id="signup-form" class="signup-field" role="form" method="post" name="Signup">
                         <div class="form-group">
                             <label for="email">Email:</label>
-                            <input name="email "type="email" class="form-control" id="email">
+                            <input id="sign-mail" name="email "type="email" class="form-control" id="email" onchange="validate(self.id)">
                         </div>
                         <div class="form-group">
                             <label for="email">Usuario:</label>
-                            <input name="username" type="text" class="form-control" id="email">
+                            <input id="sign-usr" name="username" type="text" class="form-control" id="email" onchange="validate(self.id)">
                         </div>
                         <div class="form-group">
                             <label for="pwd">Contraseña:</label>
-                            <input name="password" type="password" class="form-control" id="pwd">
+                            <input id="sign-pwd" name="password" type="password" class="form-control" id="pwd" onchange="validate(self.id)">
                         </div>
                         <div class="form-group">
                             <label for="pwd-confirm">Confirmar contraseña:</label>
-                            <input name="password" type="password" class="form-control" id="pwd-confirm">
+                            <input id="sign-pwd-confirm" name="password" type="password" class="form-control" id="pwd-confirm" onchange="validate(self.id)">
                         </div>
                         <div class="checkbox">
                             <label><input type="checkbox">Recuérdame</label>
