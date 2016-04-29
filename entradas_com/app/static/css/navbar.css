@@ -1,0 +1,33 @@
+.main-navbar {
+    position: absolute;
+    top: 25px;
+    width: 100%;
+    border: 0;
+    background-color: transparent;
+    backface-visibility: hidden;
+}
+
+.brand-logo {
+    margin-top: -28px;
+    height: 60px;
+}
+
+.navbar-item {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.btn-yellow {
+    background-color: rgb(255, 180, 2);
+    font-weight: bold;
+}
+
+.last-navbar-item {
+    margin-right: 2em;
+    margin-left: 1em;
+}
+
+.padded-dropdown-menu {
+    padding: 2em;
+    width: 20em;
+}

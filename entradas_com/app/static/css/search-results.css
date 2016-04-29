@@ -1,0 +1,50 @@
+header.carousel {
+    height: 30%;
+}
+
+#search-container{
+    top:15%;
+    width: 90%;
+}
+
+/* Filter bar */
+
+#filter-bar {
+    margin: 10px auto;
+    z-index: 100;
+}
+
+
+#dropbtn{
+    color: white;
+    background-color: rgba(255,255,255,0.3);
+}
+
+#search-input-text{
+    color: white;
+    background-color: rgba(255,255,255,0.3);
+}
+
+#searchnow{
+    color: white;
+    background-color: rgba(255,255,255,0.3);
+}
+
+.searchbar-text{
+    color: white;
+    box-shadow: 0px 3px 0px rgba(255,255,255,0.3);
+}
+
+/* Responsive Styles */
+
+@media(max-width:991px) {
+    .search-container{
+        width:690px;
+    }
+}
+
+@media(max-width:767px) {
+    .search-container{
+        width: 90%;
+    }
+}

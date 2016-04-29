@@ -1,12 +1,16 @@
-# Import flask dependencies
 from flask import Blueprint, render_template, request
+from app.models import *
 
-# Define the blueprint: 'auth', set its url prefix: app.url/
-mod_search = Blueprint('search', __name__)
+mod_search = Blueprint('search', __name__,)
 
-# Set the route and accepted methods
-@mod_search.route('/search')
+
+@mod_search.route('/search/', methods=['POST'])
 def search():
-	query = request.args.get('query')
-	category = request.args.get('category')
-	return render_template("search/results.html")
+	query = str(request.form['query'])
+	events = query_by_event_name(query)
+	return render_template("search/search-results.html", query=query, events=events)
+	
+# http://flask-sqlalchemy.pocoo.org/2.1/queries/
+def query_by_event_name(look_for):
+	result = Event.query.filter(Event.title.like("%" + look_for + "%")).all()
+	return result
