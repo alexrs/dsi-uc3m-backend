@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, make_response
 from app.models import *
 
 mod_search = Blueprint('search', __name__,)
@@ -8,7 +8,14 @@ mod_search = Blueprint('search', __name__,)
 def search():
 	query = str(request.form['query'])
 	events = query_by_event_name(query)
-	return render_template("search/search-results.html", query=query, events=events)
+	if request.cookies.get('busqueda'):
+		value = str(request.cookies.get('busqueda') + ',' + str(query))
+	else:
+		value = str(query)	
+	resp = make_response(render_template("search/search-results.html", query=query, events=events))
+	resp.set_cookie('busqueda', value)
+	return resp
+
 	
 # http://flask-sqlalchemy.pocoo.org/2.1/queries/
 def query_by_event_name(look_for):
