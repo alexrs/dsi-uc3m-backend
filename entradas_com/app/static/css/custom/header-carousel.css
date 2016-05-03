@@ -1,0 +1,23 @@
+/* Home Page Carousel */
+
+#header-carousel {
+    z-index: -100;
+    height: 82%;
+    overflow: hidden;
+}
+
+.header-carousel-image {
+    height: 10px;
+}
+
+@media(max-width:991px) {
+    #header-carousel {
+        height: 50%;
+    }
+}
+
+@media(max-width:767px) {
+    #header-carousel {
+        height: 35%;
+    }
+}
