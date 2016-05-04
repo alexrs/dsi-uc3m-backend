@@ -66,7 +66,7 @@
 
                 <!-- Exit button -->
 
-                <li><p class="navbar-text navbar-right navbar-item logged desktop" style="color: white">¡Hola, <a href="#" class="navbar-link" style="color: white"> asdhfad </a>!</p></li>
+                <li><p class="navbar-text navbar-right navbar-item logged desktop" style="color: white">¡Hola, <a id="user-name-link" href="#" class="navbar-link" style="color: white"></a>!</p></li>
                 <li>
                     <button type="button" class="btn btn-yellow navbar-btn last-navbar-item logged sign-out desktop">
                         <span class="glyphicon glyphicon-off"></span>Salir
@@ -105,32 +105,32 @@
                     <form action="{{ url_for('main.signup') }}" type="signup" id="signup-form" class="signup-field" role="form" method="post" name="Signup">
                         <div id="sign-mail-div" class="form-group has-feedback">
                             <label for="email">Email:</label>
-                            <input id="sign-mail" name="email "type="email" class="form-control" id="email" onchange="validate(0, this.id)" aria-describedby="inputSuccessStatus">
+                            <input id="sign-mail" name="email "type="email" class="form-control" id="email" onchange="validate(0, this.id)" aria-describedby="inputSuccessStatus" required>
                             <span id="sign-mail-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                             <span id="inputSuccessStatus" class="sr-only">(success)</span>
                         </div>
                         <div id="sign-usr-div" class="form-group has-feedback">
                             <label for="email">Usuario:</label>
-                            <input id="sign-usr" name="username" type="text" class="form-control" id="email" onchange="validate(1, this.id)" aria-describedby="inputSuccess1Status">
+                            <input id="sign-usr" name="username" type="text" class="form-control" id="email" onchange="validate(1, this.id)" aria-describedby="inputSuccess1Status" required>
                             <span id="sign-usr-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                             <span id="inputSuccess1Status" class="sr-only">(success)</span>
                         </div>
                         <div id="sign-pwd-div" class="form-group has-feedback">
                             <label for="pwd">Contraseña:</label>
-                            <input id="sign-pwd" name="password" type="password" class="form-control" id="pwd" onchange="validate(2, this.id)" aria-describedby="inputSuccess2Status">
+                            <input id="sign-pwd" name="password" type="password" class="form-control" id="pwd" onchange="validate(2, this.id)" aria-describedby="inputSuccess2Status" required>
                             <span id="sign-pwd-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                             <span id="inputSuccess2Status" class="sr-only">(success)</span>
                         </div>
                         <div id="sign-pwd-confirm-div" class="form-group has-feedback">
                             <label for="pwd-confirm">Confirmar contraseña:</label>
-                            <input id="sign-pwd-confirm" name="password" type="password" class="form-control" id="pwd-confirm" onchange="validate(3, this.id)" aria-describedby="inputSuccess3Status">
+                            <input id="sign-pwd-confirm" name="password" type="password" class="form-control" id="pwd-confirm" onchange="validate(3, this.id)" aria-describedby="inputSuccess3Status" required>
                             <span id="sign-pwd-confirm-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                             <span id="inputSuccess3Status" class="sr-only">(success)</span>
                         </div>
                         <div class="checkbox">
                             <label><input type="checkbox">Recuérdame</label>
                         </div>
-                        <button type="Submit" class="btn btn-success login signup-field" data-dismiss="modal" style="margin-left:34em">
+                        <button id="signup-form-btn" type="Submit" class="btn btn-success login signup-field" data-dismiss="modal" style="margin-left:34em" onclick="changename(0)" disabled>
                             <span class="glyphicon glyphicon-user"></span> Sign Up
                             
                         </button>
@@ -139,21 +139,21 @@
                     <!-- When logging in -->
                     <form action="{{ url_for('main.login') }}" type="login" id="login-form" class="login-field" role="form" method="post" name="Login">
                         <div id="login-mail-div" class="form-group has-feedback">
-                            <label for="email">Email:</label>
-                            <input name="email" type="email" class="form-control" id="login-email" onchange="login(0, this.id)" aria-describedby="inputSuccess4Status">
+                            <label for="email">Email o usuario:</label>
+                            <input name="email" type="email" class="form-control" id="login-email" onchange="login(0, this.id)" aria-describedby="inputSuccess4Status" required>
                             <span id="login-mail-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                             <span id="inputSuccess4Status" class="sr-only">(success)</span>
                         </div>
                         <div id="login-pwd-div" class="form-group has-feedback">
                             <label for="pwd">Contraseña:</label>
-                            <input name="password" type="password" class="form-control" id="login-pwd" onchange="login(1, this.id)" aria-describedby="inputSuccess5Status">
+                            <input name="password" type="password" class="form-control" id="login-pwd" onchange="login(1, this.id)" aria-describedby="inputSuccess5Status" required>
                             <span id="login-pwd-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                             <span id="inputSuccess5Status" class="sr-only">(success)</span>
                         </div>
                         <div class="checkbox">
                             <label><input type="checkbox"> Recuérdame</label>
                         </div>
-                        <button type="Submit" class="btn btn-success login login-field" data-dismiss="modal" style="margin-left:34em">
+                        <button id="login-form-btn" type="Submit" class="btn btn-success login login-field" data-dismiss="modal" style="margin-left:34em" onclick="changename(1)">
                             <span class="glyphicon glyphicon-log-in"></span> Log in
                         </button>
                     </form>

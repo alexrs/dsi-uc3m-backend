@@ -1,6 +1,9 @@
 var mail_regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 var pwd_regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 var name_regex = /^[a-zA-Z0-9]+$/;
+var combo_regex = /^[a-zA-Z0-9@._]+$/;
+
+
 //Switches visual state of forms between error (0) and ok (1)
 function switchFormState(state, prnt, icn){
     switch(state){//choose state
@@ -100,6 +103,7 @@ function validate(num, id) {
             }
             break;
     }
+    formSendEnabler(0);
 }
 
 
@@ -111,12 +115,12 @@ function login(num, id){
         case 0://validate email
             var prnt = document.getElementById("login-mail-div");
             var icn = document.getElementById("login-mail-icon");
-            if(tmp.match(mail_regex)){//set all ok
+            if(tmp.match(combo_regex)){//set all ok
                 switchFormState(1, prnt, icn);
                 creatDelText(0, "login-mail-feedback", null, prnt);
             } else {//set all not ok
                 switchFormState(0, prnt, icn);
-                creatDelText(1, "login-mail-feedback", "Correo inválido", prnt);    
+                creatDelText(1, "login-mail-feedback", "Correo/usuario inválido", prnt);    
             }
             break;
             
@@ -129,6 +133,46 @@ function login(num, id){
             } else {//set all not ok
                 switchFormState(0, prnt, icn);
                 creatDelText(1, "login-pwd-feedback", "Contraseña inválida: mínimo 8 caracteres, una mayúscula y un número", prnt);          
+            }
+            break;
+    }
+    formSendEnabler(1);
+}
+
+//Checks whether all fields have been validated to activate send button
+function formSendEnabler(num){
+    switch(num){
+        case 0://signup shit
+            if($("#sign-mail-div").hasClass("has-success") && $("#sign-usr-div").hasClass("has-success") && $("#sign-pwd-div").hasClass("has-success") && $("#sign-pwd-confirm-div").hasClass("has-success")){
+                $("signup-form-btn").prop("disabled", false);
+            } else {
+               $("signup-form-btn").prop("disabled", true); 
+            }
+            break;
+        case 1://login shit
+            if($("login-mail-div").hasClass("has-success") && $("login-pwd-div").hasClass("has-success")){
+                $("login-form-btn").prop("disabled", false);
+            } else {
+                $("login-form-btn").prop("disabled", true);
+            }
+            break;
+    }
+}
+
+//changes name of user in display
+function changename(num){
+    var dest = document.getElementById("user-name-link");
+    switch(num){
+        case 0://signup
+            var name = document.getElementById("sign-usr").value;
+            dest.innerHTML = name;
+            break;
+        case 1://login
+            var name = document.getElementById("login-email").value;
+            if(name.match(mail_regex)){//If mail inserted
+                dest.innerHTML = "(insert name from db)";
+            } else {//Otherwise 
+                dest.innerHTML = name;
             }
             break;
     }
