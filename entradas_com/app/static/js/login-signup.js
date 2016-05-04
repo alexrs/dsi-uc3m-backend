@@ -143,17 +143,23 @@ function login(num, id){
 function formSendEnabler(num){
     switch(num){
         case 0://signup shit
-            if($("#sign-mail-div").hasClass("has-success") && $("#sign-usr-div").hasClass("has-success") && $("#sign-pwd-div").hasClass("has-success") && $("#sign-pwd-confirm-div").hasClass("has-success")){
-                $("signup-form-btn").prop("disabled", false);
+            if(document.getElementById("sign-mail-div").classList.contains("has-success") && 
+               document.getElementById("sign-usr-div").classList.contains("has-success") &&
+               document.getElementById("sign-pwd-div").classList.contains("has-success") &&
+               document.getElementById("sign-pwd-confirm-div").classList.contains("has-success")){
+                
+                document.getElementById("signup-form-btn").disabled = false;
             } else {
-               $("signup-form-btn").prop("disabled", true); 
+               document.getElementById("signup-form-btn").disabled = true;
             }
             break;
         case 1://login shit
-            if($("login-mail-div").hasClass("has-success") && $("login-pwd-div").hasClass("has-success")){
-                $("login-form-btn").prop("disabled", false);
+            if(document.getElementById("login-mail-div").classList.contains("has-success") && 
+               document.getElementById("login-pwd-div").classList.contains("has-success")){
+                
+                document.getElementById("login-form-btn").disabled = false;
             } else {
-                $("login-form-btn").prop("disabled", true);
+                document.getElementById("login-form-btn").disabled = true;
             }
             break;
     }
