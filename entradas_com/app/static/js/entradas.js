@@ -32,7 +32,7 @@ function selectControls(){
 // When opening the page, initializations
 $(document).ready(function(){
     // Activate Carousel
-    $("#myCarousel").carousel({interval: 5000, wrap: true, pause: false});
+    $("#header-carousel").carousel({interval: 5000, wrap: true, pause: false});
     // hide logged info
     $(".logged").hide();
     // hide login fields in the modal
