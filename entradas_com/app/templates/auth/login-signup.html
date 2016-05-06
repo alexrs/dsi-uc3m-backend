@@ -16,12 +16,12 @@
 	    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
 
 	    <!-- Custom CSS -->
-	    <link href="{{ url_for('static', filename='css/custom/global.css') }}" rel="stylesheet">
 	    <link href="{{ url_for('static', filename='css/custom/footer.css') }}" rel="stylesheet">
         <link href="{{ url_for('static', filename='css/custom/navbar.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='css/custom/footer.css') }}" rel="stylesheet">
         <link href="{{ url_for('static', filename='css/custom/login-signup.css') }}" rel="stylesheet">
         <link href="{{ url_for('static', filename='css/custom/bg-carousel.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/custom/sticky-footer.css') }}" rel="stylesheet">
+
 
 	    <!-- Custom Fonts -->
 	    <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
@@ -51,6 +51,7 @@
         </div>
         </nav>
         
+        <!--bootstrap carousel background-->
         <div class="carousel slide carousel-fade" data-ride="carousel">
 
             <!-- Wrapper for slides -->
@@ -131,8 +132,10 @@
               </div>
             </div>
         </div>
+        
+        
         <!-- Footer -->
-        <footer class="navbar navbar-fixed-bottom"> 
+        <footer class="footer"> 
             <div class="row row-mod" align="center">
               <div class="col-lg-4" style="margin-top:10px; padding-bottom:10px">
                 <div style="display:inline-block; padding-left:10px; padding-right:10px; vertical-align:middle">
