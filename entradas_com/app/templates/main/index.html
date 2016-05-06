@@ -46,9 +46,11 @@
                 <a class="navbar-brand" href="../">
                     <img class="brand-logo img-responsive" alt="Brand" src="{{ url_for('static', filename='img/entradascomlogo.png') }}">
                 </a>
-                <button type="button" class="navbar-toggle btn btn-yellow navbar-btn last-navbar-item login-option mobile" data-toggle="modal" data-target="#signup-modal">
+                <a href="{{ url_for('auth.signup') }}">
+                <button type="button" class="navbar-toggle btn btn-yellow navbar-btn last-navbar-item login-option mobile">
                     <span class="glyphicon glyphicon-user">
                 </button>
+                </a>
                 <button type="button" class="navbar-toggle btn btn-yellow navbar-btn last-navbar-item logged sign-out mobile">
                     <span class="glyphicon glyphicon-off">
                 </button>
@@ -78,92 +80,6 @@
 
         </div>
     </nav>
-
-    <!-- Sign up modal -->
-
-    <!-- Modal -->
-    <div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="signup-dialog">
-        <div class="modal-dialog" role="document">
-
-        <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Sólo a un paso de las mejores condiciones</h4>
-                </div>
-                <div class="modal-body">
-                    <ul class="nav nav-tabs">
-                        <!-- Sign up tab-->
-                        <li id="signup-tab" class="active">
-                            <a href="#" class="signup-link">Sign up</a>
-                        </li>
-                        <!-- Sign in tab -->
-                        <li id="login-tab">
-                            <a href="#" class="login-link">Log in</a>
-                        </li>
-                    </ul>
-
-                    <!-- When signing in -->
-                    <form action="{{ url_for('main.signup') }}" type="signup" id="signup-form" class="signup-field" role="form" method="post" name="Signup">
-                        <div id="sign-mail-div" class="form-group has-feedback">
-                            <label for="email">Email:</label>
-                            <input id="sign-mail" name="email "type="email" class="form-control" id="email" onchange="validate(0, this.id)" aria-describedby="inputSuccessStatus" required>
-                            <span id="sign-mail-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                            <span id="inputSuccessStatus" class="sr-only">(success)</span>
-                        </div>
-                        <div id="sign-usr-div" class="form-group has-feedback">
-                            <label for="email">Usuario:</label>
-                            <input id="sign-usr" name="username" type="text" class="form-control" id="email" onchange="validate(1, this.id)" aria-describedby="inputSuccess1Status" required>
-                            <span id="sign-usr-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                            <span id="inputSuccess1Status" class="sr-only">(success)</span>
-                        </div>
-                        <div id="sign-pwd-div" class="form-group has-feedback">
-                            <label for="pwd">Contraseña:</label>
-                            <input id="sign-pwd" name="password" type="password" class="form-control" id="pwd" onchange="validate(2, this.id)" aria-describedby="inputSuccess2Status" required>
-                            <span id="sign-pwd-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                            <span id="inputSuccess2Status" class="sr-only">(success)</span>
-                        </div>
-                        <div id="sign-pwd-confirm-div" class="form-group has-feedback">
-                            <label for="pwd-confirm">Confirmar contraseña:</label>
-                            <input id="sign-pwd-confirm" name="password" type="password" class="form-control" id="pwd-confirm" onchange="validate(3, this.id)" aria-describedby="inputSuccess3Status" required>
-                            <span id="sign-pwd-confirm-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                            <span id="inputSuccess3Status" class="sr-only">(success)</span>
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox">Recuérdame</label>
-                        </div>
-                        <button id="signup-form-btn" type="Submit" class="btn btn-success login signup-field" data-dismiss="modal" style="margin-left:34em" onclick="changename(0)" disabled>
-                            <span class="glyphicon glyphicon-user"></span> Sign Up
-                            
-                        </button>
-                    </form>
-
-                    <!-- When logging in -->
-                    <form action="{{ url_for('main.login') }}" type="login" id="login-form" class="login-field" role="form" method="post" name="Login">
-                        <div id="login-mail-div" class="form-group has-feedback">
-                            <label for="email">Email o usuario:</label>
-                            <input name="email" type="email" class="form-control" id="login-email" onchange="login(0, this.id)" aria-describedby="inputSuccess4Status" required>
-                            <span id="login-mail-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                            <span id="inputSuccess4Status" class="sr-only">(success)</span>
-                        </div>
-                        <div id="login-pwd-div" class="form-group has-feedback">
-                            <label for="pwd">Contraseña:</label>
-                            <input name="password" type="password" class="form-control" id="login-pwd" onchange="login(1, this.id)" aria-describedby="inputSuccess5Status" required>
-                            <span id="login-pwd-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                            <span id="inputSuccess5Status" class="sr-only">(success)</span>
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox"> Recuérdame</label>
-                        </div>
-                        <button id="login-form-btn" type="Submit" class="btn btn-success login login-field" data-dismiss="modal" style="margin-left:34em" onclick="changename(1)" disabled>
-                            <span class="glyphicon glyphicon-log-in"></span> Log in
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <!-- Search bar -->
     <form action="{{ url_for('search.search') }}" type="search" method="post" name="Search">
