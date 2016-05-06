@@ -35,14 +35,14 @@ setInterval(function(){
     if (dropChosen === true){
        if(searchbar.value){
             //if not empty, shade line and if category chosen highlight btn
-            searchbar.style.boxShadow= '0px 3px 0px rgb(241, 241, 241)';
+            searchbar.style.boxShadow= '0px 3px 0px rgba(255,255,255,0.3)';
             if(dropChosen){
                 searchbtn.style.backgroundColor = 'rgb(255, 180, 2)';
             }
         }
         else{
             //if empty highlight line and remove color from btn
-            searchbar.style.boxShadow= '0px 3px 0px rgb(255,255,255)';
+            searchbar.style.boxShadow= '0px 3px 0px rgb(255, 180, 2)';
             searchbtn.style.backgroundColor = 'rgba(255,255,255,0.3)';
         }
     }
