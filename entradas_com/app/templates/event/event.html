@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="es">
+
+<html>
+	<head>
+		<title>Entradas.com</title>
+
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <meta name="description" content="">
+	    <meta name="author" content="">
+
+	    <!-- Bootstrap Core CSS -->
+	    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+	    <!-- Custom CSS -->
+	    <link href="{{ url_for('static', filename='css/custom/footer.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/custom/navbar.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/custom/login-signup.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/custom/bg-404-carousel.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/custom/sticky-footer.css') }}" rel="stylesheet">
+
+
+
+	    <!-- Custom Fonts -->
+	    <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+
+	    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	    <!--[if lt IE 9]>
+	        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	    <![endif]-->
+
+	    <!-- jQuery -->
+	    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+
+	    <!-- Bootstrap Core JavaScript -->
+	    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	</head>
+	<body>
+        
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top main-navbar">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ url_for('main.index')}}">
+                        <img class="brand-logo img-responsive" alt="Brand" src="{{ url_for('static', filename='img/entradascomlogo.png') }}">
+                    </a>
+                    <a href="{{ url_for('auth.signup') }}" style="color:black">
+                    <button type="button" class="navbar-toggle btn btn-yellow navbar-btn last-navbar-item login-option mobile">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </button>
+                    </a>
+                    <button type="button" class="navbar-toggle btn btn-yellow navbar-btn last-navbar-item logged sign-out mobile">
+                        <span class="glyphicon glyphicon-off">
+                    </button>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+
+                    <!-- Sign up/in button -->
+
+                    <li>
+                        <!-- Trigger the modal with a button -->
+
+                        <button type="button" class="btn btn-yellow navbar-btn last-navbar-item login-option desktop">
+                            <a style="text-decoration:none;color:black" href="{{ url_for('auth.signup') }}"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Entrar</a>
+                        </button>
+
+                    </li>
+
+                    <!-- Exit button -->
+
+                   <li><p class="navbar-text navbar-right navbar-item logged desktop" style="color: white">¡Hola, <a id="user-name-link" href="#" class="navbar-link" style="color: white"></a>!</p></li>
+                    <li>
+                        <button type="button" class="btn btn-yellow navbar-btn last-navbar-item logged sign-out desktop">
+                            <span class="glyphicon glyphicon-off"></span>Salir
+                        </button>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+               
+        <!--Youtube video frame (IMPORTANT: CHECK YTB API TO EVENTUALLY SHOW/HIDE NAVBAR ON PAUSE/PLAY-->
+        <!--https://developers.google.com/youtube/js_api_reference?csw=1#Requirements-->
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe src="https://www.youtube.com/embed/a8HRA49kaok?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+        </div>
+            
+        <!--Container for stuff below video-->
+        <div class="container">
+            <h1>The revenant</h1>
+            <hr style="border-width:2px;color:pink">
+            <button class="col-xs-12">Compre entradas aquí!</button>
+        </div>
+
+        
+        <!-- Footer -->
+        <footer class="footer"> 
+            <div class="row row-mod" align="center">
+                <div class="col-lg-4" style="margin-top:0px">
+                <a href="#"><img style="width:150px; padding-bottom:10px" src="{{ url_for('static', filename='img/entradascomlogo.png') }}"> </a>
+              </div>
+              <div class="col-lg-4" style="margin-top:10px; padding-bottom:10px">
+                <div style="display:inline-block; padding-left:10px; padding-right:10px; vertical-align:middle">
+                  <a href="#" style="color:black"> <i class="fa fa-facebook-square fa-3x"></i></a>
+                </div>
+                <div style="display:inline-block; padding-left:10px; padding-right:10px; vertical-align:middle">
+                    <a href="#" style="color:black"> <i class="fa fa-google-plus-square fa-3x"></i></a>
+                </div>
+                <div style="display:inline-block; padding-left:10px; padding-right:10px; vertical-align:middle">
+                    <a href="#" style="color:black"> <i class="fa fa-twitter-square fa-3x"></i></a>
+                </div>
+              </div>
+                <ul class='col-lg-4' style="list-style-type:none;margin:0;padding:0;">
+                    <li class="footitem"><a href="#" style="color:black"> Condiciones de uso</a></li>
+                    <li class="footitem"><a href="#" style="color:black"> Política de privacidad</a></li>
+                </ul>
+                <p>Made with <i class="fa fa-heart" aria-hidden="true"></i> in Leganés</p>
+            </div>
+        </footer>
+        
+    <script src="{{ url_for('static', filename='js/login-signup.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/entradas.js') }}"></script>
+
+    <!--exec bg carousel-->
+    <script>$('.carousel').carousel();</script>
+        
+	</body>
+</html>
