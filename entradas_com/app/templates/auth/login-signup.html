@@ -76,7 +76,7 @@
                 <!--displayed stuff for each of tabs-->
                 <div class="tab-content">
                   <div id="login-content" class="tab-pane fade">
-                    <form type="login" id="login-form" class="login-field" role="form" method="post" name="Login">
+                    <form action="{{ url_for('main.login') }}" type="login" id="login-form" class="login-field" role="form" method="post" name="Login">
                         <div id="login-mail-div" class="form-group has-feedback">
                             <label for="email">Email o usuario:</label>
                             <input name="email" type="email" class="form-control" id="login-email" onchange="login(0, this.id)" aria-describedby="inputSuccess4Status" required>
@@ -101,7 +101,7 @@
                       <form action="{{ url_for('main.signup') }}" type="signup" id="signup-form" class="signup-field" role="form" method="post" name="Signup">
                             <div id="sign-mail-div" class="form-group has-feedback">
                                 <label for="email">Email:</label>
-                                <input id="sign-mail" name="email "type="email" class="form-control" id="email" onchange="validate(0, this.id)" aria-describedby="inputSuccessStatus" required>
+                                <input id="sign-mail" name="email" type="email" class="form-control" id="email" onchange="validate(0, this.id)" aria-describedby="inputSuccessStatus" required>
                                 <span id="sign-mail-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                                 <span id="inputSuccessStatus" class="sr-only">(success)</span>
                             </div>
@@ -119,7 +119,7 @@
                             </div>
                             <div id="sign-pwd-confirm-div" class="form-group has-feedback">
                                 <label for="pwd-confirm">Confirmar contraseña:</label>
-                                <input id="sign-pwd-confirm" name="password" type="password" class="form-control" id="pwd-confirm" onchange="validate(3, this.id)" aria-describedby="inputSuccess3Status" required>
+                                <input id="sign-pwd-confirm" name="conf-password" type="password" class="form-control" id="pwd-confirm" onchange="validate(3, this.id)" aria-describedby="inputSuccess3Status" required>
                                 <span id="sign-pwd-confirm-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                                 <span id="inputSuccess3Status" class="sr-only">(success)</span>
                             </div>
