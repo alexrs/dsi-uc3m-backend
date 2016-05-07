@@ -21,14 +21,14 @@ def not_found(error):
 # Import a module / component using its blueprint handler variable (mod_auth)
 from app.mod_main.controllers import mod_main as main_module
 from app.mod_search.controllers import mod_search as search_module
-from app.mod_detail.controllers import mod_detail as detail_module
+from app.mod_event.controllers import mod_event as event_module
 from app.mod_auth.controllers import mod_auth as auth_module
 
 
 # Register blueprint(s)
 app.register_blueprint(main_module)
 app.register_blueprint(search_module)
-app.register_blueprint(detail_module)
+app.register_blueprint(event_module)
 app.register_blueprint(auth_module)
 
 # Build the database:
