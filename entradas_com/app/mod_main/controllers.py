@@ -8,7 +8,7 @@ mod_main = Blueprint('main', __name__,)
 # Set the route and accepted methods
 @mod_main.route('/')
 def index():
-	return render_template("main/index.html")
+	return render_template("main/index.html", user=None)
 
 @mod_main.route('/login/', methods=['POST'])
 def login():
@@ -17,16 +17,14 @@ def login():
 	user = User.query.filter_by(email=email).first()
 	if user is not None:
 		return render_template("main/index.html", user=user)
-	return render_template("main/index.html")
+	return render_template("main/index.html", user=None)
 
 @mod_main.route('/signup/', methods=['POST'])
 def signup():
-	print "Sign"
 	email = request.form['email']
 	username = request.form['username']
 	password = request.form['password']
 	user = User(username, email, password)
-
 	db.session.add(user)
 	db.session.commit()
 	return render_template("main/index.html", user=user)

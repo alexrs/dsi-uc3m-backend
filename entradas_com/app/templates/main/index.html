@@ -58,6 +58,7 @@
             <ul class="nav navbar-nav navbar-right">
 
                 <!-- Sign up/in button -->
+                {% if user is not none %}
 
                 <li>
                     <!-- Trigger the modal with a button -->
@@ -67,6 +68,7 @@
                     </button>
                     
                 </li>
+                {% else %}
 
                 <!-- Exit button -->
 
@@ -76,6 +78,8 @@
                         <span class="glyphicon glyphicon-off"></span>Salir
                     </button>
                 </li>
+                {% endif %}
+
             </ul>
 
         </div>
