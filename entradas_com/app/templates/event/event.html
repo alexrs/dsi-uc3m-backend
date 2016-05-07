@@ -43,7 +43,7 @@
 	<body>
         
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top main-navbar">
+        <nav id="navbar-top" class="navbar navbar-default navbar-static-top main-navbar">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="{{ url_for('main.index')}}">
@@ -87,8 +87,8 @@
         <!--Youtube video frame (IMPORTANT: CHECK YTB API TO EVENTUALLY SHOW/HIDE NAVBAR ON PAUSE/PLAY-->
         <!--https://developers.google.com/youtube/js_api_reference?csw=1#Requirements-->
         <div class="embed-responsive embed-responsive-16by9">
-            <iframe src="https://www.youtube.com/embed/a8HRA49kaok?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
-        </div>
+            <div id="player"></div>
+        </div>   
             
         <!--Container for stuff below video-->
         <div class="container">
@@ -125,6 +125,8 @@
         
     <script src="{{ url_for('static', filename='js/login-signup.js') }}"></script>
     <script src="{{ url_for('static', filename='js/entradas.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/event-ytb-handler.js') }}"></script>
+
 
     <!--exec bg carousel-->
     <script>$('.carousel').carousel();</script>
