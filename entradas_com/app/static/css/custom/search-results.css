@@ -1,8 +1,8 @@
-header.carousel {
+#header-carousel {
     height: 30%;
 }
 
-#search-container{
+.search-container{
     top:15%;
     width: 90%;
 }
@@ -10,8 +10,25 @@ header.carousel {
 /* Filter bar */
 
 #filter-bar {
+    border: none;
     margin: 10px auto;
     z-index: 100;
+}
+
+#filter-date {
+    width: 100%;
+}
+
+.filter-btn{
+    padding-left: 10px;
+    background-color: rgb(255, 180, 2);
+}
+.filter-btn:hover{
+    background-color: rgb(218,218,218)
+}
+
+.searchbar-text {
+    color: black;
 }
 
 
@@ -35,16 +52,30 @@ header.carousel {
     box-shadow: 0px 3px 0px rgba(255,255,255,0.3);
 }
 
+#dropbtn .caret {
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 7px solid white;
+}
+
 /* Responsive Styles */
 
 @media(max-width:991px) {
     .search-container{
         width:690px;
     }
+    
+    
 }
 
 @media(max-width:767px) {
     .search-container{
         width: 90%;
+    }
+}
+
+@media(min-width:2px) {
+    #search-container{
+        top:18%;
     }
 }
