@@ -19,7 +19,7 @@ function dropdown(val){
 
 function setDefaultDrop(){
     dropChosen = true;
-    var drop = document.getElementById('dropbtn');
+    var drop = document.getElementByClassName('btn btn-default dropdown-toggle searchbtn drop-btn');
     var searchbar = document.getElementsByClassName('form-control searchbar searchbar-text')[0];
     if (drop.innerHTML == '<i class="fa fa-question fa-lg fa-fw" aria-hidden="true"></i> <span class="caret"></span>'){
         drop.innerHTML = '<i class="fa fa-globe fa-lg fa-fw"></i> <span class="caret"></span>';
@@ -30,7 +30,7 @@ function setDefaultDrop(){
 setInterval(function(){
     //get textbox and send form btn
     var searchbar = document.getElementsByClassName('form-control searchbar searchbar-text')[0];
-    var searchbtn = document.getElementById('searchnow');
+    var searchbtn = document.getElementByClassName('search-now');
     //if dropdown has been chosen
     if (dropChosen === true){
        if(searchbar.value){
