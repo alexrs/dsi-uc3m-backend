@@ -2,76 +2,49 @@
 <html lang="es">
 
 <html>
-    <head>
-        <title>Entradas.com - {{ query }}</title>
+<head>
+    <title>Entradas.com - {{ query }}</title>
 
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-        <!-- Bootstrap Core CSS -->
-        <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
 
+    <!-- uikit CSS -->
+    <link href="{{ url_for('static', filename='css/uikit/uk-flex.css') }}" rel="stylesheet">
 
-        <!-- uikit CSS -->
-        <link href="{{ url_for('static', filename='css/uk-flex.css') }}" rel="stylesheet">
-       
-        <!-- Custom Fonts -->
-        <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <!-- Custom Fonts -->
+    <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 
-        <!-- Custom CSS -->
-            <link href="{{ url_for('static', filename='css/global.css') }}" rel="stylesheet">
-            <link href="{{ url_for('static', filename='css/navbar.css') }}" rel="stylesheet">
-            <link href="{{ url_for('static', filename='css/header-carousel.css') }}" rel="stylesheet">
-            <link href="{{ url_for('static', filename='css/searchbar.css') }}" rel="stylesheet">
-            <link href="{{ url_for('static', filename='css/footer.css') }}" rel="stylesheet">
-            <link href="{{ url_for('static', filename='css/search-results.css') }}" rel="stylesheet">
-            <link href="{{ url_for('static', filename='css/search-cards.css') }}" rel="stylesheet">
-
-
-        
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-            <!-- jQuery -->
-        <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-        
-        <!-- UIkit -->
-        <script src="{{ url_for('static', filename='js/uikit.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/components/sticky.min.js') }}"></script>
-
-        <!-- own JavaScript -->
-        <script src="{{ url_for('static', filename='js/entradas.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/search-results.js') }}"></script>
-
-
-
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='css/custom/global.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/custom/navbar.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/custom/header-carousel.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/custom/searchbar.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/custom/search-cards.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/custom/footer.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/custom/search-results.css') }}" rel="stylesheet">
 </head>
 
 
 <body>
 
     <!-- Navigation -->
-
     <nav class="navbar navbar-default navbar-static-top main-navbar">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="../">
+                <a class="navbar-brand" href="{{ url_for('main.index')}}">
                     <img class="brand-logo img-responsive" alt="Brand" src="{{ url_for('static', filename='img/entradascomlogo.png') }}">
                 </a>
-                <button type="button" class="navbar-toggle btn btn-yellow navbar-btn last-navbar-item login-option mobile" data-toggle="modal" data-target="#signup-modal">
-                    <span class="glyphicon glyphicon-user">
+                <a href="{{ url_for('auth.signup') }}" style="color:black">
+                <button type="button" class="navbar-toggle btn btn-yellow navbar-btn last-navbar-item login-option mobile">
+                    <span class="glyphicon glyphicon-user"></span>
                 </button>
+                </a>
                 <button type="button" class="navbar-toggle btn btn-yellow navbar-btn last-navbar-item logged sign-out mobile">
                     <span class="glyphicon glyphicon-off">
                 </button>
@@ -82,14 +55,16 @@
 
                 <li>
                     <!-- Trigger the modal with a button -->
-                    <button type="button" class="btn btn-yellow navbar-btn last-navbar-item login-option desktop" data-toggle="modal" data-target="#signup-modal">
-                        <span class="glyphicon glyphicon-user"></span>Entrar
+                    
+                    <button type="button" class="btn btn-yellow navbar-btn last-navbar-item login-option desktop">
+                        <a style="text-decoration:none;color:black" href="{{ url_for('auth.signup') }}"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Entrar</a>
                     </button>
+                    
                 </li>
 
                 <!-- Exit button -->
 
-                <li><p class="navbar-text navbar-right navbar-item logged desktop" style="color: white">¡Hola, <a href="#" class="navbar-link" style="color: white"> asdhfad </a>!</p></li>
+                <li><p class="navbar-text navbar-right navbar-item logged desktop" style="color: white">¡Hola, <a id="user-name-link" href="#" class="navbar-link" style="color: white"></a>!</p></li>
                 <li>
                     <button type="button" class="btn btn-yellow navbar-btn last-navbar-item logged sign-out desktop">
                         <span class="glyphicon glyphicon-off"></span>Salir
@@ -100,113 +75,37 @@
         </div>
     </nav>
 
-    <!-- Sign up modal -->
-
-    <!-- Modal -->
-    <div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="signup-dialog">
-        <div class="modal-dialog" role="document">
-
-        <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Sólo a un paso de las mejores condiciones</h4>
-                </div>
-                <div class="modal-body">
-                    <ul class="nav nav-pills">
-                        <!-- Sign up tab-->
-                        <li id="signup-tab" class="active">
-                            <a href="#" class="signup-link">Sign up</a>
-                        </li>
-                        <!-- Sign in tab -->
-                        <li id="login-tab">
-                            <a href="#" class="login-link">Log in</a>
-                        </li>
-                    </ul>
-
-
-                    <!-- When signing in -->
-                    <form id="signup-form" class="signup-field" role="form">
-                        <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="email" class="form-control" id="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Usuario:</label>
-                            <input type="email" class="form-control" id="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="pwd">Contraseña:</label>
-                            <input type="password" class="form-control" id="pwd">
-                        </div>
-                        <div class="form-group">
-                            <label for="pwd-confirm">Confirmar contraseña:</label>
-                            <input type="password" class="form-control" id="pwd-confirm">
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox">Recuérdame</label>
-                        </div>
-                    </form>
-
-                    <!-- When logging in -->
-                    <form id="login-form" class="login-field" role="form">
-                        <div class="form-group">
-                            <label for="email">Usuario o email:</label>
-                            <input type="email" class="form-control" id="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="pwd">Password:</label>
-                            <input type="password" class="form-control" id="pwd">
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox"> Recuérdame</label>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success login signup-field" data-dismiss="modal">
-                        <span class="glyphicon glyphicon-user"></span> Sign Up
-                    </button>
-                    <button type="submit" class="btn btn-success login login-field" data-dismiss="modal">
-                        <span class="glyphicon glyphicon-log-in"></span> Log in
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Search bar -->
 
-<!-- Search bar -->
     <form action="{{ url_for('search.search') }}" type="search" method="post" name="Search">
         <div id='search-container' class="container input-group">
             <div class="input-group-btn">
             <button id='dropbtn' type="button" class="btn btn-default dropdown-toggle searchbtn dropbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-question fa-lg fa-fw" aria-hidden="true"></i> <span class="caret"></span></button>
                 <ul class="dropdown-menu search-dropdown-menu">
-                  <li><a href="#" onclick="dropdown(1);"><i class="fa fa-ticket fa-lg fa-fw"></i> Cine </a></li>
-                  <li><a href="#" onclick="dropdown(2);"><img src="{{ url_for('static', filename='img/theater.png') }}" style="width:18px"> &nbsp; Teatro </a></li>
-                  <li><a href="#" onclick="dropdown(3);"><i class="fa fa-music fa-lg fa-fw"></i> Conciertos </a></li>
-                  <li><a href="#" onclick="dropdown(4);"><i class="fa fa-university fa-lg fa-fw"></i> Exposiciones/Museos </a></li>
-                  <li><a href="#" onclick="dropdown(5);"><i class="fa fa-futbol-o fa-lg fa-fw"></i> Deportes </a></li>
-                  <li><a href="#" onclick="dropdown(6);"><i class="fa fa-magic fa-lg fa-fw" aria-hidden="true"></i> Shows/Espectáculos </a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="#" onclick="dropdown(0);"><i class="fa fa-globe fa-lg fa-fw"></i> Todas las categorías</a></li>
+                    <li><a href="#" onclick="dropdown(1);"><i class="fa fa-ticket fa-lg fa-fw"></i> Cine </a></li>
+                    <li><a href="#" onclick="dropdown(2);"><img src="{{ url_for('static', filename='img/theater.png') }}" style="width:18px"> &nbsp; Teatro </a></li>
+                    <li><a href="#" onclick="dropdown(3);"><i class="fa fa-music fa-lg fa-fw"></i> Conciertos </a></li>
+                    <li><a href="#" onclick="dropdown(4);"><i class="fa fa-university fa-lg fa-fw"></i> Exposiciones/Museos </a></li>
+                    <li><a href="#" onclick="dropdown(5);"><i class="fa fa-futbol-o fa-lg fa-fw"></i> Deportes </a></li>
+                    <li><a href="#" onclick="dropdown(6);"><i class="fa fa-magic fa-lg fa-fw" aria-hidden="true"></i> Shows/Espectáculos </a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#" onclick="dropdown(0);"><i class="fa fa-globe fa-lg fa-fw"></i> Todas las categorías</a></li>
+                </ul>
             </div>
             <input id="search-input-text" name="query" type="text" class="form-control searchbar searchbar-text" placeholder="Busca espectáculos aquí" aria-label="search-terms" onkeydown="setDefaultDrop()" method="post">
-                <div class="input-group-btn">
-                    <a href="search-results.html">
-                        <button id="searchnow" class="btn btn-default searchbtn sendsearchbtn" type="Submit">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </a>
-                </div>
-
+            <div class="input-group-btn">
+                <a href="search-results.html">
+                    <button id="searchnow" class="btn btn-default searchbtn sendsearchbtn" type="Submit">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </a>
+            </div>
         </div>
     </form>
 
- <!-- Header Carousel -->
+    <!-- Header Carousel -->
 
-    <header id="myCarousel" class="carousel slide">
+    <header id="header-carousel" class="carousel slide">
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
@@ -221,7 +120,6 @@
             </div>
         </div>
     </header>
-
 
     <!-- Filter bar -->
 
@@ -239,17 +137,17 @@
         </div>
     </div>
 
-
     <!-- Cards -->
+
     <div class="container">
-    {% for event in events %}
+    {% for event in events%}
 
 
-    <div class="col-sm-6 col-md-6 card" tabindex="-1">
+    <div class="col-sm-12 col-md-6 card" tabindex="-1">
         <div class="media">
             <div class="media-left">
                 <a href="#">
-                    <img class="media-object card-img" src="{{ url_for('static', filename='img/placeholder.jpg') }}" alt="#">
+                    <img class="media-object card-img" src="{{ event.omdb_poster }}" alt="#">
                 </a>
             </div>
             <div class="media-body">
@@ -261,7 +159,7 @@
                     <i class="fa fa-money fa-fw" aria-hidden="true"></i>Desde {{event.price}}€
                 </p>
                 <p class="card-body">
-                    <a href="#" class="btn btn-warning" role="button">Información + Comprar entradas</a>
+                    <a href="{{ url_for('event.event', id=42) }}" class="btn btn-warning" role="button">Información + Comprar entradas</a>
                 </p>
             </div>
         </div>
@@ -269,28 +167,31 @@
 
     {% endfor %}
     </div>
+
     <!--Pagination-->
 
-        <nav style="text-align:center; display:block; margin-top:20px">
-          <ul class="pagination pagination-lg">
-            <li>
-              <a href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li class="disabled"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li>
-              <a href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
+    <nav style="text-align:center; display:block; margin-top:20px">
+      <ul class="pagination pagination-lg">
+        <li>
+          <a href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="disabled"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li>
+          <a href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
     <!-- Footer -->
+
     <footer class="footer" style="margin-top:30px">
         <div class="row row-mod" align="center">
           <div class="col-lg-4" style="margin-top:0px">
@@ -314,6 +215,21 @@
             <p>Made with <i class="fa fa-heart" aria-hidden="true"></i> in Leganés</p>
         </div>
     </footer>
+
+    <!-- jQuery -->
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+    <!-- UIkit -->
+    <script src="{{ url_for('static', filename='js/uikit.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/components/sticky.min.js') }}"></script>
+
+    <!-- own JavaScript -->
+    <script src="{{ url_for('static', filename='js/entradas.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/searchbar-transparent.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/search-results.js') }}"></script>
 
 </body>
 

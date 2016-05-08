@@ -15,7 +15,6 @@ def search():
 	resp = make_response(render_template("search/search-results.html", query=query, events=events))
 	resp.set_cookie('busqueda', value)
 	return resp
-
 	
 # http://flask-sqlalchemy.pocoo.org/2.1/queries/
 def query_by_event_name(look_for):

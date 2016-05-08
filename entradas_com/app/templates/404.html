@@ -1,1 +1,108 @@
-Oh :(
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="es">
+
+<html>
+	<head>
+		<title>Entradas.com</title>
+
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <meta name="description" content="">
+	    <meta name="author" content="">
+
+	    <!-- Bootstrap Core CSS -->
+	    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+	    <!-- Custom CSS -->
+	    <link href="{{ url_for('static', filename='css/custom/footer.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/custom/navbar.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/custom/login-signup.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/custom/bg-404-carousel.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/custom/sticky-footer.css') }}" rel="stylesheet">
+
+
+	    <!-- Custom Fonts -->
+	    <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+
+	    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	    <!--[if lt IE 9]>
+	        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	    <![endif]-->
+
+	    <!-- jQuery -->
+	    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+
+	    <!-- Bootstrap Core JavaScript -->
+	    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	</head>
+	<body>
+        
+        <nav class="navbar navbar-default navbar-static-top main-navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{{ url_for( 'main.index') }}" style="position:absolute;left:50%;margin-left:-125px;display:block">
+                    <img class="brand-logo img-responsive" alt="Brand" src="{{ url_for('static', filename='img/entradascomlogo.png') }}">
+                </a>
+            </div>
+        </div>
+        </nav>
+        
+        <!--bootstrap carousel background-->
+        <div class="carousel slide carousel-fade" data-ride="carousel">
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                </div>
+                <div class="item">
+                </div>
+                <div class="item">
+                </div>
+            </div>
+        </div>
+        
+        
+		<!--tabs for login/signup-->
+        <div class="container" style="text-align:center;padding-top:10em;color:white">
+            <img style="height:250px;width:250px"src="{{ url_for( 'static', filename='img/yes.gif') }}">
+            <h1>Oops!</h1>
+            <h4>Ha surgido un error inesperado.</h4>
+            <a href="{{ url_for( 'main.index' ) }}">Pincha aquí para volver a la portada</a>
+        </div>
+        
+        
+        <!-- Footer -->
+        <footer class="footer"> 
+            <div class="row row-mod" align="center">
+                <div class="col-lg-4" style="margin-top:0px">
+                <a href="#"><img style="width:150px; padding-bottom:10px" src="{{ url_for('static', filename='img/entradascomlogo.png') }}"> </a>
+              </div>
+              <div class="col-lg-4" style="margin-top:10px; padding-bottom:10px">
+                <div style="display:inline-block; padding-left:10px; padding-right:10px; vertical-align:middle">
+                  <a href="#" style="color:black"> <i class="fa fa-facebook-square fa-3x"></i></a>
+                </div>
+                <div style="display:inline-block; padding-left:10px; padding-right:10px; vertical-align:middle">
+                    <a href="#" style="color:black"> <i class="fa fa-google-plus-square fa-3x"></i></a>
+                </div>
+                <div style="display:inline-block; padding-left:10px; padding-right:10px; vertical-align:middle">
+                    <a href="#" style="color:black"> <i class="fa fa-twitter-square fa-3x"></i></a>
+                </div>
+              </div>
+                <ul class='col-lg-4' style="list-style-type:none;margin:0;padding:0;">
+                    <li class="footitem"><a href="#" style="color:black"> Condiciones de uso</a></li>
+                    <li class="footitem"><a href="#" style="color:black"> Política de privacidad</a></li>
+                </ul>
+                <p>Made with <i class="fa fa-heart" aria-hidden="true"></i> in Leganés</p>
+            </div>
+        </footer>
+        
+    <script src="{{ url_for('static', filename='js/login-signup.js') }}"></script>
+    <!--exec bg carousel-->
+    <script>$('.carousel').carousel();</script>
+        
+	</body>
+</html>
