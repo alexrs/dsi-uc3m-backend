@@ -6,10 +6,53 @@ import random
 
 mod_main = Blueprint('main', __name__,)
 
+#Parsea las cookies de busqueda, separadas por un 54, o devuelve una lista vacia
+def parse_search_cookies():
+	print "AQUIIIIIIIIIIIIIIII\n"
+	searchCookies = request.cookies.get('busqueda')
+	if searchCookies:
+		searchCookies.split("\54")
+		return searchCookies
+	else:
+		return []
+
+#Busca en las cookies de busqueda, si no hay, devuelve los 3 primeros resultados
+def get_suggestions():
+	busquedas = parse_search_cookies()
+	result = []
+	if len(busquedas)==0:
+		result = Event.query.filter().all()
+		print "<<<<<<<<<< result  <>>>>>>>>>>>\n"
+		print result
+		print "\n"
+		return result[:3]
+	else:
+		busquedas_list = busquedas.split(',')
+		for i in range(len(busquedas_list)):
+			result.append( Event.query.filter(Event.title.like("%" + busquedas_list[i] + "%")).first() ) 
+		print "<<<<<<<<<< result  <>>>>>>>>>>>\n"
+		print result
+		print "\n"
+		return result[len(result)-3:len(result)]
+
+
 # Set the route and accepted methods
 @mod_main.route('/')
 def index():
-	return render_template("main/index.html")
+	suggestions = get_suggestions()
+	print "<<<<<<<<< suggestions >>>>>>>>>>>>>>>>>< "
+	print suggestions
+	print "\n"
+	
+	if not suggestions:
+		random_suggestions = []
+		for i in range(4):
+			random_suggestions.append(Event.query.get(int(random.random()*i*100)))
+		print "<<<<<<<<< random_suggestions >>>>>>>>>>>>>>>>>< "
+		print random_suggestions
+		print "\n"
+		return render_template("main/index.html", suggestions=random_suggestions[1:4])
+	return render_template("main/index.html", suggestions=suggestions)
 
 @mod_main.route('/login/', methods=['POST'])
 def login():

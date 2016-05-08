@@ -223,12 +223,12 @@
                     Recomendados para ti
                 </h1>
             </div>
-
+	    {% for suggestion in suggestions %}
              <div class="col-md-4" style="max-width:80%;margin-left:auto; margin-right:auto">
                  <img class='img-responsive' src="{{ url_for('static', filename='img/bosnianr_rainbows.jpg') }}">
                 <div class="panel panel-default" style="border:none" >
                     <div class="panel-body" style="background-color:rgb(241,241,241)">
-                        <h3 style="text-align:center;padding:0;margin:0">Bosnian Rainbows</h>
+                        <h3 style="text-align:center;padding:0;margin:0">{{suggestion.title}}</h>
                         <div style="margin-top:20px;vertical-align:middle">
                             <div style="display:inline-block">
                                 <div style="background-color:rgb(221,221,221); width:70px; height:25px; font-size:16px; padding-top:3px">Mayo</div>
@@ -240,7 +240,7 @@
                             <div style="display:inline-block; font-size:16px;">
                             <ul class="list-unstyled" style="text-align:left">
                                 <li>
-                                  <i class="fa fa-money fa-fw"></i> Desde 23,20€</li>
+                                  <i class="fa fa-money fa-fw"></i>{{ suggestion.price }}</li>
                                 <li style="margin-top:10px"><i class="fa fa-music fa-fw"></i>  Indie/rock alternativo</li>
                                 <li style="margin-top:10px"><i class="fa fa-map-marker fa-fw"></i> Sala Caracol, Madrid</li>
                             </ul>
@@ -249,8 +249,9 @@
                         </div>
                     </div>
                 </div>
+            {% endfor %}
             </div>
-        
+
 
 
         </div>
