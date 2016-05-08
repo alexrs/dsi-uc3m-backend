@@ -1,0 +1,24 @@
+.seat-section {
+    background-color: rgb(241,241,241);
+}
+
+.side-section {
+    height: 4em;
+}
+
+#section-bm {
+    height: 2em;
+}
+
+#section-mm {
+    height: 4em;
+}
+
+#section-fm {
+    height: 1em;
+}
+
+#screen {
+    height: 1em;
+    background-color:  rgb(221,221,221);
+}
