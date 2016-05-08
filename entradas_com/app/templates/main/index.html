@@ -30,8 +30,7 @@
         <link href="{{ url_for('static', filename='css/custom/searchbar.css') }}" rel="stylesheet">
         <link href="{{ url_for('static', filename='css/custom/footer.css') }}" rel="stylesheet">
         <link href="{{ url_for('static', filename='css/custom/home-categories.css') }}" rel="stylesheet">
-
-
+        <link href="{{ url_for('static', filename='css/custom/suggestions.css') }}" rel="stylesheet">
 
 	</head>
 	<body>
@@ -197,27 +196,25 @@
                 </h1>
             </div>
 	    {% for suggestion in suggestions %}
-             <div class="col-md-4" style="max-width:80%;margin-left:auto; margin-right:auto">
-                 <img class='img-responsive' src="{{ url_for('static', filename='img/bosnianr_rainbows.jpg') }}">
-                <div class="panel panel-default" style="border:none" >
-                    <div class="panel-body" style="background-color:rgb(241,241,241)">
-                        <h3 style="text-align:center;padding:0;margin:0">{{suggestion.title}}</h>
-                        <div style="margin-top:20px;vertical-align:middle">
-                            <div style="display:inline-block">
-                                <div style="background-color:rgb(221,221,221); width:70px; height:25px; font-size:16px; padding-top:3px">Mayo</div>
-                                <div style="background-color:white;width:70px; height:50px;">
-                                    <p style="font-size:16px;padding:0;margin:0">Viernes</p>
-                                    <h1 style="padding:0;margin:0; font-size:26px"> 26 </h1>
+             <div class="col-md-4 suggestion">
+                <img class='img-responsive' src="{{ url_for('static', filename='img/bosnianr_rainbows.jpg') }}">
+                <div class="panel panel-default suggestion-panel" >
+                    <div class="panel-body suggestion-body">
+                        <h3 class="suggestion-title">{{suggestion.title}}</h>
+                        <div class="suggestion-when">
+                            <div class="suggestion-inner-content">
+                                <div class="suggestion-month">Mayo</div>
+                                <div class="suggestion-date">
+                                    <p class="suggestion-weekday">Viernes</p>
+                                    <h1 class="suggestion-monthday"> 26 </h1>
                                 </div>
                             </div>
-                            <div style="display:inline-block; font-size:16px;">
-                            <ul class="list-unstyled" style="text-align:left">
-                                <li>
-                                  <i class="fa fa-money fa-fw"></i>{{ suggestion.price }}</li>
-                                <li style="margin-top:10px"><i class="fa fa-music fa-fw"></i>  Indie/rock alternativo</li>
-                                <li style="margin-top:10px"><i class="fa fa-map-marker fa-fw"></i> Sala Caracol, Madrid</li>
-                            </ul>
-
+                            <div class="suggestion-what">
+                                <ul class="list-unstyled suggestion-info-list">
+                                    <li><i class="fa fa-money fa-fw"></i>{{ suggestion.price }}</li>
+                                    <li class="suggestion-info-list-item"><i class="fa fa-music fa-fw"></i>  Indie/rock alternativo</li>
+                                    <li class="suggestion-info-list-item"><i class="fa fa-map-marker fa-fw"></i> Sala Caracol, Madrid</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
