@@ -140,23 +140,23 @@
     <!-- Cards -->
 
     <div class="container">
-    {% for i in range(8) %}
+    {% for event in events%}
 
 
     <div class="col-sm-12 col-md-6 card" tabindex="-1">
         <div class="media">
             <div class="media-left">
                 <a href="#">
-                    <img class="media-object card-img" src="{{ url_for('static', filename='img/placeholder.jpg') }}" alt="#">
+                    <img class="media-object card-img" src="{{ event.omdb_poster }}" alt="#">
                 </a>
             </div>
             <div class="media-body">
-                <h4 class="media-heading card-body">{{ events[i].title }}</h4>
+                <h4 class="media-heading card-body">{{ event.title }}</h4>
                 <p class="card-body">
-                    <i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>{{ events[i].duration }} min.
+                    <i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>{{ event.duration }} min.
                     <i class="fa fa-ticket fa-fw" aria-hidden="true"></i>Aventura
                     <i class="fa fa-birthday-cake fa-fw" aria-hidden="true"></i>16+
-                    <i class="fa fa-money fa-fw" aria-hidden="true"></i>Desde {{events[i].price}}€
+                    <i class="fa fa-money fa-fw" aria-hidden="true"></i>Desde {{event.price}}€
                 </p>
                 <p class="card-body">
                     <a href="{{ url_for('event.event', id=42) }}" class="btn btn-warning" role="button">Información + Comprar entradas</a>

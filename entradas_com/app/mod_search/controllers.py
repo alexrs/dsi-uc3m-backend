@@ -8,6 +8,7 @@ mod_search = Blueprint('search', __name__,)
 def search():
 	query = str(request.form['query'])
 	events = query_by_event_name(query)
+	print events
 	return render_template("search/search-results.html", query=query, events=events)
 	
 # http://flask-sqlalchemy.pocoo.org/2.1/queries/
