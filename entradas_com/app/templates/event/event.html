@@ -18,9 +18,9 @@
 	    <!-- Custom CSS -->
 	    <link href="{{ url_for('static', filename='css/custom/footer.css') }}" rel="stylesheet">
         <link href="{{ url_for('static', filename='css/custom/navbar.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='css/custom/login-signup.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='css/custom/bg-404-carousel.css') }}" rel="stylesheet">
         <link href="{{ url_for('static', filename='css/custom/sticky-footer.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/custom/event.css') }}" rel="stylesheet">
+
 
 
 
@@ -92,9 +92,31 @@
             
         <!--Container for stuff below video-->
         <div class="container">
-            <h1>The revenant</h1>
+            <h1>The revenant </h1>
+            <h4><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>156 min.<i style="margin-left:50px"class="fa fa-birthday-cake fa-fw" aria-hidden="true"></i>16+</h4>
             <hr style="border-width:2px;color:pink">
-            <button class="col-xs-12">Compre entradas aquí!</button>
+            <button id="purchase-button" class="col-xs-12">Comprar entradas</button>
+            <h2>Información</h2>
+            <hr style="border-width:2px;color:pink">
+            <h3>Sinopsis</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis est ultrices, pretium ligula sit amet, varius dolor. Nulla eget erat vel ipsum fermentum sodales sit amet non dolor. Cras sed eleifend nisi, in sollicitudin leo. Pellentesque a egestas arcu, non elementum purus. Nunc at tempus arcu. Mauris lobortis mattis justo, in elementum quam lacinia ut. In ut velit faucibus, gravida libero sed, tempor ante. Integer imperdiet nisi in semper viverra. Praesent faucibus nisi sed sem cursus ultrices. In hac habitasse platea dictumst.</p>
+            <h3>Ficha técnica</h3>
+            <div id="fact-sheet">
+                <ul>
+                    <li class="left">Género:</li>
+                    <li class="right">genero aqui</li>
+                    <li class="left">Director:</li>
+                    <li class="right">director aqui</li>
+                    <li class="left">Duración:</li>
+                    <li class="right">duracion aqui</li>
+                    <li class="left">País</li>
+                    <li class="right"></li>
+                    <li class="left">Fecha de estreno:</li>
+                    <li class="right">reparto aqui</li>
+                    <li class="left">Reparto:</li>
+                    <li class="right">reparto aqui</li>
+                </ul>
+            </div>
         </div>
 
         
