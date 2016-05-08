@@ -20,11 +20,12 @@
 }
 
 .filter-btn{
+    border: 1px solid rgb(218,218,218);
     padding-left: 10px;
     background-color: rgb(255, 180, 2);
 }
 .filter-btn:hover{
-    background-color: rgb(218,218,218)
+    background-color: rgb(218,218,218);
 }
 
 .searchbar-text {
@@ -38,7 +39,7 @@
 }
 
 #search-input-text{
-    color: white;
+    color: rgba(255,255,255,0.3);
     background-color: rgba(255,255,255,0.3);
 }
 

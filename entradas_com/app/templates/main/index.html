@@ -17,10 +17,8 @@
         <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
 
         <!-- uikit CSS -->
-        <link href="{{ url_for('static', filename='css/uikit/uk-flex.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='css/uikit/uk-overlay.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='css/uikit/uk-position.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='css/uikit/uk-text.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/uikit/uikit.min.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/components/slideshow.css') }}" rel="stylesheet">
 
         <!-- Custom Fonts -->
         <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
@@ -61,11 +59,11 @@
 
                 <li>
                     <!-- Trigger the modal with a button -->
-                    
+
                     <button type="button" class="btn btn-yellow navbar-btn last-navbar-item login-option desktop">
                         <a style="text-decoration:none;color:black" href="{{ url_for('auth.signup') }}"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Entrar</a>
                     </button>
-                    
+
                 </li>
 
                 <!-- Exit button -->
@@ -154,48 +152,39 @@
     </div>
 
     <!-- Search bar -->
-    <form action="{{ url_for('search.search') }}" type="search" method="post" name="Search">
-        <div id='search-container' class="container input-group">
+    <form id="search-bar" action="{{ url_for('search.search') }}" type="search" method="post" name="Search">
+        <div class="search-container container input-group">
             <div class="input-group-btn">
-            <button id='dropbtn' type="button" class="btn btn-default dropdown-toggle searchbtn dropbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-question fa-lg fa-fw" aria-hidden="true"></i> <span class="caret"></span></button>
+                <button type="button" class="btn btn-default dropdown-toggle searchbtn drop-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-question fa-lg fa-fw" aria-hidden="true"></i> <span class="caret"></span></button>
                 <ul class="dropdown-menu search-dropdown-menu">
-                  <li><a href="#" onclick="dropdown(1);"><i class="fa fa-ticket fa-lg fa-fw"></i> Cine </a></li>
-                  <li><a href="#" onclick="dropdown(2);"><img src="{{ url_for('static', filename='img/theater.png') }}" style="width:18px"> &nbsp; Teatro </a></li>
-                  <li><a href="#" onclick="dropdown(3);"><i class="fa fa-music fa-lg fa-fw"></i> Conciertos </a></li>
-                  <li><a href="#" onclick="dropdown(4);"><i class="fa fa-university fa-lg fa-fw"></i> Exposiciones/Museos </a></li>
-                  <li><a href="#" onclick="dropdown(5);"><i class="fa fa-futbol-o fa-lg fa-fw"></i> Deportes </a></li>
-                  <li><a href="#" onclick="dropdown(6);"><i class="fa fa-magic fa-lg fa-fw" aria-hidden="true"></i> Shows/Espectáculos </a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="#" onclick="dropdown(0);"><i class="fa fa-globe fa-lg fa-fw"></i> Todas las categorías</a></li>
+                    <li><a href="#" onclick="dropdown(1);"><i class="fa fa-ticket fa-lg fa-fw"></i> Cine </a></li>
+                    <li><a href="#" onclick="dropdown(2);"><img src="{{ url_for('static', filename='img/theater.png') }}" style="width:18px"> &nbsp; Teatro </a></li>
+                    <li><a href="#" onclick="dropdown(3);"><i class="fa fa-music fa-lg fa-fw"></i> Conciertos </a></li>
+                    <li><a href="#" onclick="dropdown(4);"><i class="fa fa-university fa-lg fa-fw"></i> Exposiciones/Museos </a></li>
+                    <li><a href="#" onclick="dropdown(5);"><i class="fa fa-futbol-o fa-lg fa-fw"></i> Deportes </a></li>
+                    <li><a href="#" onclick="dropdown(6);"><i class="fa fa-magic fa-lg fa-fw" aria-hidden="true"></i> Shows/Espectáculos </a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#" onclick="dropdown(0);"><i class="fa fa-globe fa-lg fa-fw"></i> Todas las categorías</a></li>
+                </ul>
             </div>
-            <input id="search-input-text" name="query" type="text" class="form-control searchbar searchbar-text" placeholder="Busca espectáculos aquí" aria-label="search-terms" onkeydown="setDefaultDrop()" method="post">
-                <div class="input-group-btn">
-                    <a href="search-results.html">
-                        <button id="searchnow" class="btn btn-default searchbtn sendsearchbtn" type="Submit">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </a>
-                </div>
-
+            <input name="query" type="text" class="form-control searchbar searchbar-text search-input-text" placeholder="Busca espectáculos aquí" aria-label="search-terms" onkeydown="setDefaultDrop()" method="post">
+            <div class="input-group-btn">
+                <button class="btn btn-default searchbtn sendsearchbtn search-now" type="Submit" href="{{ url_for('search.search') }}">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
         </div>
     </form>
+
     <!-- Header Carousel -->
 
-    <header id="header-carousel" class="carousel slide">
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            <div class="item active">
-                <div class="fill" style="background-image:url('https://images.unsplash.com/photo-1459749411175-04bf5292ceea?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=698b0decc7115d06b16801d7b8291c63');"></div>
-            </div>
-            <div class="item">
-                <div class="fill" id ='violinFlip' style="background-image:url('http://cdn.paper4pc.com/images/entertainment-music-violin-musical-instrument-strings-wood-people-orchestra-wallpaper-1.jpg');"></div>
-            </div>
-            <div class="item">
-                <div class="fill" style="background-image:url('http://i.imgur.com/yny7x.jpg');"></div>
-            </div>
-        </div>
-    </header>
+    <div id="header-carousel">
+        <ul class="uk-slideshow" data-uk-slideshow="{autoplay:true, animation: 'random-fx', kenburns:true}">
+            <li><img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=698b0decc7115d06b16801d7b8291c63" width="" height="" alt=""></li>
+            <li><img src="http://cdn.paper4pc.com/images/entertainment-music-violin-musical-instrument-strings-wood-people-orchestra-wallpaper-1.jpg" width="" height="" alt=""></li>
+            <li><img src="http://i.imgur.com/yny7x.jpg" width="" height="" alt=""></li>
+        </ul>
+    </div>
 
     <!-- Page Content -->
     <div class="container">
@@ -326,13 +315,14 @@
 
     <!-- UIkit -->
     <script src="{{ url_for('static', filename='js/uikit.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/components/slideshow.min.js') }}"></script>
 
     <!-- own JavaScript -->
     <script src="{{ url_for('static', filename='js/entradas.js') }}"></script>
     <script src="{{ url_for('static', filename='js/searchbar.js') }}"></script>
     <script src="{{ url_for('static', filename='js/login-signup.js') }}"></script>
 
-        
+
 
 {% endblock %}
 	</body>

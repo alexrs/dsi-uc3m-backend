@@ -3,79 +3,76 @@
 <html lang="es">
 
 <html>
-	<head>
-		<title>Entradas.com</title>
+<head>
+	<title>Entradas.com</title>
 
-	    <meta charset="utf-8">
-	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
-	    <meta name="description" content="">
-	    <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-	    <!-- Bootstrap Core CSS -->
-	    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
 
-	    <!-- Custom CSS -->
-	    <link href="{{ url_for('static', filename='css/custom/footer.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='css/custom/navbar.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='css/custom/login-signup.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='css/custom/bg-carousel.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='css/custom/sticky-footer.css') }}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='css/custom/navbar.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/custom/login-signup.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/custom/bg-carousel.css') }}" rel="stylesheet">
 
+    <!-- Custom Fonts -->
+    <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 
-	    <!-- Custom Fonts -->
-	    <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
-	    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	    <!--[if lt IE 9]>
-	        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-	    <![endif]-->
+    <!-- jQuery -->
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
 
-	    <!-- jQuery -->
-	    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</head>
+<body>
 
-	    <!-- Bootstrap Core JavaScript -->
-	    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-	</head>
-	<body>
-        
-        <nav class="navbar navbar-default navbar-static-top main-navbar">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="{{ url_for( 'main.index') }}" style="position:absolute;left:50%;margin-left:-125px;display:block">
-                    <img class="brand-logo img-responsive" alt="Brand" src="{{ url_for('static', filename='img/entradascomlogo.png') }}">
-                </a>
+    <nav class="navbar navbar-default navbar-static-top main-navbar">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{ url_for( 'main.index') }}" style="position:absolute;left:50%;margin-left:-125px;display:block">
+                <img class="brand-logo img-responsive" alt="Brand" src="{{ url_for('static', filename='img/entradascomlogo.png') }}">
+            </a>
+        </div>
+    </div>
+    </nav>
+
+    <!--bootstrap carousel background-->
+    <div class="carousel slide carousel-fade" data-ride="carousel">
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+            </div>
+            <div class="item">
+            </div>
+            <div class="item">
             </div>
         </div>
-        </nav>
-        
-        <!--bootstrap carousel background-->
-        <div class="carousel slide carousel-fade" data-ride="carousel">
+    </div>
 
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                </div>
-                <div class="item">
-                </div>
-                <div class="item">
-                </div>
-            </div>
-        </div>
-        
-        
-		<!--tabs for login/signup-->
-        <div class="container">
-            <div  id="register-container" class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                <ul class="nav nav-tabs" style="margin-bottom:10px">
-                    <li id="login-li"><a data-toggle="tab" href="#login-content">Log in</a></li>
-                    <li id="signup-li" class="active"><a data-toggle="tab" href="#signup-content">Sign up</a></li>
-                </ul>
-                <!--displayed stuff for each of tabs-->
-                <div class="tab-content">
-                  <div id="login-content" class="tab-pane fade">
+
+	<!--tabs for login/signup-->
+    <div class="container">
+        <div  id="register-container" class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+            <ul class="nav nav-tabs" style="margin-bottom:10px">
+                <li id="login-li"><a data-toggle="tab" href="#login-content">Log in</a></li>
+                <li id="signup-li" class="active"><a data-toggle="tab" href="#signup-content">Sign up</a></li>
+            </ul>
+            <!--displayed stuff for each of tabs-->
+            <div class="tab-content">
+                <div id="login-content" class="tab-pane fade">
                     <form type="login" id="login-form" class="login-field" role="form" method="post" name="Login">
                         <div id="login-mail-div" class="form-group has-feedback">
                             <label for="email">Email o usuario:</label>
@@ -95,73 +92,47 @@
                         <button id="login-form-btn" type="Submit" class="btn btn-success login login-field" data-dismiss="modal"onclick="changename(1)"  style="float:right" disabled>
                             <span class="glyphicon glyphicon-log-in"></span> Log in
                         </button>
-                    </form> 
-                  </div>
-                  <div id="signup-content" class="tab-pane fade in active">
-                      <form action="{{ url_for('main.signup') }}" type="signup" id="signup-form" class="signup-field" role="form" method="post" name="Signup">
-                            <div id="sign-mail-div" class="form-group has-feedback">
-                                <label for="email">Email:</label>
-                                <input id="sign-mail" name="email "type="email" class="form-control" id="email" onchange="validate(0, this.id)" aria-describedby="inputSuccessStatus" required>
-                                <span id="sign-mail-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                                <span id="inputSuccessStatus" class="sr-only">(success)</span>
-                            </div>
-                            <div id="sign-usr-div" class="form-group has-feedback">
-                                <label for="email">Usuario:</label>
-                                <input id="sign-usr" name="username" type="text" class="form-control" id="email" onchange="validate(1, this.id)" aria-describedby="inputSuccess1Status" required>
-                                <span id="sign-usr-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                                <span id="inputSuccess1Status" class="sr-only">(success)</span>
-                            </div>
-                            <div id="sign-pwd-div" class="form-group has-feedback">
-                                <label for="pwd">Contraseña:</label>
-                                <input id="sign-pwd" name="password" type="password" class="form-control" id="pwd" onchange="validate(2, this.id)" aria-describedby="inputSuccess2Status" required>
-                                <span id="sign-pwd-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                                <span id="inputSuccess2Status" class="sr-only">(success)</span>
-                            </div>
-                            <div id="sign-pwd-confirm-div" class="form-group has-feedback">
-                                <label for="pwd-confirm">Confirmar contraseña:</label>
-                                <input id="sign-pwd-confirm" name="password" type="password" class="form-control" id="pwd-confirm" onchange="validate(3, this.id)" aria-describedby="inputSuccess3Status" required>
-                                <span id="sign-pwd-confirm-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                                <span id="inputSuccess3Status" class="sr-only">(success)</span>
-                            </div>
-                            <div class="checkbox"><label><input type="checkbox">Recuérdame</label></div>
-                            <button id="signup-form-btn" type="Submit" class="btn btn-success login signup-field" data-dismiss="modal"onclick="changename(0)" style="float:right" disabled>
-                                <span class="glyphicon glyphicon-user"></span> Sign Up
-                            </button>
-                        </form>
-                    </div>
-              </div>
+                    </form>
+                </div>
+                <div id="signup-content" class="tab-pane fade in active">
+                    <form action="{{ url_for('main.signup') }}" type="signup" id="signup-form" class="signup-field" role="form" method="post" name="Signup">
+                        <div id="sign-mail-div" class="form-group has-feedback">
+                            <label for="email">Email:</label>
+                            <input id="sign-mail" name="email "type="email" class="form-control" id="email" onchange="validate(0, this.id)" aria-describedby="inputSuccessStatus" required>
+                            <span id="sign-mail-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                            <span id="inputSuccessStatus" class="sr-only">(success)</span>
+                        </div>
+                        <div id="sign-usr-div" class="form-group has-feedback">
+                            <label for="email">Usuario:</label>
+                            <input id="sign-usr" name="username" type="text" class="form-control" id="email" onchange="validate(1, this.id)" aria-describedby="inputSuccess1Status" required>
+                            <span id="sign-usr-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                            <span id="inputSuccess1Status" class="sr-only">(success)</span>
+                        </div>
+                        <div id="sign-pwd-div" class="form-group has-feedback">
+                            <label for="pwd">Contraseña:</label>
+                            <input id="sign-pwd" name="password" type="password" class="form-control" id="pwd" onchange="validate(2, this.id)" aria-describedby="inputSuccess2Status" required>
+                            <span id="sign-pwd-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                            <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                        </div>
+                        <div id="sign-pwd-confirm-div" class="form-group has-feedback">
+                            <label for="pwd-confirm">Confirmar contraseña:</label>
+                            <input id="sign-pwd-confirm" name="password" type="password" class="form-control" id="pwd-confirm" onchange="validate(3, this.id)" aria-describedby="inputSuccess3Status" required>
+                            <span id="sign-pwd-confirm-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                            <span id="inputSuccess3Status" class="sr-only">(success)</span>
+                        </div>
+                        <div class="checkbox"><label><input type="checkbox">Recuérdame</label></div>
+                        <button id="signup-form-btn" type="Submit" class="btn btn-success login signup-field" data-dismiss="modal"onclick="changename(0)" style="float:right" disabled>
+                            <span class="glyphicon glyphicon-user"></span> Sign Up
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
-        
-        
-        <!-- Footer -->
-        <footer class="footer"> 
-            <div class="row row-mod" align="center">
-                <div class="col-lg-4" style="margin-top:0px">
-                <a href="#"><img style="width:150px; padding-bottom:10px" src="{{ url_for('static', filename='img/entradascomlogo.png') }}"> </a>
-              </div>
-              <div class="col-lg-4" style="margin-top:10px; padding-bottom:10px">
-                <div style="display:inline-block; padding-left:10px; padding-right:10px; vertical-align:middle">
-                  <a href="#" style="color:black"> <i class="fa fa-facebook-square fa-3x"></i></a>
-                </div>
-                <div style="display:inline-block; padding-left:10px; padding-right:10px; vertical-align:middle">
-                    <a href="#" style="color:black"> <i class="fa fa-google-plus-square fa-3x"></i></a>
-                </div>
-                <div style="display:inline-block; padding-left:10px; padding-right:10px; vertical-align:middle">
-                    <a href="#" style="color:black"> <i class="fa fa-twitter-square fa-3x"></i></a>
-                </div>
-              </div>
-                <ul class='col-lg-4' style="list-style-type:none;margin:0;padding:0;">
-                    <li class="footitem"><a href="#" style="color:black"> Condiciones de uso</a></li>
-                    <li class="footitem"><a href="#" style="color:black"> Política de privacidad</a></li>
-                </ul>
-                <p>Made with <i class="fa fa-heart" aria-hidden="true"></i> in Leganés</p>
-            </div>
-        </footer>
-        
-    <script src="{{ url_for('static', filename='js/login-signup.js') }}"></script>
-    <!--exec bg carousel-->
-    <script>$('.carousel').carousel();</script>
-        
-	</body>
+    </div>
+
+<script src="{{ url_for('static', filename='js/login-signup.js') }}"></script>
+<!--exec bg carousel-->
+<script>$('.carousel').carousel();</script>
+
+</body>
 </html>
