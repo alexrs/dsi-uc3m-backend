@@ -18,9 +18,9 @@
 	    <!-- Custom CSS -->
 	    <link href="{{ url_for('static', filename='css/custom/footer.css') }}" rel="stylesheet">
         <link href="{{ url_for('static', filename='css/custom/navbar.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='css/custom/login-signup.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='css/custom/bg-404-carousel.css') }}" rel="stylesheet">
         <link href="{{ url_for('static', filename='css/custom/sticky-footer.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/custom/event.css') }}" rel="stylesheet">
+
 
 
 
@@ -92,11 +92,81 @@
             
         <!--Container for stuff below video-->
         <div class="container">
-            <h1>The revenant</h1>
-            <hr style="border-width:2px;color:pink">
-            <button class="col-xs-12">Compre entradas aquí!</button>
+            
+            <!--TITULO + DURACION + EDAD-->
+            <h1>The revenant </h1>
+            <h4>
+                <i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>156 min.
+                <i style="margin-left:50px"class="fa fa-birthday-cake fa-fw" aria-hidden="true"></i>16+
+            </h4>
+            <hr>
+            <a id="purchase-button" class="col-xs-12" data-scroll href="#buy-pls">Comprar entradas</a>
+            <h2>Información</h2>
+            <hr>
+            
+            <!--SINOPSIS-->
+            <h3>Sinopsis</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis est ultrices, pretium ligula sit amet, varius dolor. Nulla eget erat vel ipsum fermentum sodales sit amet non dolor. Cras sed eleifend nisi, in sollicitudin leo. Pellentesque a egestas arcu, non elementum purus. Nunc at tempus arcu. Mauris lobortis mattis justo, in elementum quam lacinia ut. In ut velit faucibus, gravida libero sed, tempor ante. Integer imperdiet nisi in semper viverra. Praesent faucibus nisi sed sem cursus ultrices. In hac habitasse platea dictumst.</p>
+            
+            <!--INFO PELICULA-->
+            <h3>Ficha técnica</h3>
+            <div style="display:inline-block">
+                <strong>Género:</strong><br>
+                <strong>Director:</strong><br>
+                <strong>Duración:</strong><br>
+                <strong>País:</strong><br>
+                <strong>Fecha de estreno:</strong><br>
+                <strong>Reparto:</strong><br>
+            </div>
+            <div style="display:inline-block">
+                genero<br>
+                director<br>
+                duracion<br>
+                pais<br>
+                estreno</strong><br>
+                reparto<br>
+            </div>
+            
+            <!--LINKS CINES; COMPRA DE ENTRADAS-->
+            <h2 id="buy-pls">Comprar entradas</h2>
+            <hr>
+            <h5>Seleccione un cine:</h5>
+            <div class="list-group">
+                
+            <!-- iterar cines desde aqui, por links -->
+              <a href="#" class="list-group-item">
+                <div style="display:inline-block">
+                  <h4 class="list-group-item-heading">Cinesa Tres Aguas</h4>
+                  <p class="list-group-item-text">C/Arroyomolinos, 15</p>
+                </div>
+                <div class="cinema-price"><i class="fa fa-money fa-sm fa-fw"></i>&nbsp; 7,60€</div>
+              </a>
+            <!-- fin iteracion -->
+                
+            </div>
+            
+            <!-- paginacion -->
+            <nav style="text-align:center; display:block; margin-top:10px">
+              <ul class="pagination pagination-lg">
+                <li>
+                  <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <li class="disabled"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li>
+                  <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+            
+            
         </div>
-
+        
         
         <!-- Footer -->
         <footer class="footer"> 
@@ -126,10 +196,11 @@
     <script src="{{ url_for('static', filename='js/login-signup.js') }}"></script>
     <script src="{{ url_for('static', filename='js/entradas.js') }}"></script>
     <script src="{{ url_for('static', filename='js/event-ytb-handler.js') }}"></script>
-
+    <script src="{{ url_for('static', filename='js/smooth-scroll.min.js') }}"></script>
 
     <!--exec bg carousel-->
     <script>$('.carousel').carousel();</script>
+    <script>smoothScroll.init();</script>
         
 	</body>
 </html>

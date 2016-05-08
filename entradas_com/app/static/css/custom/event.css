@@ -1,0 +1,26 @@
+#purchase-button{
+    background-color: rgb(255, 180, 2);
+    border: 2px solid rgb(255, 180, 2);
+    transition: border 0.5s ease;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: white;
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 2em;
+    text-align: center;
+    text-decoration: none;
+
+
+}
+
+.cinema-price{
+    float:right;
+    font-size:24px;
+    margin-top:4px;
+}
+
+strong {
+    margin-right:20px;
+}

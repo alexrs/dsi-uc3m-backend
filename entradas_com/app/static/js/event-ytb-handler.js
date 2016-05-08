@@ -13,11 +13,12 @@
     player = new YT.Player('player', {
       width: '100%',
       height: '100%',
+      showinfo: '0',
+      controls: '0',
       color: 'red',
       autohide: '1',
       fs: '1',
       videoId: 'a8HRA49kaok',
-      controls: '0',
       events: {
         'onReady': onPlayerReady,
         'onStateChange': onPlayerStateChange
