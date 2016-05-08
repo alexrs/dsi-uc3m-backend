@@ -25,12 +25,13 @@
 
     <!-- Custom CSS -->
     <link href="{{ url_for('static', filename='css/custom/global.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/custom/searchbar.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/custom/navbar.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/custom/header-carousel.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/custom/searchbar.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/custom/search-cards.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/custom/footer.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/custom/search-cards.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/custom/search-results.css') }}" rel="stylesheet">
+
 </head>
 
 
@@ -83,7 +84,7 @@
     <form id="search-bar" action="{{ url_for('search.search') }}" type="search" method="post" name="Search">
         <div class="search-container container input-group">
             <div class="input-group-btn">
-                <button type="button" class="btn btn-default dropdown-toggle searchbtn drop-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-question fa-lg fa-fw" aria-hidden="true"></i> <span class="caret"></span></button>
+                <button id="dropbtn" type="button" class="btn btn-default dropdown-toggle searchbtn drop-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-question fa-lg fa-fw" aria-hidden="true"></i> <span class="caret"></span></button>
                 <ul class="dropdown-menu search-dropdown-menu">
                     <li><a href="#" onclick="dropdown(1);"><i class="fa fa-ticket fa-lg fa-fw"></i> Cine </a></li>
                     <li><a href="#" onclick="dropdown(2);"><img src="{{ url_for('static', filename='img/theater.png') }}" style="width:18px"> &nbsp; Teatro </a></li>
@@ -95,13 +96,11 @@
                     <li><a href="#" onclick="dropdown(0);"><i class="fa fa-globe fa-lg fa-fw"></i> Todas las categorías</a></li>
                 </ul>
             </div>
-            <input name="query" type="text" class="form-control searchbar searchbar-text search-input-text" placeholder="Busca espectáculos aquí" aria-label="search-terms" onkeydown="setDefaultDrop()" method="post">
+            <input id="search-input-text" name="query" type="text" class="form-control searchbar searchbar-text search-input-text" placeholder="Busca espectáculos aquí" aria-label="search-terms" onkeydown="setDefaultDrop()" method="post">
             <div class="input-group-btn">
-                <a href="search-results.html">
-                    <button class="btn btn-default searchbtn sendsearchbtn search-now" type="Submit">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </a>
+                <button id="searchnow" class="btn btn-default searchbtn sendsearchbtn search-now" type="Submit" href="{{ url_for('search.search') }}">
+                    <i class="fa fa-search"></i>
+                </button>
             </div>
         </div>
     </form>
@@ -120,7 +119,9 @@
 
     <div data-uk-sticky id="filter-bar" class="container input-group">
         <div class="input-group-btn">
-            <button type="button" class="btn btn-default dropdown-toggle filter-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-question fa-lg fa-fw" aria-hidden="true"></i> <span class="caret"></span></button>
+            <button type="button" class="btn btn-default dropdown-toggle filter-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-question fa-lg fa-fw" aria-hidden="true"></i> <span class="caret"></span>
+            </button>
             <ul class="dropdown-menu filter-dropdown-menu">
                 <li><a onclick="dropdownFilter(0);"href="#"><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i> &nbsp; Filtro por localización</a></li>
                 <li><a onclick="dropdownFilter(1);"href="#"><i class="fa fa-calendar-o fa-fw" aria-hidden="true"></i> &nbsp; Filtro por fecha</a></li>
@@ -226,8 +227,8 @@
 
     <!-- own JavaScript -->
     <script src="{{ url_for('static', filename='js/entradas.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/searchbar-transparent.js') }}"></script>
     <script src="{{ url_for('static', filename='js/search-results.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/searchbar-transparent.js') }}"></script>
 
 </body>
 

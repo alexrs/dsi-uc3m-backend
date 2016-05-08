@@ -97,11 +97,9 @@
             </div>
             <input name="query" type="text" class="form-control searchbar searchbar-text search-input-text" placeholder="Busca espectáculos aquí" aria-label="search-terms" onkeydown="setDefaultDrop()" method="post">
             <div class="input-group-btn">
-                <a href="search-results.html">
-                    <button class="btn btn-default searchbtn sendsearchbtn search-now" type="Submit">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </a>
+                <button class="btn btn-default searchbtn sendsearchbtn search-now" type="Submit" href="{{ url_for('search.search') }}">
+                    <i class="fa fa-search"></i>
+                </button>
             </div>
         </div>
     </form>

@@ -7,7 +7,7 @@ function dropdown(val){
     y[0].style.backgroundColor = 'rgba(255,255,255,0.3)';
     switch(val){
         case 1: y[0].innerHTML = '<i class="fa fa-ticket fa-lg fa-fw"></i> <span class="caret"></span>'; break;
-        case 2: y[0].innerHTML = "<img src='../../static/img/theaterwhite.png' style='width:18px''>  &nbsp;<span class='caret'></span>"; break;
+        case 2: y[0].innerHTML = '<img src="../../static/img/theaterwhite.png" style="width:20px"> &nbsp; <span class="caret"></span>'; break;
         case 3: y[0].innerHTML = '<i class="fa fa-music fa-lg fa-fw"></i> <span class="caret"></span>'; break;
         case 4: y[0].innerHTML = '<i class="fa fa-university fa-lg fa-fw"></i> <span class="caret"></span>'; break;
         case 5: y[0].innerHTML = '<i class="fa fa-futbol-o fa-lg fa-fw"></i> <span class="caret"></span>'; break;
