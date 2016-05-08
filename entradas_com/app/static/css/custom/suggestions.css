@@ -1,0 +1,68 @@
+.suggestion {
+    max-width: 80%;
+    margin-left: auto;
+    margin-right:auto;
+}
+
+.suggestion-panel {
+    border:none;
+}
+
+.suggestion-body {
+    background-color:rgb(241,241,241);
+}
+
+.suggestion-title {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+.suggestion-when {
+    height: 100%;
+    margin-top: 20px;
+    vertical-align: middle;
+}
+
+.suggestion-inner-content {
+    display:inline-block;
+}
+
+.suggestion-month {
+    background-color: rgb(221,221,221);
+    width: 70px;
+    height: 30px;
+    font-size:16px;
+    padding-top:3px;
+}
+
+.suggestion-date {
+    background-color: white;
+    width: 70px;
+    height: 65px;
+}
+
+.suggestion-weekday {
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+}
+
+.suggestion-monthday {
+    padding: 0;
+    margin: 0;
+    font-size: 26px;
+}
+
+.suggestion-what {
+    display: inline-block;
+    font-size: 16px;
+}
+
+.suggestion-info-list {
+    text-align:left;
+}
+
+.suggestion-info-list-item {
+    margin-top:10px;
+}
