@@ -34,29 +34,28 @@ def get_suggestions():
 		similar = []
 		recomendacion = []
 		for i in range(len(busquedas_list)):
-			event = Event.query.filter(Event.title.like("%" + busquedas_list[i] + "%")).with_entities(Event.eventId).all()
-			if event:
-				genres = []
-				for j in range(len(event)): 
-					genres.append(Genre.query.filter(Genre.event_id.like("%" + str(event[j][0]) + "%")).with_entities(Genre.name).all() ) 
-				ocurrencias = []
-				ocurrenciasIndex = []
-				for i in range(len(genres)):
-					if genres[i][0] not in ocurrencias:
-						ocurrencias.append(genres[i][0])
-						ocurrenciasIndex.append(1)
-					else:
-						ocurrenciasIndex[ocurrencias.index(genres[i][0])] += 1
+			event.append(Event.query.filter(Event.title.like("%" + busquedas_list[i] + "%")).with_entities(Event.eventId).first())
+		if event:
+			genres = []
+			for j in range(len(event)): 
+				genres.append(Genre.query.filter(Genre.event_id.like("%" + str(event[j][0]) + "%")).with_entities(Genre.name).all() ) 
+			ocurrencias = []
+			ocurrenciasIndex = []
+			for i in range(len(genres)):
+				if genres[i][0] not in ocurrencias:
+					ocurrencias.append(genres[i][0])
+					ocurrenciasIndex.append(1)
+				else:
+					ocurrenciasIndex[ocurrencias.index(genres[i][0])] += 1
+			
+			similar = ocurrencias[ocurrenciasIndex.index(max(ocurrenciasIndex))]
+			ids = Genre.query.filter(Genre.name.like("%" + similar[0][0] + "%")).with_entities(Genre.event_id).all()	
+			for k in range(3):	
+				recomendacion.append(Event.query.filter(Event.eventId.like("%" + str(ids[int(random.random()*len(ids))][0]) + "%")).first())
+			return recomendacion
 				
-				similar = ocurrencias[ocurrenciasIndex.index(max(ocurrenciasIndex))]
-				ids = Genre.query.filter(Genre.name.like("%" + similar[0][0] + "%")).with_entities(Genre.event_id).all()	
-				for k in range(3):	
-					recomendacion.append(Event.query.filter(Event.eventId.like("%" + str(ids[int(random.random()*len(ids))][0]) + "%")).first())
-				return recomendacion
-				
-			else: 
-				return None
-		return None
+		else: 
+			return None
 
 
 # Set the route and accepted methods
