@@ -1,3 +1,18 @@
+$(document).ready( function () {
+    $(".card-input").hide()
+    $(".paypal").hide()
+});
+
+function payWithCard () {
+    $(".card-input").show()
+    $(".paypal").hide()
+};
+
+function payWithPal () {
+    $(".card-input").hide()
+    $(".paypal").show()
+};
+
 function selectSection(id) {
     $(".seat-section").removeClass( "selected-section" );
     switch(id) {
