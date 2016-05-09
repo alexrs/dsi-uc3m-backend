@@ -11,9 +11,9 @@
   var player;
   function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
-      width: '100%',
-      height: '100%',
       showinfo: '0',
+      width: '100%',
+      height: '300',   
       controls: '0',
       color: 'red',
       autohide: '1',
