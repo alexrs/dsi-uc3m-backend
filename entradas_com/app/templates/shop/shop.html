@@ -18,6 +18,7 @@
     <link href="{{ url_for('static', filename='css/uikit/uikit.min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/uikit/uk-flex.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/components/datepicker.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/components/autocomplete.min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/components/slideshow.min.css') }}" rel="stylesheet">
 
     <!-- Custom Fonts -->
@@ -25,10 +26,9 @@
 
     <!-- Custom CSS -->
     <link href="{{ url_for('static', filename='css/custom/global.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/custom/searchbar.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/custom/navbar.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/custom/header-carousel.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/custom/footer.css') }}" rel="stylesheet">\
+    <link href="{{ url_for('static', filename='css/custom/footer.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/custom/shop.css') }}" rel="stylesheet">
 
 </head>
@@ -78,32 +78,6 @@
         </div>
     </nav>
 
-    <!-- Search bar -->
-
-    <form id="search-bar" action="{{ url_for('search.search') }}" type="search" method="post" name="Search">
-        <div class="search-container container input-group">
-            <div class="input-group-btn">
-                <button id="dropbtn" type="button" class="btn btn-default dropdown-toggle searchbtn drop-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-question fa-lg fa-fw" aria-hidden="true"></i> <span class="caret"></span></button>
-                <ul class="dropdown-menu search-dropdown-menu">
-                    <li><a href="#" onclick="dropdown(1);"><i class="fa fa-ticket fa-lg fa-fw"></i> Cine </a></li>
-                    <li><a href="#" onclick="dropdown(2);"><img src="{{ url_for('static', filename='img/theater.png') }}" style="width:18px"> &nbsp; Teatro </a></li>
-                    <li><a href="#" onclick="dropdown(3);"><i class="fa fa-music fa-lg fa-fw"></i> Conciertos </a></li>
-                    <li><a href="#" onclick="dropdown(4);"><i class="fa fa-university fa-lg fa-fw"></i> Exposiciones/Museos </a></li>
-                    <li><a href="#" onclick="dropdown(5);"><i class="fa fa-futbol-o fa-lg fa-fw"></i> Deportes </a></li>
-                    <li><a href="#" onclick="dropdown(6);"><i class="fa fa-magic fa-lg fa-fw" aria-hidden="true"></i> Shows/Espectáculos </a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#" onclick="dropdown(0);"><i class="fa fa-globe fa-lg fa-fw"></i> Todas las categorías</a></li>
-                </ul>
-            </div>
-            <input id="search-input-text" name="query" type="text" class="form-control searchbar searchbar-text search-input-text" placeholder="Busca espectáculos aquí" aria-label="search-terms" onkeydown="setDefaultDrop()" method="post">
-            <div class="input-group-btn">
-                <button id="searchnow" class="btn btn-default searchbtn sendsearchbtn search-now" type="Submit" href="{{ url_for('search.search') }}">
-                    <i class="fa fa-search"></i>
-                </button>
-            </div>
-        </div>
-    </form>
-
     <!-- Header Carousel -->
 
     <div id="header-carousel">
@@ -116,62 +90,67 @@
 
     <!-- Shop process -->
 
-    <form class="uk-form uk-form-horizontal" action="index.html" method="post">
+    <div id="purchase-container" class="container">
+        <form id="purchase-form" class="uk-form uk-form-horizontal" action="index.html" method="post">
 
-        <!-- Session date -->
+            <!-- Session date -->
 
-        <div class="uk-form-row">
-            <label class="uk-form-label" for="session-date">Selecciona tu método de pago</label>
-            <div class="uk-form-controls">
-                <input id="session-date" type="text" data-uk-datepicker="{format:'DD.MM.YYYY'}" placeholder="¿Qué sesión quieres?" aria-describedby="basic-addon1">
-            </div>
-        </div>
-
-        <!-- Seats selection -->
-
-        <label for="seat-select">Selecciona tu titio</label>
-        <ul id="seat-select" class="uk-grid" data-uk-grid-margin>
-            <li id="section-bl" onclick="selectSection(0);" class="seat-section side-section uk-width-1-5"> </li>
-            <li id="section-bm" onclick="selectSection(1);" class="seat-section mid-section uk-width-3-5">  </li>
-            <li id="section-br" onclick="selectSection(2);" class="seat-section side-section uk-width-1-5"> </li>
-            <li id="section-mm" onclick="selectSection(3);" class="seat-section mid-section uk-width-3-5">  </li>
-            <li id="section-fm" onclick="selectSection(4);" class="seat-section mid-section uk-width-3-5">  </li>
-            <li id="screen" class="uk-width-medium-1-1"></li>
-        </ul>
-
-        <!-- Payment -->
-
-        <fieldset>
             <div class="uk-form-row">
-                <label class="uk-form-label" for="payment">Selecciona tu método de pago</label>
+                <label class="uk-form-label" for="session-date">Selecciona tu sesión</label>
                 <div class="uk-form-controls">
-                    <input id="paypal-radio" type="radio" name="payment" value="">
-                    <label for="paypal-radio">PayPal</label>
-                    <input id="card-radio" type="radio" name="payment" value="">
-                    <label for="card-radio">Tarjeta de Crédito</label>
+                    <input id="session-date" type="text" data-uk-datepicker="{format:'DD/MM/YYYY'}" placeholder="¿Qué día?" aria-describedby="basic-addon1">
                 </div>
             </div>
 
-            <legend>Datos de Tarjeta</legend>
-            <div class="uk-form-row"><input id="cardholder-input" class="uk-form-width-large" type="text" name="cardholder" placeholder="Nombre Apellidos"></div>
-            <div class="uk-form-row"><input id="cardnum-input" class="uk-form-width-large" type="text" name="cardnum" placeholder="1234 1234 1234 1234"></div>
-            <div class="uk-form-row"><input id="cardexp-input" class="uk-form-width-small" type="text" data-uk-datepicker="{format:'MM.YYYY'}" placeholder="Click para seleccionar" aria-describedby="basic-addon1"></div>
-            <div class="uk-form-row"><input id="cardsecret-input" class="uk-form-width-mini" type="text" name="cardnum" placeholder="123"></div>
-        </fieldset>
+            <!-- Seats selection -->
 
-        <!-- Pager -->
+            <label for="seat-select">Selecciona tu sitio</label>
+            <div class="uk-container-center uk-width-3-5">
+                <ul id="seat-select" class="uk-grid uk-grid-medium" data-uk-grid-margin>
+                    <li id="section-bl" onclick="selectSection(0);" class="seat-section available-section side-section uk-width-1-6"> </li>
+                    <li id="section-bm" onclick="selectSection(1);" class="seat-section available-section mid-section uk-container-center uk-width-3-5">  </li>
+                    <li id="section-br" onclick="selectSection(2);" class="seat-section side-section uk-width-1-6"> </li>
+                    <li id="section-mm" onclick="selectSection(3);" class="seat-section available-section mid-section uk-container-center uk-width-3-5">  </li>
+                    <li id="section-fm" onclick="selectSection(4);" class="seat-section mid-section uk-container-center uk-width-3-5">  </li>
+                    <li id="screen" class="uk-width-medium-1-1">Pantalla/escenario
+                    </li>
+                </ul>
+            </div>
 
-        <nav>
-            <ul class="pager">
-                <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> Paso anterior</a></li>
-                <li class="next"><a href="#">Paso siguiente <span aria-hidden="true">&rarr;</span></a></li>
-            </ul>
-        </nav>
+            <!-- Payment -->
 
-        <!-- Submit -->
+            <fieldset>
+                <div class="uk-form-row">
+                    <label class="uk-form-label" for="payment">Selecciona tu método de pago</label>
+                    <div class="uk-form-controls">
+                        <input id="paypal-radio" type="radio" name="payment" value="">
+                        <label for="paypal-radio">PayPal</label>
+                        <input id="card-radio" type="radio" name="payment" value="">
+                        <label for="card-radio">Tarjeta de Crédito</label>
+                    </div>
+                </div>
+
+                <legend>Datos de Tarjeta</legend>
+                <div class="uk-form-row"><input id="cardholder-input" class="uk-form-width-large" type="text" name="cardholder" placeholder="Nombre Apellidos"></div>
+                <div class="uk-form-row"><input id="cardnum-input" class="uk-form-width-large" type="text" name="cardnum" placeholder="1234 1234 1234 1234"></div>
+                <div class="uk-form-row"><input id="cardexp-input" class="uk-form-width-small" type="text" data-uk-datepicker="{format:'MM.YYYY', minDate: 0}" placeholder="Click para seleccionar" aria-describedby="basic-addon1"></div>
+                <div class="uk-form-row"><input id="cardsecret-input" class="uk-form-width-mini" type="text" name="cardnum" placeholder="123"></div>
+            </fieldset>
+
+            <!-- Pager -->
+
+            <nav>
+                <ul class="pager">
+                    <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> Paso anterior</a></li>
+                    <li class="next"><a href="#">Paso siguiente <span aria-hidden="true">&rarr;</span></a></li>
+                </ul>
+            </nav>
+
+            <!-- Submit -->
 
 
-    </form>
+        </form>
+    </div>
 
     <!-- Footer -->
 
