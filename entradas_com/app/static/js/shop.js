@@ -1,5 +1,4 @@
 $(document).ready( function () {
-    $(".card-input").hide()
     $(".paypal").hide()
 });
 

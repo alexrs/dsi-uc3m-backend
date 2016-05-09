@@ -95,21 +95,21 @@
 
             <!-- Session date -->
 
-            <fieldset>
-                <legend>Selecciona tu sesión</legend>
-                <div class="uk-form-row">
-                    <label class="uk-form-label" for="">Selecciona el día</label>
-                    <div class="uk-form-controls">
-                        <input id="session-date" type="text" data-uk-datepicker="{format:'DD/MM/YYYY'}" placeholder="¿Qué día?" aria-describedby="basic-addon1">
-                    </div>
-                </div>
-            </fieldset>
-
+            <h1 style="margin-top:1em"><i class="fa fa-child fa-fw" aria-hidden="true"></i>Ya casi está!</h1>
+            <h3>Complete su compra en tres pasos:</h3>
+            <!-- Session date -->
+            <h2>1. Selecciona tu sesión</h2>
+            <hr>
+            <h4>Por favor, elija la sesión en la que desee asistir:</h4>
+            <div class="uk-form-controls">
+                <input id="session-date" type="text" data-uk-datepicker="{format:'DD.MM.YYYY'}" placeholder="¿Qué sesión quieres?" aria-describedby="basic-addon1">
+            </div>
             <!-- Seats selection -->
-
+            <h2 style="margin-top:1em">2. No te quedes sin tu sitio!</h2>
+            <hr>
+            <h4>Por favor, elija las butacas que desee:</h4>
             <fieldset>
-                <legend>Selecciona tu sitio</legend>
-                <div class="uk-container-center uk-width-3-5">
+                <div class="col-xs-12 col-md-8 col-md-offset-2">
                     <ul id="seat-select" class="uk-grid uk-grid-medium" data-uk-grid-margin>
                         <li id="section-bl" onclick="selectSection(0);" class="seat-section available-section side-section uk-width-1-6"> </li>
                         <li id="section-bm" onclick="selectSection(1);" class="seat-section available-section mid-section uk-container-center uk-width-3-5">  </li>
@@ -123,12 +123,13 @@
             </fieldset>
 
             <!-- Payment -->
-
+            <h2>3. Confirmación y pago</h2>
+            <hr>
+            <h4>Por favor, revise su compra y seleccione una forma de pago:</h4>
             <fieldset>
-                <legend>¡Sólo queda pagar!</legend>
                 <ul class="uk-tab uk-tab-bottom" data-uk-tab>
                     <li><a href="#" onclick="payWithPal();">Paypal</a></li>
-                    <li><a href="#" onclick="payWithCard();">Credit Card</a></li>
+                    <li class="uk-active"><a href="#" onclick="payWithCard();">Credit Card</a></li>
                 </ul>
 
                 <div id="card-info" class="payment-option">
@@ -165,7 +166,7 @@
         </form>
     </div>
 
-    <!-- Footer -->
+     <!-- Footer
 
     <footer class="footer" style="margin-top:30px">
         <div class="row row-mod" align="center">
@@ -189,7 +190,7 @@
             </ul>
             <p>Made with <i class="fa fa-heart" aria-hidden="true"></i> in Leganés</p>
         </div>
-    </footer>
+    </footer>-->
 
     <!-- jQuery -->
     <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
