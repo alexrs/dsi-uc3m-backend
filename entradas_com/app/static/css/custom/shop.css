@@ -2,13 +2,9 @@
     height: 30%;
 }
 
-.search-container{
-    top:15%;
-    width: 90%;
-}
-
 #purchase-form {
     padding: 10px;
+    height: 7em;
 }
 
 .seat-section {
