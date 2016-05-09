@@ -126,47 +126,54 @@
             <h2>3. Confirmación y pago</h2>
             <hr>
             <h4>Por favor, revise su compra y seleccione una forma de pago:</h4>
-            <fieldset>
-                <ul class="uk-tab uk-tab-bottom" data-uk-tab>
-                    <li><a href="#" onclick="payWithPal();">Paypal</a></li>
-                    <li class="uk-active"><a href="#" onclick="payWithCard();">Credit Card</a></li>
-                </ul>
-
-                <div id="card-info" class="payment-option">
-                    <div class="uk-form-row card-input">
-                        <label class="uk-form-label" for="">Cardholder</label>
-                        <div class="uk-form-controls">
-                            <input id="cardholder-input" class="uk-form-width-large" type="text" name="cardholder" placeholder="Nombre Apellidos">
-                        </div>
-                    </div>
-                    <div class="uk-form-row card-input">
-                        <label class="uk-form-label" for="">Card Number</label>
-                        <div class="uk-form-controls">
-                            <input id="cardnum-input" class="uk-form-width-large" type="text" name="cardnum" placeholder="1234 1234 1234 1234">
-                        </div>
-                    </div>
-                    <div class="uk-form-row card-input">
-                        <label class="uk-form-label" for="">Expiration date</label>
-                        <div class="uk-form-controls">
-                            <input id="cardexp-input" class="uk-form-width-small" type="text" data-uk-datepicker="{format:'MM.YYYY', minDate: 0}" placeholder="Click para seleccionar" aria-describedby="basic-addon1">
-                        </div>
-                    </div>
-                    <div class="uk-form-row card-input">
-                        <label class="uk-form-label" for="">Secret Number</label>
-                        <div class="uk-form-controls">
-                            <input id="cardsecret-input" class="uk-form-width-mini" type="text" name="cardnum" placeholder="123">
-                        </div>
-                    </div>
+            <div class="col-xs-12 col-sm-8">
+                <h3>Tarjeta de débito o crédito</h3>
+                <hr>
+                <div id="shop-mail-div" class="form-group has-feedback col-xs-12">
+                    <label for="email">Email:</label>
+                    <input name="email" type="email" class="form-control" id="login-email" onchange="login(0, this.id)" aria-describedby="inputSuccess4Status" required>
+                    <span id="login-mail-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    <span id="inputSuccess4Status" class="sr-only">(success)</span>
                 </div>
-            </fieldset>
+                <div id="shop-card-div" class="form-group has-feedback col-xs-12">
+                    <label for="pwd">Tarjeta de débito o crédito:</label>
+                    <input name="password" type="password" class="form-control" id="login-pwd" onchange="login(1, this.id)" aria-describedby="inputSuccess5Status" required>
+                    <span id="login-pwd-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    <span id="inputSuccess5Status" class="sr-only">(success)</span>
+                </div>
+                <div id="shop-date-div" class="form-group has-feedback col-xs-6">
+                    <label for="pwd">Fecha de expiración</label>
+                    <input name="password" type="password" class="form-control" id="login-pwd" onchange="login(1, this.id)" aria-describedby="inputSuccess5Status" required>
+                    <span id="login-pwd-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    <span id="inputSuccess5Status" class="sr-only">(success)</span>
+                </div>
+                <div id="shop-crc-div" class="form-group has-feedback col-xs-6">
+                    <label for="pwd">CRC</label>
+                    <input name="password" type="password" class="form-control" id="login-pwd" onchange="login(1, this.id)" aria-describedby="inputSuccess5Status" required>
+                    <span id="login-pwd-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    <span id="inputSuccess5Status" class="sr-only">(success)</span>
+                </div>
 
+                <button id="login-form-btn" type="Submit" class="btn btn-success login login-field" data-dismiss="modal"onclick="changename(1)"  style="float:right" disabled>
+                    <span class="glyphicon glyphicon-log-in"></span> Proceed to checkout
+                </button>
+            </div>
+
+            <div class="col-xs-12 col-sm-4">
+                <h3>PayPal</h3>
+                <hr>
+                <div  style="text-align:center">
+                    <a href=""><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png" alt="Check out with PayPal"/></a>
+                    <img style="width:200px;margin-top:20px;"src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppppcmcvdam.png" alt="Pay with PayPal, PayPal Credit or any major credit card" />
+                </div>
+            </div>
             <!-- Submit -->
 
 
         </form>
     </div>
 
-     <!-- Footer
+     <!-- Footer-->
 
     <footer class="footer" style="margin-top:30px">
         <div class="row row-mod" align="center">
@@ -190,7 +197,7 @@
             </ul>
             <p>Made with <i class="fa fa-heart" aria-hidden="true"></i> in Leganés</p>
         </div>
-    </footer>-->
+    </footer>
 
     <!-- jQuery -->
     <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
