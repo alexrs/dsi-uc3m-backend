@@ -91,7 +91,7 @@
     <!-- Shop process -->
 
     <div id="purchase-container" class="container">
-        <form id="purchase-form" action="index.html" method="post">
+        <form id="purchase-form" action="{{ url_for('purchase.finish_purchase') }}" method="get">
 
             <!-- Session date -->
 
@@ -168,7 +168,7 @@
                     <span id="inputSuccess4Status" class="sr-only">(success)</span>
                 </div>
                 <div class="col-xs-12" style="padding-top:20px">
-                <button id="shop-form-btn" type="Submit" class="btn btn-success col-xs-12" disabled>
+                <button id="shop-form-btn" type="Submit" class="btn btn-success col-xs-12">
                     <span class="glyphicon glyphicon-log-in"></span> Proceed to checkout
                 </button>
                 </div>
