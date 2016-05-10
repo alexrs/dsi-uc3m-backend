@@ -91,7 +91,7 @@
     <!-- Shop process -->
 
     <div id="purchase-container" class="container">
-        <form id="purchase-form" class="uk-form uk-form-stacked" action="index.html" method="post">
+        <form id="purchase-form" action="index.html" method="post">
 
             <!-- Session date -->
 
@@ -100,14 +100,14 @@
             <!-- Session date -->
             <h2>1. Selecciona tu sesión</h2>
             <hr>
-            <h4>Por favor, elija la sesión en la que desee asistir:</h4>
+            <h4>Elija la sesión en la que desee asistir:</h4>
             <div class="uk-form-controls">
                 <input id="session-date" type="text" data-uk-datepicker="{format:'DD.MM.YYYY'}" placeholder="¿Qué sesión quieres?" aria-describedby="basic-addon1">
             </div>
             <!-- Seats selection -->
             <h2 style="margin-top:1em">2. Selecciona tus butacas</h2>
             <hr>
-            <h4>Por favor, elija la sección de butacas y posteriormente los asientos que desee:</h4>
+            <h4>Elija la sección de butacas y posteriormente los asientos que desee:</h4>
             <fieldset>
                 <div class="col-xs-12 col-md-8 col-md-offset-2">
                     <ul id="seat-select" class="uk-grid uk-grid-medium" data-uk-grid-margin>
@@ -125,9 +125,9 @@
             <!-- Payment -->
             <h2>3. Confirmación y pago</h2>
             <hr>
-            <h4>Por favor, revise su compra y seleccione una forma de pago:</h4>
+            <h4>Revise su compra y seleccione una forma de pago:</h4>
             <div class="col-xs-12 list-group">
-                <div class="list-group-item disabled">
+                <div id="shop-cart" class="list-group-item">
                     <h2>Titulo de evento</h2>
                     <h4>información adicional</h4>
                     <h3><strong>TOTAL:</strong></h3>
@@ -139,32 +139,39 @@
                 <hr>
                 <div id="shop-mail-div" class="form-group has-feedback col-xs-12">
                     <label for="email">Email:</label>
-                    <input name="email" type="email" class="form-control" id="login-email" onchange="login(0, this.id)" aria-describedby="inputSuccess4Status" required>
-                    <span id="login-mail-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                    <span id="inputSuccess4Status" class="sr-only">(success)</span>
+                    <input name="email" type="email" class="form-control" id="shop-email" aria-describedby="inputSuccessStatus" required onchange="cardcheck(0, self)" placeholder="ej. mi@correo.com">
+                    <span id="shop-mail-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    <span id="inputSuccessStatus" class="sr-only">(success)</span>
                 </div>
                 <div id="shop-card-div" class="form-group has-feedback col-xs-12">
-                    <label for="pwd">Tarjeta de débito o crédito:</label>
-                    <input name="password" type="password" class="form-control" id="login-pwd" onchange="login(1, this.id)" aria-describedby="inputSuccess5Status" required>
-                    <span id="login-pwd-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                    <span id="inputSuccess5Status" class="sr-only">(success)</span>
+                    <label for="shop">Tarjeta de débito o crédito:</label>
+                    <input name="card-number" type="text" class="form-control" id="shop-card" aria-describedby="inputSuccess1Status" required onchange="cardcheck(1, self)" placeholder="formato: XXXX XXXX XXXX XXXX">
+                    <span id="shop-card-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    <span id="inputSuccess1Status" class="sr-only">(success)</span>
                 </div>
-                <div id="shop-date-div" class="form-group has-feedback col-xs-6">
-                    <label for="pwd">Fecha de expiración</label>
-                    <input name="password" type="password" class="form-control" id="login-pwd" onchange="login(1, this.id)" aria-describedby="inputSuccess5Status" required>
-                    <span id="login-pwd-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                    <span id="inputSuccess5Status" class="sr-only">(success)</span>
+                <div id="shop-month-div" class="form-group has-feedback col-xs-5">
+                    <label for="shop">Mes</label>
+                    <input name="shop-month" type="text" class="form-control" id="shop-month" aria-describedby="inputSuccess2Status" required onchange="cardcheck(2, self)" placeholder="formato: mm">
+                    <span id="shop-month-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    <span id="inputSuccess2Status" class="sr-only">(success)</span>
                 </div>
-                <div id="shop-crc-div" class="form-group has-feedback col-xs-6">
+                <div id="shop-year-div" class="form-group has-feedback col-xs-5">
+                    <label for="shop">Año</label>
+                    <input name="shop-year" type="text" class="form-control" id="shop-year" aria-describedby="inputSuccess3Status" required onchange="cardcheck(3, self)" placeholder="formato: aaaa">
+                    <span id="shop-year-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    <span id="inputSuccess3Status" class="sr-only">(success)</span>
+                </div>
+                <div id="shop-crc-div" class="form-group has-feedback col-xs-2">
                     <label for="pwd">CRC<i style="padding-left:5px"class="fa fa-question-circle" aria-hidden="true"></i></label>
-                    <input name="password" type="password" class="form-control" id="login-pwd" onchange="login(1, this.id)" aria-describedby="inputSuccess5Status" required>
-                    <span id="login-pwd-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                    <span id="inputSuccess5Status" class="sr-only">(success)</span>
+                    <input name="shop-crc" type="password" class="form-control" id="shop-crc" aria-describedby="inputSuccess4Status" required onchange="cardcheck(4, self)">
+                    <span id="shop-crc-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    <span id="inputSuccess4Status" class="sr-only">(success)</span>
                 </div>
-
-                <button id="login-form-btn" type="Submit" class="btn btn-success login login-field" data-dismiss="modal"onclick="changename(1)"  style="float:right" disabled>
+                <div class="col-xs-12" style="padding-top:20px">
+                <button id="shop-form-btn" type="Submit" class="btn btn-success col-xs-12" disabled>
                     <span class="glyphicon glyphicon-log-in"></span> Proceed to checkout
                 </button>
+                </div>
             </div>
 
             <div class="col-xs-12 col-sm-4">
