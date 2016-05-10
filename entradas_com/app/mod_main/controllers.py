@@ -1,5 +1,5 @@
 # Import flask dependencies
-from flask import Blueprint, render_template, redirect, request, make_response
+from flask import Blueprint, render_template, redirect, request, make_response, session
 from app.models import *
 from app import db
 from collections import Counter
@@ -21,7 +21,7 @@ def parse_search_cookies():
  resultados de busqueda, y usa esos ids para buscar el genero mas buscado
  una vez tiene el genero mas buscado por el usuario, hace una busqueda en genres sobre ese
  genero, de peliculas ( .all() ), y selecciona 3 al azar.
- 
+
 """
 def get_suggestions():
 	busquedas = parse_search_cookies()
@@ -37,8 +37,8 @@ def get_suggestions():
 			event.append(Event.query.filter(Event.title.like("%" + busquedas_list[i] + "%")).with_entities(Event.eventId).first())
 		if event:
 			genres = []
-			for j in range(len(event)): 
-				genres.append(Genre.query.filter(Genre.event_id.like("%" + str(event[j][0]) + "%")).with_entities(Genre.name).all() ) 
+			for j in range(len(event)):
+				genres.append(Genre.query.filter(Genre.event_id.like("%" + str(event[j][0]) + "%")).with_entities(Genre.name).all() )
 			ocurrencias = []
 			ocurrenciasIndex = []
 			for i in range(len(genres)):
@@ -47,16 +47,21 @@ def get_suggestions():
 					ocurrenciasIndex.append(1)
 				else:
 					ocurrenciasIndex[ocurrencias.index(genres[i][0])] += 1
-			
+
 			similar = ocurrencias[ocurrenciasIndex.index(max(ocurrenciasIndex))]
-			ids = Genre.query.filter(Genre.name.like("%" + similar[0][0] + "%")).with_entities(Genre.event_id).all()	
-			for k in range(3):	
+			ids = Genre.query.filter(Genre.name.like("%" + similar[0][0] + "%")).with_entities(Genre.event_id).all()
+			for k in range(3):
 				recomendacion.append(Event.query.filter(Event.eventId.like("%" + str(ids[int(random.random()*len(ids))][0]) + "%")).first())
 			return recomendacion
-				
-		else: 
+		else:
 			return None
 
+def get_random_suggestions():
+	random_suggestions = []
+	for i in range(4): #por alguna rara razon, el primer resultado de random_suggestions
+			   #me sale None siempre
+		random_suggestions.append(Event.query.get(int(random.random()*i*100)))
+	return random_suggestions
 
 # Set the route and accepted methods
 """
@@ -69,33 +74,31 @@ def index():
 	suggestions = get_suggestions()
 	print suggestions
 	if not suggestions:
-		random_suggestions = []
-		for i in range(4): #por alguna rara razon, el primer resultado de random_suggestions 
-				   #me sale None siempre
-			random_suggestions.append(Event.query.get(int(random.random()*i*100)))
+		suggestions = get_random_suggestions()
 		return render_template("main/index.html", suggestions=random_suggestions[1:4])
 	else:
 		if len(suggestions)==1:
 			for i in range(2):
 				suggestions.append(Event.query.get(int(random.random()*i*100)))
-		
+
 		elif len(suggestions)==2:
 			suggestions.append(Event.query.get(int(random.random()*i*100)))
-	
+
 	return render_template("main/index.html", suggestions=suggestions)
 
 @mod_main.route('/login/', methods=['POST'])
 def login():
 	print "Login"
-	if request.cookie.get('username'):
-		username = request.form['username']
-		password = request.form['password']
-		user = User.query.filter_by(username=username).first()
-		if user.email == email:
-			resp = make_response(render_template("main/index.html", user=user, saves=request.cookie.get('username')) )
-			resp.set_cookie('user', str(username))
-			return resp
-	return render_template("main/index.html")
+	username = request.form['username']
+	password = request.form['password']
+	print "HERE"
+	user = User.query.filter_by(User.username.like("%" + username + "%").first())
+	print user
+	if user.email == username:
+		print "HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEERE"
+		session['username'] = user.username
+		return render_template("main/index.html", user=user, username=user.username)
+
 
 @mod_main.route('/signup/', methods=['POST'])
 def signup():
@@ -112,4 +115,7 @@ def signup():
 	db.session.commit()
 	return render_template("main/index.html", user=user)
 
-
+@mod_main.route('/logout')
+def logout():
+	session.pop('username', None)
+	return redirect(url_for('index'))

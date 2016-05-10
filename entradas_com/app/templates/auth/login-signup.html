@@ -73,7 +73,7 @@
             <!--displayed stuff for each of tabs-->
             <div class="tab-content">
                 <div id="login-content" class="tab-pane fade">
-                    <form type="login" id="login-form" class="login-field" role="form" method="post" name="Login">
+                    <form type="login" action="{{ url_for('main.login')}}" id="login-form" class="login-field" role="form" method="post" name="Login">
                         <div id="login-mail-div" class="form-group has-feedback">
                             <label for="email">Email o usuario:</label>
                             <input name="email" type="email" class="form-control" id="login-email" onchange="login(0, this.id)" aria-describedby="inputSuccess4Status" required>
