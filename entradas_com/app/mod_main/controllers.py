@@ -99,10 +99,13 @@ def login():
 
 @mod_main.route('/signup/', methods=['POST'])
 def signup():
-	print "Sign up"
+	print "df"
 	username = request.form['username']
-	email = request.form['email']
+	print username
 	password = request.form['password']
+	print password
+	email = request.form['email']
+
 	user = User(username, email, password)
 
 	db.session.add(user)
