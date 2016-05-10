@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<html>
+<head>
+	<title>Entradas.com</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='css/custom/navbar.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/custom/login-signup.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/custom/bg-carousel.css') }}" rel="stylesheet">
+
+
+    <!-- Custom Fonts -->
+    <link href="{{ url_for('static', filename='font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+
+    <!-- jQuery -->
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top main-navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{{ url_for('main.index')}}">
+                    <img class="brand-logo img-responsive" alt="Brand" src="{{ url_for('static', filename='img/entradascomlogo.png') }}">
+                </a>
+                <a href="{{ url_for('auth.signup') }}" style="color:black">
+                <button type="button" class="navbar-toggle btn btn-yellow navbar-btn last-navbar-item login-option mobile">
+                    <span class="glyphicon glyphicon-user"></span>
+                </button>
+                </a>
+                <button type="button" class="navbar-toggle btn btn-yellow navbar-btn last-navbar-item logged sign-out mobile">
+                    <span class="glyphicon glyphicon-off">
+                </button>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+
+                <!-- Sign up/in button -->
+
+                <li>
+                    <!-- Trigger the modal with a button -->
+
+                    <button type="button" class="btn btn-yellow navbar-btn last-navbar-item login-option desktop">
+                        <a style="text-decoration:none;color:black" href="{{ url_for('auth.signup') }}"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Entrar</a>
+                    </button>
+
+                </li>
+
+                <!-- Exit button -->
+
+                <li><p class="navbar-text navbar-right navbar-item logged desktop" style="color: white">¡Hola, <a id="user-name-link" href="#" class="navbar-link" style="color: white"></a>!</p></li>
+                <li>
+                    <button type="button" class="btn btn-yellow navbar-btn last-navbar-item logged sign-out desktop">
+                        <span class="glyphicon glyphicon-off"></span>Salir
+                    </button>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+    
+    <!--bootstrap carousel background-->
+    <div class="carousel slide carousel-fade" data-ride="carousel">
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+            </div>
+            <div class="item">
+            </div>
+            <div class="item">
+            </div>
+        </div>
+    </div>
+
+
+	<!--tabs for login/signup-->
+    <div class="container" style="text-align:center;padding-top:10em;color:white">
+        <h1>Tu compra ha sido un éxito!</h1>
+        <h4>Hemos enviado las entradas a tu dirección de correo</h4>
+        <a href="{{ url_for( 'main.index' ) }}">
+            <button type="button" class="btn btn-default">
+                También puedes descargar un .pdf pinchando aquí
+            </button>
+        </a>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/login-signup.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/entradas.js') }}"></script>
+    <!--exec bg carousel-->
+    <script>$('.carousel').carousel();</script>
+
+</body>
+</html>
