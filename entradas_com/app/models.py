@@ -78,10 +78,13 @@ class Time(Base):
         self.showtime = showtime
 
 
+movie_director = db.Table('movie_director', db.Column("event_id", db.Integer, db.ForeignKey('event.id')), db.Column("director_id", db.Integer, db.ForeignKey('crew_member.id')))
+
 class CrewMember(Base):
 
     firstName = db.Column(db.UnicodeText(100))
     role = db.Column(db.String(50))
+    movie_director = db.relationship('Event', secondary=movie_director, backref = db.backref('directors', lazy='dynamic'))
 
     def __init__(self, firstName, role):
         self.firstName = firstName

@@ -10,15 +10,21 @@
   //    after the API code downloads.
   var player;
   function onYouTubeIframeAPIReady() {
+    id = document.getElementById("player").innerHTML.trim()
+
+    if (id == ""){
+      id = "YytwyEtBL6Y";
+    }
+    console.log(id)
     player = new YT.Player('player', {
       showinfo: '0',
       width: '100%',
-      height: '300',   
+      height: '300',
       controls: '0',
       color: 'red',
       autohide: '1',
       fs: '1',
-      videoId: 'a8HRA49kaok',
+      videoId: id,
       events: {
         'onReady': onPlayerReady,
         'onStateChange': onPlayerStateChange
@@ -42,4 +48,8 @@
     } else {
         nav.style.display = "block";
     }
+  }
+
+  function loadVideo(videoID) {
+    if (player) { player.loadVideoById(videoID);}
   }

@@ -33,10 +33,7 @@ def search_by_id(imdb_id):
                 "", "", "", "", "", "", "", "",
                  "", "", "", "")
 
-def search_by_name(title):
-    title = unicode(title)
-
-    #print(title)
+def parse_title(title):
 
     if title == u"Los cuentos de Hoffman - ópera PREG. MET CAN":
         title = "Los cuentos de Hoffman"
@@ -58,8 +55,6 @@ def search_by_name(title):
 
     if title == u"Maratón: Los juegos del hambre: Sinsajo parte 1 y parte 2 (Dig)" or title == u"Maratón: Los juegos del hambre: Sinsajo parte 1 y parte 2 (Dig) V.O.S.E.":
         title = "Sinsajo"
-
-
 
     index = title.find("/")
     if (index != -1):
@@ -93,6 +88,8 @@ def search_by_name(title):
     title = title.replace("V.O.S.E.", "")
     title = title.replace("V.O.S.", "")
     title = title.replace("(Dig)", "")
+    title = title.replace("(3D)", "")
+
     title = title.replace("(Directo)", "")
     title = title.replace(u"(emisión directo)", "")
     title = title.replace(u"(emisión diferido)", "")
@@ -128,7 +125,10 @@ def search_by_name(title):
     title = title.replace("PREG MET CAN", "")
     title = title.replace("Met", "")
 
+    return title.strip()
 
+def search_by_name(title):
+    title = unicode(title)
 
     title = "+".join(title.split())
     url = url_first+"t="+title+url_second
@@ -196,43 +196,58 @@ class OMDB():
                 ", type = "+ self.type)
 
 #Theater
-# for elem in root[0]:
-#
-#     id = elem.get('theaterId')
-#     name = elem.find('name').text
-#     telephone = elem.find('telephone').text
-#     longitude = elem.find('longitude').text if elem.find('longitude').text is not None else 0.0
-#     latitude = elem.find('latitude').text if elem.find('latitude').text is not None else 0.0
-#     street = elem.find('address').find('streetAddress').find('street').text
-#     city = elem.find('address').find('city').text
-#     state = elem.find('address').find('state').text
-#     postalCode = elem.find('address').find('postalCode').text
-#     country = elem.find('address').find('country').text
-#
-#     theater = Theater(id, name, telephone, longitude, latitude, street, city, state, postalCode, country)
-#     ###db.session.commit(theater)
-#
+for elem in root[0]:
+
+    id = elem.get('theaterId')
+    name = elem.find('name').text
+    telephone = elem.find('telephone').text
+    longitude = elem.find('longitude').text if elem.find('longitude').text is not None else 0.0
+    latitude = elem.find('latitude').text if elem.find('latitude').text is not None else 0.0
+    street = elem.find('address').find('streetAddress').find('street').text
+    city = elem.find('address').find('city').text
+    state = elem.find('address').find('state').text
+    postalCode = elem.find('address').find('postalCode').text
+    country = elem.find('address').find('country').text
+
+    theater = Theater(id, name, telephone, longitude, latitude, street, city, state, postalCode, country)
+    db.session.add(theater)
+
 # #Showtime
-# for elem in root[2]:
-#     date = elem.get('date')
-#     theaterId = elem.get('theaterId')
-#     eventId = elem.get('movieId')
-#
-#     showtime = ShowTime(date, theaterId, eventId)
-#     #db.session.add(showtime)
-#
-#     times = elem.find('times').findall('time')
-#
-#     for time in times:
-#         ticketUrl = time.get('ticketUrl')
-#         hour = time.text
-#         mtime = Time(ticketUrl, hour, eventId, showtime)
-#         #db.session.add(mtime)
+for elem in root[2]:
+    date = elem.get('date')
+    theaterId = elem.get('theaterId')
+    eventId = elem.get('movieId')
+
+    showtime = ShowTime(date, theaterId, eventId)
+    db.session.add(showtime)
+
+    times = elem.find('times').findall('time')
+
+    for time in times:
+        ticketUrl = time.get('ticketUrl')
+        hour = time.text
+        mtime = Time(ticketUrl, hour, eventId, showtime)
+        db.session.add(mtime)
 
 #Event
+titles = []
+
 for elem in root[1]:
+
+    title = parse_title(elem.find('officialTitle').text)
+
+    skip = False
+    for comp_title in titles:
+        if title == comp_title:
+            print("SKIPPING", title)
+            skip = True
+
+    if skip:
+        continue
+
+    titles.append(title)
+
     eventId = elem.get('movieId')
-    title = elem.find('officialTitle').text
     sinopsis = elem.find('sinopsis')
     if sinopsis is not None:
         sinopsis = sinopsis.text
@@ -296,14 +311,22 @@ for elem in root[1]:
     crew = elem.find('crew').findall('member')
     for person in crew:
         member = CrewMember(person.find('firstName').text if person.find('firstName') is not None else "NULL", person.find('role').text if person.find('role') is not None else "NULL")
+        if person.find('role') is not None and person.find('role') == "Director":
+            print("HERE", person.find('firstName'))
+            member.movie_director.append(event)
         db.session.add(member)
 
+
     for person in omdb_ob.director.split(","):
+        if (person == 'J.J. Abrams' and event.eventId == 30659):
+            print(person, event.eventId)
         member = CrewMember(unicode(person, "utf-8"), "Director")
+        member.movie_director.append(event)
         db.session.add(member)
 
     for person in omdb_ob.writer.split(","):
         member = CrewMember(unicode(person, "utf-8"), "Writer")
+        member.movie_director.append(event)
         db.session.add(member)
 
     db.session.add(event)

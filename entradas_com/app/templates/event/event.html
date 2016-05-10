@@ -41,7 +41,7 @@
 	    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 	</head>
 	<body>
-        
+
         <!-- Navigation -->
         <nav id="navbar-top" class="navbar navbar-default navbar-static-top main-navbar">
             <div class="container-fluid">
@@ -83,16 +83,16 @@
 
             </div>
         </nav>
-               
+
         <!--Youtube video frame (IMPORTANT: CHECK YTB API TO EVENTUALLY SHOW/HIDE NAVBAR ON PAUSE/PLAY-->
         <!--https://developers.google.com/youtube/js_api_reference?csw=1#Requirements-->
         <div>
-            <div id="player"></div>
-        </div>   
-            
+            <div id="player">{{event.trailer}} </div>
+        </div>
+
         <!--Container for stuff below video-->
         <div class="container">
-            
+
             <!--TITULO + DURACION + EDAD-->
             <h1>{{ event.title }}</h1>
             <h4>
@@ -104,11 +104,11 @@
             <a id="purchase-button" class="col-xs-12" data-scroll href="#buy-pls">Comprar entradas</a>
             <h2>Información</h2>
             <hr>
-            
+
             <!--SINOPSIS-->
             <h3>Sinopsis</h3>
-            <p>{{ event.sinopsis }}</p>
-            
+            <p>{{event.omdb_plot if event.omdb_response == "True" and not event.country.lower() == "españa" else event.sinopsis }}</p>
+
             <!--INFO PELICULA-->
             <h3>Ficha técnica</h3>
             <div style="display:inline-block">
@@ -120,20 +120,20 @@
                 <strong>Reparto:</strong><br>
             </div>
             <div style="display:inline-block">
-                genero<br>
-                director<br>
-                duracion<br>
-                {{ event.country.lower() }}<br>
-                estreno</strong><br>
-                reparto<br>
+                {{genres_list}}<br>
+                {{director}}<br>
+                {{event.duration}}<br>
+                {{event.country[:1]+event.country[1:].lower() }}<br>
+                {{event.omdb_released}}</strong><br>
+                {{cast}}<br>
             </div>
-            
+
             <!--LINKS CINES; COMPRA DE ENTRADAS-->
             <h2 id="buy-pls">Comprar entradas</h2>
             <hr>
             <h5>Seleccione un cine:</h5>
             <div class="list-group">
-                
+
             <!-- iterar cines desde aqui, por links -->
               <a href="{{ url_for('purchase.purchase') }}" class="list-group-item">
                 <div style="display:inline-block">
@@ -143,7 +143,7 @@
                 <div class="cinema-price"><i class="fa fa-money fa-sm fa-fw"></i>&nbsp; {{ event.price }}€</div>
               </a>
             <!-- fin iteracion -->
-                
+
             <!--placeholder shit-->
               <a href="{{ url_for('purchase.purchase') }}" class="list-group-item">
                 <div style="display:inline-block">
@@ -152,7 +152,7 @@
                 </div>
                 <div class="cinema-price"><i class="fa fa-money fa-sm fa-fw"></i>&nbsp; 9,20€</div>
               </a>
-                
+
               <a href="{{ url_for('purchase.purchase') }}" class="list-group-item">
                 <div style="display:inline-block">
                   <h4 class="list-group-item-heading">Kinepolia Center</h4>
@@ -160,7 +160,7 @@
                 </div>
                 <div class="cinema-price"><i class="fa fa-money fa-sm fa-fw"></i>&nbsp; 9,60€</div>
               </a>
-                
+
               <a href="{{ url_for('purchase.purchase') }}" class="list-group-item">
                 <div style="display:inline-block">
                   <h4 class="list-group-item-heading">Adarga Cines</h4>
@@ -168,10 +168,10 @@
                 </div>
                 <div class="cinema-price"><i class="fa fa-money fa-sm fa-fw"></i>&nbsp; 8,30€</div>
               </a>
-                
-                
+
+
             </div>
-            
+
             <!-- paginacion -->
             <nav style="text-align:center; display:block; margin-top:10px">
               <ul class="pagination pagination-lg">
@@ -190,13 +190,13 @@
                 </li>
               </ul>
             </nav>
-            
-            
+
+
         </div>
-        
-        
+
+
         <!-- Footer -->
-        <footer class="footer"> 
+        <footer class="footer">
             <div class="row row-mod" align="center">
                 <div class="col-lg-4" style="margin-top:0px">
                 <a href="#"><img style="width:150px; padding-bottom:10px" src="{{ url_for('static', filename='img/entradascomlogo.png') }}"> </a>
@@ -219,7 +219,7 @@
                 <p>Made with <i class="fa fa-heart" aria-hidden="true"></i> in Leganés</p>
             </div>
         </footer>
-        
+
     <script src="{{ url_for('static', filename='js/login-signup.js') }}"></script>
     <script src="{{ url_for('static', filename='js/entradas.js') }}"></script>
     <script src="{{ url_for('static', filename='js/event-ytb-handler.js') }}"></script>
@@ -228,6 +228,6 @@
     <!--exec bg carousel-->
     <script>$('.carousel').carousel();</script>
     <script>smoothScroll.init();</script>
-        
+
 	</body>
 </html>
