@@ -1,3 +1,7 @@
+$("document").ready( function () {
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
 //controller for seating mechanism
 function selectSection(id) {
     $(".seat-section").removeClass( "selected-section" );
@@ -80,15 +84,15 @@ function creatDelText(state, identif, string, prnt){
             var txt = document.createTextNode(string);
             info.appendChild(txt);
             prnt.appendChild(info);
-            break;         
-    }      
+            break;
+    }
 }
 
 //Format validation for sign in form
 function cardcheck(num, id) {
     var tmp = document.getElementById(id).value;
     switch (num) {
-        
+
         case 0://validate email
             var prnt = document.getElementById("shop-mail-div");
             var icn = document.getElementById("shop-mail-icon");
@@ -97,10 +101,10 @@ function cardcheck(num, id) {
                 creatDelText(0, "shop-mail-feedback", null, prnt);
             } else {//set all not ok
                 switchFormState(0, prnt, icn);
-                creatDelText(1, "sign-shop-feedback", "Correo inválido", prnt); 
+                creatDelText(1, "sign-shop-feedback", "Correo inválido", prnt);
             }
             break;
-            
+
         case 1://validate card
             var prnt = document.getElementById("shop-card-div");
             var icn = document.getElementById("shop-card-icon");
@@ -109,10 +113,10 @@ function cardcheck(num, id) {
                 creatDelText(0, "shop-card-feedback", null, prnt);
             } else {//set all not ok
                 switchFormState(0, prnt, icn);
-                creatDelText(1, "shop-card-feedback", "Número de tarjeta inválido", prnt); 
+                creatDelText(1, "shop-card-feedback", "Número de tarjeta inválido", prnt);
             }
             break;
-            
+
         case 2://validate month
             var prnt = document.getElementById("shop-month-div");
             var icn = document.getElementById("shop-month-icon");
@@ -121,10 +125,10 @@ function cardcheck(num, id) {
                 creatDelText(0, "shop-month-feedback", null, prnt);
             } else {//set all not ok
                 switchFormState(0, prnt, icn);
-                creatDelText(1, "shop-month-feedback", "Mes inválido, formato: mm", prnt); 
+                creatDelText(1, "shop-month-feedback", "Mes inválido, formato: mm", prnt);
             }
             break;
-            
+
         case 3://validate year
             var prnt = document.getElementById("shop-year-div");
             var icn = document.getElementById("shop-year-icon");
@@ -133,7 +137,7 @@ function cardcheck(num, id) {
                 creatDelText(0, "shop-year-feedback", null, prnt);
             } else {//set all not ok
                 switchFormState(0, prnt, icn);
-                creatDelText(1, "shop-year-feedback", "Año inválido, formato: yyyy", prnt); 
+                creatDelText(1, "shop-year-feedback", "Año inválido, formato: yyyy", prnt);
             }
             break;
          case 4://validate crc
@@ -145,7 +149,7 @@ function cardcheck(num, id) {
                 creatDelText(0, "shop-crc-feedback", null, prnt);
             } else {//set all not ok
                 switchFormState(0, prnt, icn);
-                creatDelText(1, "shop-crc-feedback", "CRC inválido, formato: nnn", prnt); 
+                creatDelText(1, "shop-crc-feedback", "CRC inválido, formato: nnn", prnt);
             }
             break;
     }
@@ -154,7 +158,7 @@ function cardcheck(num, id) {
 
 //Checks whether all fields have been validated to activate send button
 function enableSend(num){
-    if(document.getElementById("shop-mail-div").classList.contains("has-success") && 
+    if(document.getElementById("shop-mail-div").classList.contains("has-success") &&
        document.getElementById("shop-card-div").classList.contains("has-success") &&
        document.getElementById("shop-month-div").classList.contains("has-success") &&
        document.getElementById("shop-year-div").classList.contains("has-success") &&
