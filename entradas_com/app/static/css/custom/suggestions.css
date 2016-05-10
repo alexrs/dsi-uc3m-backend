@@ -9,6 +9,7 @@
 }
 
 .suggestion-body {
+    min-height: 230px;
     background-color:rgb(241,241,241);
 }
 

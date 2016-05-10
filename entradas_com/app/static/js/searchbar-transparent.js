@@ -30,7 +30,7 @@ function setDefaultDrop(){
 setInterval(function(){
     //get textbox and send form btn
     var searchbar = document.getElementsByClassName('form-control searchbar searchbar-text')[0];
-    var searchbtn = document.getElementByClassName('search-now');
+    var searchbtn = document.getElementsByClassName('search-now')[0];
     //if dropdown has been chosen
     if (dropChosen === true){
        if(searchbar.value){

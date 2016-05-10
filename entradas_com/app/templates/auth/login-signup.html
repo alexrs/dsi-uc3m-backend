@@ -76,13 +76,13 @@
                     <form type="login" action="{{ url_for('main.login')}}" id="login-form" class="login-field" role="form" method="post" name="Login">
                         <div id="login-mail-div" class="form-group has-feedback">
                             <label for="email">Email o usuario:</label>
-                            <input name="email" type="email" class="form-control" id="login-email" onchange="login(0, this.id)" aria-describedby="inputSuccess4Status" required>
+                            <input name="email" type="email" class="form-control" id="login-email" oninput="login(0, this.id);" aria-describedby="inputSuccess4Status" required>
                             <span id="login-mail-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                             <span id="inputSuccess4Status" class="sr-only">(success)</span>
                         </div>
                         <div id="login-pwd-div" class="form-group has-feedback">
                             <label for="pwd">Contraseña:</label>
-                            <input name="password" type="password" class="form-control" id="login-pwd" onchange="login(1, this.id)" aria-describedby="inputSuccess5Status" required>
+                            <input name="password" type="password" class="form-control" id="login-pwd" oninput="login(1, this.id)" aria-describedby="inputSuccess5Status" required>
                             <span id="login-pwd-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                             <span id="inputSuccess5Status" class="sr-only">(success)</span>
                         </div>
@@ -98,25 +98,29 @@
                     <form action="{{ url_for('main.signup') }}" type="signup" id="signup-form" class="signup-field" role="form" method="post" name="Signup">
                         <div id="sign-mail-div" class="form-group has-feedback">
                             <label for="email">Email:</label>
+
                             <input id="sign-mail" name="email" type="email" class="form-control" id="email" onchange="validate(0, this.id)" aria-describedby="inputSuccessStatus" required>
+
                             <span id="sign-mail-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                             <span id="inputSuccessStatus" class="sr-only">(success)</span>
                         </div>
                         <div id="sign-usr-div" class="form-group has-feedback">
                             <label for="email">Usuario:</label>
-                            <input id="sign-usr" name="username" type="text" class="form-control" id="email" onchange="validate(1, this.id)" aria-describedby="inputSuccess1Status" required>
+                            <input id="sign-usr" name="username" type="text" class="form-control" id="email" oninput="validate(1, this.id)" aria-describedby="inputSuccess1Status" required>
                             <span id="sign-usr-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                             <span id="inputSuccess1Status" class="sr-only">(success)</span>
                         </div>
                         <div id="sign-pwd-div" class="form-group has-feedback">
                             <label for="pwd">Contraseña:</label>
-                            <input id="sign-pwd" name="password" type="password" class="form-control" id="pwd" onchange="validate(2, this.id)" aria-describedby="inputSuccess2Status" required>
+                            <input id="sign-pwd" name="password" type="password" class="form-control" id="pwd" oninput="validate(2, this.id)" aria-describedby="inputSuccess2Status" required>
                             <span id="sign-pwd-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                             <span id="inputSuccess2Status" class="sr-only">(success)</span>
                         </div>
                         <div id="sign-pwd-confirm-div" class="form-group has-feedback">
                             <label for="pwd-confirm">Confirmar contraseña:</label>
+
                             <input id="sign-pwd-confirm" name="sdfasdf" type="password" class="form-control" id="pwd-confirm" onchange="validate(3, this.id)" aria-describedby="inputSuccess3Status" required>
+
                             <span id="sign-pwd-confirm-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                             <span id="inputSuccess3Status" class="sr-only">(success)</span>
                         </div>
@@ -133,6 +137,9 @@
 <script src="{{ url_for('static', filename='js/login-signup.js') }}"></script>
 <!--exec bg carousel-->
 <script>$('.carousel').carousel();</script>
+<script>
+    var tId = ""; // create a global var
+</script>
 
 </body>
 </html>
