@@ -12,10 +12,10 @@
   function onYouTubeIframeAPIReady() {
     id = document.getElementById("player").innerHTML.trim()
 
-    if (id == ""){
+    if (!id || id == "None"){
       id = "YytwyEtBL6Y";
     }
-    console.log(id)
+
     player = new YT.Player('player', {
       showinfo: '0',
       width: '100%',

@@ -11,9 +11,21 @@ mod_event = Blueprint('event', __name__,)
 def event(id):
 	#return id
     event = query_by_id(id)
-    genres_list = ", ".join(event_genre(event.eventId))
-    director = ", ".join(event_director(id))
-    cast = ", ".join(event_cast(id))
+
+    result = event_genre(event.eventId)
+    genres_list = ""
+    if len(result) > 0:
+        genres_list = ", ".join(result) if len(result) > 1 else result[0]
+
+    result = event_director(id)
+    director = ""
+    if len(result) > 0:
+        director = ", ".join(result) if len(result) > 1 else result[0]
+
+    result = event_cast(id)
+    cast = ""
+    if len(result) > 0:
+        cast = ", ".join(result) if len(result) > 1 else result[0]
 
     return render_template("event/event.html", event=event, genres_list=genres_list, director = director, cast = cast)
 
@@ -30,12 +42,14 @@ def event_genre(id):
     genre_list = Genre.query.filter_by(event_id=id).all()
     result = []
     for i in genre_list:
-        result.append(i.name.strip())
+        genre = i.name.strip()
+        if genre:
+            result.append(genre)
 
     if len(result) > 1:
         return list(set(result))
     else:
-        []
+        return []
 
 def event_director(id):
 
@@ -44,7 +58,8 @@ def event_director(id):
 
     for director in directors:
         director_name = CrewMember.query.filter_by(id=director[1]).first()
-        result.append(director_name.firstName.strip())
+        if director_name.firstName.strip():
+            result.append(director_name.firstName.strip())
 
     return list(set(result[:2]))
 
@@ -55,6 +70,8 @@ def event_cast(id):
 
     for actor in cast:
         actor_name = Actor.query.filter_by(id=actor[1]).first()
-        result.append(actor_name.firstName.strip())
+        new = actor_name.firstName.strip()
+        if new:
+            result.append(new)
 
     return result[:3]
