@@ -151,19 +151,19 @@
                 </div>
                 <div id="shop-month-div" class="form-group has-feedback col-xs-5">
                     <label for="shop">Mes</label>
-                    <input name="shop-month" type="text" class="form-control" id="shop-month" aria-describedby="inputSuccess2Status" required onchange="cardcheck(2, self)" placeholder="formato: mm">
+                    <input name="shop-month" min="1" max="12" type="text" class="form-control" id="shop-month" aria-describedby="inputSuccess2Status" required onchange="cardcheck(2, self)" placeholder="formato: mm">
                     <span id="shop-month-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     <span id="inputSuccess2Status" class="sr-only">(success)</span>
                 </div>
                 <div id="shop-year-div" class="form-group has-feedback col-xs-5">
                     <label for="shop">Año</label>
-                    <input name="shop-year" type="text" class="form-control" id="shop-year" aria-describedby="inputSuccess3Status" required onchange="cardcheck(3, self)" placeholder="formato: aaaa">
+                    <input name="shop-year" min="1900" max="2050" type="text" class="form-control" id="shop-year" aria-describedby="inputSuccess3Status" required onchange="cardcheck(3, self)" placeholder="formato: aaaa">
                     <span id="shop-year-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     <span id="inputSuccess3Status" class="sr-only">(success)</span>
                 </div>
                 <div id="shop-crc-div" class="form-group has-feedback col-xs-2">
-                    <label for="pwd">CRC<i style="padding-left:5px"class="fa fa-question-circle" aria-hidden="true"></i></label>
-                    <input name="shop-crc" type="password" class="form-control" id="shop-crc" aria-describedby="inputSuccess4Status" required onchange="cardcheck(4, self)">
+                    <label for="pwd">CVV<a data-toggle="tooltip" title="CVV: dígitos de seguridad en la parte posterior de tu tarjeta de débito/crédito"<i style="padding-left:5px"class="fa fa-question-circle" aria-hidden="true"></i></label></a>
+                    <input name="shop-crc" type="text" min="100" max="999" class="form-control" id="shop-crc" aria-describedby="inputSuccess4Status" required onchange="cardcheck(4, self)">
                     <span id="shop-crc-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     <span id="inputSuccess4Status" class="sr-only">(success)</span>
                 </div>
@@ -230,7 +230,11 @@
     <script src="{{ url_for('static', filename='js/entradas.js') }}"></script>
     <script src="{{ url_for('static', filename='js/searchbar-transparent.js') }}"></script>
     <script src="{{ url_for('static', filename='js/shop.js') }}"></script>
-
+    <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip(); 
+    });
+    </script>
 </body>
 
 </html>
