@@ -132,7 +132,7 @@
                     <h4>información adicional</h4>
                     <h3><strong>TOTAL:</strong></h3>
                 </div>
-                
+
             </div>
             <div class="col-xs-12 col-sm-8">
                 <h2>Tarjeta de débito o crédito</h2>
@@ -149,25 +149,24 @@
                     <span id="shop-card-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     <span id="inputSuccess1Status" class="sr-only">(success)</span>
                 </div>
-                <div id="shop-month-div" class="form-group has-feedback col-xs-5">
+                <div id="shop-month-div" class="form-group has-feedback col-xs-4">
                     <label for="shop">Mes</label>
-                    <input name="shop-month" type="text" class="form-control" id="shop-month" aria-describedby="inputSuccess2Status" required onchange="cardcheck(2, self)" placeholder="formato: mm">
+                    <input name="shop-month" min="1" max="12" type="text" class="form-control" id="shop-month" aria-describedby="inputSuccess2Status" required onchange="cardcheck(2, self)" placeholder="formato: mm">
                     <span id="shop-month-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     <span id="inputSuccess2Status" class="sr-only">(success)</span>
                 </div>
                 <div id="shop-year-div" class="form-group has-feedback col-xs-5">
                     <label for="shop">Año</label>
-                    <input name="shop-year" type="text" class="form-control" id="shop-year" aria-describedby="inputSuccess3Status" required onchange="cardcheck(3, self)" placeholder="formato: aaaa">
+                    <input name="shop-year" min="1900" max="2050" type="text" class="form-control" id="shop-year" aria-describedby="inputSuccess3Status" required onchange="cardcheck(3, self)" placeholder="formato: aaaa">
                     <span id="shop-year-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     <span id="inputSuccess3Status" class="sr-only">(success)</span>
                 </div>
-                <div id="shop-crc-div" class="form-group has-feedback col-xs-2">
-                    <label for="pwd">CRC<i style="padding-left:5px"class="fa fa-question-circle" aria-hidden="true"></i></label>
-                    <input name="shop-crc" type="password" class="form-control" id="shop-crc" aria-describedby="inputSuccess4Status" required onchange="cardcheck(4, self)">
-                    <span id="shop-crc-icon" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <div id="shop-crc-div" class="form-group has-feedback col-xs-3">
+                    <label>CVV<a data-toggle="tooltip" title="CVV: dígitos de seguridad en la parte posterior de tu tarjeta de débito/crédito"<i style="padding-left:5px"class="fa fa-question-circle" aria-hidden="true"></i></label></a>
+                    <input name="shop-crc" type="text" min="100" max="999" class="form-control" id="shop-crc" required onchange="cardcheck(4, self)">
                     <span id="inputSuccess4Status" class="sr-only">(success)</span>
                 </div>
-                <div class="col-xs-12" style="padding-top:20px">
+                <div class="col-xs-12" style="padding-top:20px;padding-bottom:20px;">
                 <button id="shop-form-btn" type="Submit" class="btn btn-success col-xs-12">
                     <span class="glyphicon glyphicon-log-in"></span> Proceed to checkout
                 </button>
@@ -178,7 +177,7 @@
                 <h2>PayPal</h2>
                 <hr>
                 <div  style="text-align:center">
-                    <a href="#"><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png" alt="Check out with PayPal"/></a>
+                    <a href="https://paypal.me/danimedinag/30"><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png" alt="Check out with PayPal"/></a>
                     <img style="width:230px;margin-top:20px;"src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppppcmcvdam.png" alt="Pay with PayPal, PayPal Credit or any major credit card" />
                 </div>
             </div>
@@ -228,9 +227,7 @@
 
     <!-- own JavaScript -->
     <script src="{{ url_for('static', filename='js/entradas.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/searchbar-transparent.js') }}"></script>
     <script src="{{ url_for('static', filename='js/shop.js') }}"></script>
-
 </body>
 
 </html>

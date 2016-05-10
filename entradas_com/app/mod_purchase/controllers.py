@@ -6,9 +6,17 @@ from app import db
 mod_purchase = Blueprint('purchase', __name__,)
 
 @mod_purchase.route('/purchase')
-def purchase():	
-	return render_template("shop/shop.html")
+def purchase():
+	if 'username' in session:
+		user = session['username']
+		return render_template("shop/shop.html", user=user)
+	else:
+		return render_template("shop/shop.html")
 
 @mod_purchase.route('/purchase/end')
 def finish_purchase():
-	return render_template("shop/end.html")
+	if 'username' in session:
+		user = session['username']
+		return render_template("shop/end.html", user=user)
+	else:
+		return render_template("shop/end.html")	
