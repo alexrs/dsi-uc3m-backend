@@ -83,19 +83,19 @@ def index():
 
 		elif len(suggestions)==2:
 			suggestions.append(Event.query.get(int(random.random()*i*100)))
-
-	return render_template("main/index.html", suggestions=suggestions)
+	if 'username' in session:
+		user = session['username']
+		return render_template("main/index.html", suggestions=suggestions, user=user)
+	else:
+		return render_template("main/index.html", suggestions=suggestions)
 
 @mod_main.route('/login/', methods=['POST'])
 def login():
 	print "Login"
-	username = request.form['username']
+	username = request.form['email']
 	password = request.form['password']
-	print "HERE"
-	user = User.query.filter_by(User.username.like("%" + username + "%").first())
-	print user
+	user = User.query.filter_by(email=username).first()
 	if user.email == username:
-		print "HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEERE"
 		session['username'] = user.username
 		return render_template("main/index.html", user=user, username=user.username)
 

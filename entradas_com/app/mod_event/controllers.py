@@ -10,7 +10,11 @@ mod_event = Blueprint('event', __name__,)
 def event(id):
 	#return id
 	event = query_by_id(id)
-	return render_template("event/event.html", event=event)
+	if 'username' in session:
+		user = session['username']
+		return render_template("event/event.html", event=event, user=user)
+	else:
+		return render_template("event/event.html", event=event)
 
 # http://flask-sqlalchemy.pocoo.org/2.1/queries/
 def query_by_id(id):
