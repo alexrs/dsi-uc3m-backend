@@ -61,8 +61,8 @@ def get_suggestions():
 
 def get_random_suggestions():
 	random_suggestions = []
-	while len(random_suggestion)<4:
-		ran_sug = Event.query.get(int(random.random()*len(random_suggestion)*100))
+	while len(random_suggestions)<4:
+		ran_sug = Event.query.get(int(random.random()*(len(random_suggestions)+1)*100))
 		if len(ran_sug.imdb)>0:
 			random_suggestions.append(ran_sug)
 	return random_suggestions
