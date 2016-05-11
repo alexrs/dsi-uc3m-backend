@@ -144,7 +144,7 @@
         <div class="media">
             <div class="media-left">
                 <a href="{{ url_for('event.event', id=event.id) }}">
-                    <img class="media-object card-img" src="http://img.omdbapi.com/?i={{ event.imdb }}&apikey=b7845ea1" alt="{{ url_for('static', filename='img/placeholder.jpg') }}">
+                    <img class="media-object card-img" src="http://img.omdbapi.com/?i={{ event.imdb }}&apikey=b7845ea1" onError="this.onerror=null;this.src='{{ url_for('static', filename='img/test.jpg') }}';">
                 </a>
             </div>
             <div class="media-body">
