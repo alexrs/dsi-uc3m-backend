@@ -74,7 +74,7 @@ def index():
 	suggestions = get_suggestions()
 	print suggestions
 	if not suggestions:
-		suggestions = get_random_suggestions()
+		random_suggestions = get_random_suggestions()
 		return render_template("main/index.html", suggestions=random_suggestions[1:4])
 	else:
 		if len(suggestions)==1:

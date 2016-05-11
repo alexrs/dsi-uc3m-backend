@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, make_response
+from flask import Blueprint, render_template, request, make_response, session
 from app.models import *
 
 mod_search = Blueprint('search', __name__,)
