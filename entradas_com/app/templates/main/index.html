@@ -197,23 +197,16 @@
             </div>
 	    {% for suggestion in suggestions %}
              <div class="col-md-4 suggestion">
-                <img class='img-responsive' src="{{ url_for('static', filename='img/bosnianr_rainbows.jpg') }}">
+                <img style="width:640px;height:480px;object-fit:cover" src="http://img.omdbapi.com/?i={{ suggestion.imdb }}&apikey=b7845ea1" onError="this.onerror=null;this.src='{{ url_for('static', filename='img/test.jpg') }}';">
                 <div class="panel panel-default suggestion-panel" >
                     <div class="panel-body suggestion-body">
-                        <h3 class="suggestion-title">{{suggestion.title}}</h>
+                        <h3 class="suggestion-title">{{suggestion.title}}</h3>
                         <div class="suggestion-when">
-                            <div class="suggestion-inner-content">
-                                <div class="suggestion-month">Mayo</div>
-                                <div class="suggestion-date">
-                                    <p class="suggestion-weekday">Viernes</p>
-                                    <h1 class="suggestion-monthday"> 26 </h1>
-                                </div>
-                            </div>
                             <div class="suggestion-what">
-                                <ul class="list-unstyled suggestion-info-list">
-                                    <li><i class="fa fa-money fa-fw"></i>{{ suggestion.price }}</li>
-                                    <li class="suggestion-info-list-item"><i class="fa fa-music fa-fw"></i>  Indie/rock alternativo</li>
-                                    <li class="suggestion-info-list-item"><i class="fa fa-map-marker fa-fw"></i> Sala Caracol, Madrid</li>
+                                <ul class="list-unstyled suggestion-info-list col-xs-12">
+                                    <li class="suggestion-info-list-item"><i class="fa fa-clock-o fa-fw"></i>&nbsp;{{suggestion.duration}} min.</li>
+                                    <li class="suggestion-info-list-item"><i class="fa fa-star fa-fw"></i>&nbsp;{{ suggestion.omdb_imdbRating }}</li>
+                                    <li class="suggestion-info-list-item"><i class="fa fa-money fa-fw"></i>&nbsp;{{ suggestion.price }}&nbsp;€</li>
                                 </ul>
                             </div>
                         </div>
