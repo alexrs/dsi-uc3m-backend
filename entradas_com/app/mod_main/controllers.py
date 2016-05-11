@@ -52,9 +52,9 @@ def get_suggestions():
 			ids = Genre.query.filter(Genre.name.like("%" + similar[0][0] + "%")).with_entities(Genre.event_id).all()
 			while len(recomendacion)<3:
 				rec = Event.query.filter(Event.eventId.like("%" + str(ids[int(random.random()*len(ids))][0]) + "%")).first()
-				if len(rec.imdb)>0:
-					recomendacion.append(Event.query.filter(Event.eventId.like("%" + str(ids[int(random.random()*len(ids))][0]) + "%")).first())
-					
+				if rec:
+					if len(rec.imdb)>0:
+						recomendacion.append(Event.query.filter(Event.eventId.like("%" + str(ids[int(random.random()*len(ids))][0]) + "%")).first())
 			return recomendacion
 		else:
 			return None
@@ -63,8 +63,9 @@ def get_random_suggestions():
 	random_suggestions = []
 	while len(random_suggestions)<4:
 		ran_sug = Event.query.get(int(random.random()*(len(random_suggestions)+1)*100))
-		if len(ran_sug.imdb)>0:
-			random_suggestions.append(ran_sug)
+		if ran_sug:
+			if len(ran_sug.imdb)>0:
+				random_suggestions.append(ran_sug)
 	return random_suggestions
 
 # Set the route and accepted methods
