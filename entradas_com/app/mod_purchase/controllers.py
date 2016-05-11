@@ -1,5 +1,5 @@
 # Import flask dependencies
-from flask import Blueprint, render_template, redirect, request, make_response
+from flask import Blueprint, render_template, redirect, request, make_response, session
 from app.models import *
 from app import db
 
