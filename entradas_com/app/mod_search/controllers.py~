@@ -26,11 +26,8 @@ def search():
 		cast = ""
 		if len(result) > 0:
 			cast = ", ".join(result) if len(result) > 1 else result[0]
-                if 'username' in session:
-                    user = session['username']
-                    return render_template("event/event.html", event=event, genres_list=genres_list, director = director, cast = cast, user=user) 
-                else:
-                    return render_template("event/event.html", event=event, genres_list=genres_list, director = director, cast = cast) 
+
+		return render_template("event/event.html", event=event, genres_list=genres_list, director = director, cast = cast) 
 	else:
 		if request.cookies.get('busqueda'):
 			value = str(request.cookies.get('busqueda') + ',' + str(query))

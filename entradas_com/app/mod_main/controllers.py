@@ -50,17 +50,21 @@ def get_suggestions():
 
 			similar = ocurrencias[ocurrenciasIndex.index(max(ocurrenciasIndex))]
 			ids = Genre.query.filter(Genre.name.like("%" + similar[0][0] + "%")).with_entities(Genre.event_id).all()
-			for k in range(3):
-				recomendacion.append(Event.query.filter(Event.eventId.like("%" + str(ids[int(random.random()*len(ids))][0]) + "%")).first())
+			while len(recomendacion)<3:
+				rec = Event.query.filter(Event.eventId.like("%" + str(ids[int(random.random()*len(ids))][0]) + "%")).first()
+				if len(rec.imdb)>0:
+					recomendacion.append(Event.query.filter(Event.eventId.like("%" + str(ids[int(random.random()*len(ids))][0]) + "%")).first())
+					
 			return recomendacion
 		else:
 			return None
 
 def get_random_suggestions():
 	random_suggestions = []
-	for i in range(4): #por alguna rara razon, el primer resultado de random_suggestions
-			   #me sale None siempre
-		random_suggestions.append(Event.query.get(int(random.random()*i*100)))
+	while len(random_suggestion)<4:
+		ran_sug = Event.query.get(int(random.random()*len(random_suggestion)*100))
+		if len(ran_sug.imdb)>0:
+			random_suggestions.append(ran_sug)
 	return random_suggestions
 
 # Set the route and accepted methods
