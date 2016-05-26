@@ -1,3 +1,5 @@
+##What is this
+This is a project made for the course of Design of Interactive Systems at [UC3M](http://www.uc3m.es). It consists of a redesign of [entradas.com](http://www.entradas.com/)
 ##Dependencies
 ###Add new dependency
 Edit the file requirements.txt adding the new dependency and the version.
@@ -10,19 +12,6 @@ Execute `python run.py` et voilà from inside the `app/` folder.
 - [SQLAlchemy](http://flask-sqlalchemy.pocoo.org/2.1/quickstart/)
 - [Flask](http://flask.pocoo.org/)
 - [Blueprints](http://flask.pocoo.org/docs/0.10/blueprints/)
-- [Flask-WTF](https://flask-wtf.readthedocs.org/en/latest/)
 
-**The default branch is integration.**
-
-- New feature: git checkout -b feature/nameofyourfeature
-- Bugfix: git checkout -b bugfix/nameofthefix
-
-**If you push to master, I will find you and I will kill you**
-
-##Endpints
-- `/`: index
-- `/search?query={query}&category={category}`:
-	- `{query}`: text of the search
-	- `{category}`: category for searching
-	- Example: /search?query=Star&category=2
-	- TODO: Define IDs for the categories
+##Try it!
+Play with it at http://ri3sgo.pythonanywhere.com/
